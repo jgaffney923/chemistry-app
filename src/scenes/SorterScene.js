@@ -3,6 +3,7 @@ import { Bin, BIN_W } from '../sorter/Bin.js';
 import { makeRoundButton } from '../ui/button.js';
 import { addEmoji } from '../ui/emoji.js';
 import { addItemArt } from '../art/items.js';
+import { burst, changeEffect } from '../ui/effects.js';
 import { makeDraggable, returnTo } from '../systems/drag.js';
 import { say, sfx, stopNarration } from '../systems/audio.js';
 import { addStars, getStars } from '../systems/save.js';
@@ -10,8 +11,8 @@ import { addStars, getStars } from '../systems/save.js';
 const SPAWN = { x: W / 2, y: 420 };
 const PLATE = 170;
 const ACTIONS = {
-  heat: { emoji: '🔥', color: 0xff7a3d, sparks: [0xff7a3d, 0xffc53d, 0xff4d2e] },
-  cool: { emoji: '❄️', color: 0x8fd3ff, sparks: [0xffffff, 0xbfe8ff, 0x8fd3ff] },
+  heat: { emoji: '🔥', color: 0xff7a3d },
+  cool: { emoji: '❄️', color: 0x8fd3ff },
 };
 
 // State Sorter: drag each item into the Solid, Liquid, or Gas bin.
@@ -159,7 +160,7 @@ export default class SorterScene extends Phaser.Scene {
     item.disableInteractive();
     sfx(this, 'good');
     bin.bounce();
-    this.burst(bin.x, bin.y - 60, [bin.color, 0xffffff]);
+    burst(this, bin.x, bin.y - 60, [bin.color, 0xffffff]);
     const fact = say(this, `item.${item.info.id}.fact`);
 
     if (this.step < this.chain.actions.length) {
@@ -211,7 +212,8 @@ export default class SorterScene extends Phaser.Scene {
     const to = this.chain.items[this.step + 1];
     this.step += 1;
 
-    this.changeEffect(action);
+    sfx(this, action === 'heat' ? 'good' : 'star');
+    changeEffect(this, SPAWN.x, SPAWN.y, PLATE, action);
     this.tweens.add({ targets: item, angle: { from: -6, to: 6 }, duration: 90, yoyo: true, repeat: 7, onComplete: () => item.setAngle(0) });
 
     const oldArt = item.art;
@@ -230,45 +232,6 @@ export default class SorterScene extends Phaser.Scene {
         say(this, `change.${from.id}.${to.id}`);
       },
     });
-  }
-
-  // Heat: warm sparks rise from below. Cool: snowflakes drift down.
-  changeEffect(action) {
-    const heat = action === 'heat';
-    const { sparks } = ACTIONS[action];
-    sfx(this, heat ? 'good' : 'star');
-    for (let i = 0; i < 26; i++) {
-      const x = SPAWN.x + Phaser.Math.Between(-PLATE * 1.2, PLATE * 1.2);
-      const startY = heat ? SPAWN.y + PLATE + 40 : SPAWN.y - PLATE - 60;
-      const p = this.add.circle(x, startY, Phaser.Math.Between(10, 20), sparks[i % sparks.length]).setDepth(1100).setAlpha(0);
-      this.tweens.add({
-        targets: p,
-        y: heat ? SPAWN.y - PLATE : SPAWN.y + PLATE,
-        x: x + Phaser.Math.Between(-40, 40),
-        alpha: { from: 0.9, to: 0 },
-        duration: 1000,
-        delay: i * 35,
-        ease: heat ? 'Quad.easeOut' : 'Sine.easeIn',
-        onComplete: () => p.destroy(),
-      });
-    }
-  }
-
-  burst(x, y, colors) {
-    for (let i = 0; i < 14; i++) {
-      const angle = (Math.PI * 2 * i) / 14;
-      const spark = this.add.circle(x, y, 18, colors[i % colors.length]).setDepth(900);
-      this.tweens.add({
-        targets: spark,
-        x: x + Math.cos(angle) * 260,
-        y: y + Math.sin(angle) * 260,
-        alpha: 0,
-        scale: 0.3,
-        duration: 600,
-        ease: 'Quad.easeOut',
-        onComplete: () => spark.destroy(),
-      });
-    }
   }
 
   finishRound() {

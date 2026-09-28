@@ -7,6 +7,8 @@ const DEFAULTS = {
   sound: true,
   stars: { sorter: 0 },
   sorterIntroSeen: false,
+  labIntroSeen: false,
+  stickers: [],
 };
 
 let data = load();
@@ -48,6 +50,31 @@ export function isSorterIntroSeen() {
 export function markSorterIntroSeen() {
   data.sorterIntroSeen = true;
   persist();
+}
+
+export function isLabIntroSeen() {
+  return data.labIntroSeen;
+}
+
+export function markLabIntroSeen() {
+  data.labIntroSeen = true;
+  persist();
+}
+
+export function hasSticker(id) {
+  return data.stickers.includes(id);
+}
+
+export function stickerCount() {
+  return data.stickers.length;
+}
+
+// Returns true if this is a new sticker.
+export function addSticker(id) {
+  if (hasSticker(id)) return false;
+  data.stickers = [...data.stickers, id];
+  persist();
+  return true;
 }
 
 export function isSoundOn() {

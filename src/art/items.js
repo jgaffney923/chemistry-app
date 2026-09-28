@@ -91,6 +91,19 @@ function pour(g, color, light, { width = 36, bottom = 95 } = {}) {
   fill(g, [[-width / 2 + 6, -135], [-width / 2 + 13, -135], [-width / 2 + 17, 40], [-width / 2 + 8, 40]], light);
 }
 
+// A slice of bread: rounded top, crust around a soft middle.
+function drawSlice(g, crust, middle) {
+  const outline = [];
+  for (let a = 200; a <= 340; a += 8) {
+    const t = Phaser.Math.DegToRad(a);
+    outline.push([118 * Math.cos(t), -40 + 80 * Math.sin(t)]);
+  }
+  outline.push([100, 0], [100, 120], [-100, 120], [-100, 0]);
+  shape(g, outline, crust);
+  const inner = outline.map(([x, y]) => [x * 0.82, (y - 40) * 0.82 + 40]);
+  fill(g, inner, middle);
+}
+
 // --- Items
 
 const DRAW = {
@@ -235,6 +248,79 @@ const DRAW = {
   meltedButter(g) {
     pour(g, 0xffd54f, 0xfff0a8, { width: 32 });
     for (const [x, y, r] of [[-94, 56, 10], [98, 50, 12], [62, 22, 8]]) shape(g, circle(x, y, r), 0xffd54f);
+  },
+
+  sugar(g) {
+    const cube = (cx, cy, s) => {
+      shape(g, [[cx - s, cy - s / 2], [cx, cy], [cx, cy + s], [cx - s, cy + s / 2]], 0xe9ebf2);
+      shape(g, [[cx + s, cy - s / 2], [cx, cy], [cx, cy + s], [cx + s, cy + s / 2]], 0xd3d7e3);
+      shape(g, [[cx, cy - s], [cx + s, cy - s / 2], [cx, cy], [cx - s, cy - s / 2]], 0xffffff);
+    };
+    cube(0, -50, 55);
+    cube(-58, 25, 55);
+    cube(58, 25, 55);
+  },
+
+  salt(g) {
+    shape(g, [[-55, 110], [55, 110], [45, -35], [-45, -35]], 0xf7f7fb);
+    shape(g, [[-50, -35], [50, -35], [42, -85], [-42, -85]], 0xb8c2cc);
+    for (const x of [-18, 0, 18]) fill(g, circle(x, -62, 5), OUT);
+    fill(g, [[-35, -20], [-25, -20], [-25, 95], [-35, 95]], 0xffffff);
+    for (const [x, y] of [[80, 118], [98, 108], [-85, 115]]) shape(g, [[x, y - 7], [x + 7, y], [x, y + 7], [x - 7, y]], 0xffffff);
+  },
+
+  sand(g) {
+    const pile = [];
+    for (let a = 180; a <= 360; a += 10) {
+      const t = Phaser.Math.DegToRad(a);
+      pile.push([125 * Math.cos(t), 95 + 115 * Math.sin(t)]);
+    }
+    shape(g, pile, 0xe8c07a);
+    fill(g, ellipse(-35, 20, 30, 14, -20), 0xf5d9a3);
+    for (const [x, y] of [[-60, 60], [-20, 40], [15, 70], [50, 30], [75, 70], [0, 5], [-85, 85], [95, 88]]) {
+      fill(g, circle(x, y, 5), 0xb98a45);
+    }
+  },
+
+  oil(g) {
+    const bottle = [[-60, 125], [60, 125], [60, 5], [25, -45], [25, -100], [-25, -100], [-25, -45], [-60, 5]];
+    fill(g, bottle, 0xffffff, 0.35);
+    fill(g, [[-56, 121], [56, 121], [56, 20], [-56, 20]], 0xf2c230);
+    fill(g, [[-40, 30], [-30, 30], [-30, 110], [-40, 110]], 0xffe38a);
+    stroke(g, bottle);
+    shape(g, [[-30, -100], [30, -100], [30, -130], [-30, -130]], 0x3c8d4a);
+  },
+
+  vinegar(g) {
+    const bottle = [[-45, 128], [45, 128], [45, -10], [20, -60], [20, -110], [-20, -110], [-20, -60], [-45, -10]];
+    fill(g, bottle, 0xffffff, 0.35);
+    fill(g, [[-41, 124], [41, 124], [41, 5], [-41, 5]], 0xf1e6c4);
+    fill(g, [[-30, 15], [-22, 15], [-22, 115], [-30, 115]], 0xffffff);
+    stroke(g, bottle);
+    shape(g, [[-25, -110], [25, -110], [25, -138], [-25, -138]], 0xc0392b);
+  },
+
+  bakingSoda(g) {
+    shape(g, [[-95, -60], [45, -60], [45, 110], [-95, 110]], 0xf28c28);
+    shape(g, [[45, -60], [85, -95], [85, 75], [45, 110]], 0xc96d17);
+    shape(g, [[-95, -60], [-55, -95], [85, -95], [45, -60]], 0xf7a95a);
+    shape(g, circle(-25, 25, 42), 0xffffff);
+    fill(g, circle(-25, 25, 22), 0xf28c28);
+    const pile = [];
+    for (let a = 180; a <= 360; a += 15) {
+      const t = Phaser.Math.DegToRad(a);
+      pile.push([100 + 40 * Math.cos(t), 118 + 26 * Math.sin(t)]);
+    }
+    shape(g, pile, 0xffffff);
+  },
+
+  bread(g) {
+    drawSlice(g, 0xc98b4a, 0xf6deb0);
+  },
+
+  toast(g) {
+    drawSlice(g, 0x7a4a22, 0xc98b4a);
+    for (const [x, y, r] of [[-30, -10, 12], [25, 30, 10], [40, -35, 8], [-45, 45, 9]]) fill(g, circle(x, y, r), 0x9c6230);
   },
 
   balloon(g) {

@@ -1,0 +1,56 @@
+{
+  "items": [
+    { "id": "ice", "name": "ice cube", "emoji": "🧊" },
+    { "id": "water", "name": "water", "emoji": "💧" },
+    { "id": "steam", "name": "steam", "emoji": "♨️" },
+    { "id": "sugar", "name": "sugar", "emoji": "🍬" },
+    { "id": "salt", "name": "salt", "emoji": "🧂" },
+    { "id": "sand", "name": "sand", "emoji": "🏖️" },
+    { "id": "oil", "name": "oil", "emoji": "🫒" },
+    { "id": "bakingSoda", "name": "baking soda", "emoji": "📦" },
+    { "id": "vinegar", "name": "vinegar", "emoji": "🍶" },
+    { "id": "chocolate", "name": "chocolate bar", "emoji": "🍫" },
+    { "id": "meltedChocolate", "name": "melted chocolate", "emoji": "🟤" },
+    { "id": "butter", "name": "butter", "emoji": "🧈" },
+    { "id": "meltedButter", "name": "melted butter", "emoji": "🟡" },
+    { "id": "bread", "name": "bread", "emoji": "🍞" },
+    { "id": "toast", "name": "toast", "emoji": "🍞" }
+  ],
+
+  "shelf": ["ice", "water", "sugar", "salt", "sand", "oil", "bakingSoda", "vinegar", "chocolate", "butter", "bread"],
+
+  "heat": {
+    "ice": { "to": "water", "sticker": "meltIce" },
+    "water": { "to": "steam", "sticker": "boilWater" },
+    "chocolate": { "to": "meltedChocolate", "sticker": "meltChocolate" },
+    "butter": { "to": "meltedButter", "sticker": "meltButter" },
+    "bread": { "to": "toast", "sticker": "toast" }
+  },
+
+  "cool": {
+    "water": { "to": "ice", "sticker": "freezeWater" },
+    "meltedChocolate": { "to": "chocolate", "sticker": "hardenChocolate" },
+    "meltedButter": { "to": "butter", "sticker": "hardenButter" },
+    "toast": { "to": "toast", "sticker": "toastStays" }
+  },
+
+  "beakerAccepts": ["ice", "sugar", "salt", "sand", "oil", "bakingSoda", "vinegar"],
+
+  "stickers": [
+    { "id": "meltIce", "icon": "water" },
+    { "id": "freezeWater", "icon": "ice" },
+    { "id": "boilWater", "icon": "steam" },
+    { "id": "meltChocolate", "icon": "meltedChocolate" },
+    { "id": "hardenChocolate", "icon": "chocolate" },
+    { "id": "meltButter", "icon": "meltedButter" },
+    { "id": "hardenButter", "icon": "butter" },
+    { "id": "toast", "icon": "toast" },
+    { "id": "toastStays", "icon": "toast" },
+    { "id": "iceFloats", "icon": "ice" },
+    { "id": "sugarDissolves", "icon": "sugar" },
+    { "id": "saltDissolves", "icon": "salt" },
+    { "id": "sandSinks", "icon": "sand" },
+    { "id": "oilFloats", "icon": "oil" },
+    { "id": "fizz", "icon": "bakingSoda" }
+  ]
+}

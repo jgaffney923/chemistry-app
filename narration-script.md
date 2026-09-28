@@ -38,6 +38,47 @@ to a 6-year-old. The iPhone Voice Memos app records .m4a.
 | `change.chocolate.meltedChocolate` | The chocolate got warm and melted! Where does melted chocolate go? | TO RECORD |
 | `change.meltedChocolate.chocolate` | The chocolate cooled down and got hard again! Where does it go now? | TO RECORD |
 | `change.butter.meltedButter` | The butter got warm and melted! Where does melted butter go? | TO RECORD |
+| `lab.intro` | Welcome to the kitchen lab! Let's try something. Put the ice cube on the hot plate! | TO RECORD |
+| `lab.free` | You made a discovery, and you got a sticker! There are lots more to find. Try anything you like! | TO RECORD |
+| `lab.stickers` | Your discovery stickers! Can you find them all? | TO RECORD |
+| `lab.nothing` | Hmm, nothing new happened. Try something else! | TO RECORD |
+| `lab.notInBeaker` | Let's try that on the hot plate, or in the freezer! | TO RECORD |
+| `lab.stir` | Now stir it with the spoon! | TO RECORD |
+| `lab.stirred` | Stir, stir, stir! | TO RECORD |
+| `lab.freshWater` | Fresh, clean water! | TO RECORD |
+| `lab.hotPlate` | The hot plate. It heats things up! | TO RECORD |
+| `lab.freezer` | The freezer. It cools things down! | TO RECORD |
+| `lab.beaker` | A beaker full of water. Try putting things in it! | TO RECORD |
+| `lab.spoon` | A spoon, for stirring the water! | TO RECORD |
+| `lab.magnifier` | A magnifying glass! Hold it over the water to look up close. | TO RECORD |
+| `lab.magnify.water` | Up close, water is made of tiny bits too, and they're always moving! | TO RECORD |
+| `lab.magnify.dissolved` | Look! Tiny bits are spread all through the water. It's still there, even though you can't see it! | TO RECORD |
+| `lab.magnify.grains` | Those pieces haven't dissolved yet. Stir them! | TO RECORD |
+| `lab.magnify.sand` | The sand grains just sit at the bottom. They don't mix into the water. | TO RECORD |
+| `lab.magnify.oil` | The oil stays in its own layer, on top of the water. | TO RECORD |
+| `disc.meltIce` | The ice melted into water! Heat turns solid ice into liquid water. | TO RECORD |
+| `disc.freezeWater` | The water froze into ice! Cold turns liquid water into solid ice. | TO RECORD |
+| `disc.boilWater` | The water got so hot it boiled into steam! Steam is water as a gas, and it floats away. | TO RECORD |
+| `disc.meltChocolate` | The chocolate melted! Warm chocolate turns into a liquid. | TO RECORD |
+| `disc.hardenChocolate` | The melted chocolate cooled down and got hard again! Melting can be undone. | TO RECORD |
+| `disc.meltButter` | The butter melted into a liquid! | TO RECORD |
+| `disc.hardenButter` | The melted butter cooled down and turned solid again! | TO RECORD |
+| `disc.toast` | The bread turned into toast! The heat changed it into something new. | TO RECORD |
+| `disc.toastStays` | The toast is still toast! Cooling it can't turn it back into bread. Some changes can't be undone. | TO RECORD |
+| `disc.iceFloats` | The ice floats! Ice is lighter than the same amount of water. | TO RECORD |
+| `disc.sugarDissolves` | The sugar dissolved! You can't see it anymore, but it's still in the water. Look with the magnifying glass! | TO RECORD |
+| `disc.saltDissolves` | The salt dissolved! You can't see it anymore, but it's still in the water. Look with the magnifying glass! | TO RECORD |
+| `disc.sandSinks` | The sand didn't dissolve. It sank back down to the bottom! | TO RECORD |
+| `disc.oilFloats` | The oil floats on top of the water. Oil and water don't mix! | TO RECORD |
+| `disc.fizz` | Fizz! The baking soda and vinegar made something new: bubbles of a gas called carbon dioxide! | TO RECORD |
+| `item.sugar.name` | Sugar! | TO RECORD |
+| `item.salt.name` | Salt! | TO RECORD |
+| `item.sand.name` | Sand! | TO RECORD |
+| `item.oil.name` | Cooking oil! | TO RECORD |
+| `item.bakingSoda.name` | Baking soda! | TO RECORD |
+| `item.vinegar.name` | Vinegar! | TO RECORD |
+| `item.bread.name` | A slice of bread! | TO RECORD |
+| `item.toast.name` | Toast! | TO RECORD |
 | `item.ice.name` | An ice cube! | TO RECORD |
 | `item.ice.fact` | Ice is a solid. It keeps its shape! | TO RECORD |
 | `item.rock.name` | A rock! | TO RECORD |
