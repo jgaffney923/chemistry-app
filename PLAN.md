@@ -109,7 +109,9 @@ A touch-first game for kids ages 6-8 that teaches early chemistry concepts throu
 - **Chemical changes (make something new):**
   - Baking soda + vinegar -> fizzing bubbles. The bubbles are carbon dioxide gas (a molecule the kid later builds in Molecule Builder).
   - Bread + heater -> toast. The freezer does not turn toast back into bread. This contrast with chocolate teaches "some changes can't be undone."
-- Goal-free play plus optional "discovery stickers" collected for each new change found (saved locally). No fail states.
+- Goal-free play plus optional "discovery stickers" collected for each new change found (15 in all, saved locally; a sticker book shows found ones, tap to hear the explanation again). No fail states.
+- **First visit is guided** (teach before free play): a pointing hand walks the kid through melting the ice on the hot plate, then "try anything you like".
+- Each discovery is narrated as it happens, so the explanation arrives at the moment of cause and effect.
 - Data-driven via `items.json` (a table of `item x action -> result`).
 
 ### 6.3 Molecule Builder — build third
