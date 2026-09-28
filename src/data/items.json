@@ -7,6 +7,7 @@
   "sorter": {
     "roundSize": 6,
     "starsPerRound": 3,
+    "guided": ["ice", "water", "balloon"],
     "items": [
       { "id": "ice", "name": "ice cube", "emoji": "🧊", "state": "solid" },
       { "id": "rock", "name": "rock", "emoji": "🪨", "state": "solid" },

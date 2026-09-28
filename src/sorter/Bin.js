@@ -50,6 +50,7 @@ export class Bin extends Phaser.GameObjects.Container {
     this.state = state;
     this.color = Number(info.color);
     this.filled = 0;
+    this.baseScale = 1; // set before pulsing a bin that is drawn smaller
 
     this.add(scene.add.image(0, 7, binTexture(scene, state, this.color)));
 
@@ -88,11 +89,28 @@ export class Bin extends Phaser.GameObjects.Container {
   }
 
   bounce() {
-    this.scene.tweens.add({ targets: this, scaleY: 0.92, scaleX: 1.05, duration: 90, yoyo: true });
+    const base = this.baseScale;
+    this.scene.tweens.add({ targets: this, scaleY: base * 0.92, scaleX: base * 1.05, duration: 90, yoyo: true });
   }
 
-  // Gentle glow to point a stuck kid at the right answer.
-  pulse() {
-    this.scene.tweens.add({ targets: this, scale: 1.08, duration: 280, yoyo: true, repeat: 3, ease: 'Sine.easeInOut' });
+  // Gentle pulse to point a kid at the right answer. Pass `forever` to keep
+  // pulsing until stopPulse().
+  pulse(forever = false) {
+    this.stopPulse();
+    const base = this.baseScale;
+    this.pulseTween = this.scene.tweens.add({
+      targets: this,
+      scale: base * 1.08,
+      duration: 280,
+      yoyo: true,
+      repeat: forever ? -1 : 3,
+      ease: 'Sine.easeInOut',
+      onStop: () => this.setScale(base),
+    });
+  }
+
+  stopPulse() {
+    this.pulseTween?.stop();
+    this.pulseTween = null;
   }
 }

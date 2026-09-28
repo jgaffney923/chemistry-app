@@ -11,12 +11,14 @@ const PLATE = 170;
 
 // State Sorter: drag each item into the Solid, Liquid, or Gas bin.
 // Wrong drops just bounce back; after two misses the right bin glows.
+// A guided round (right after the warm-up) starts with one easy item per state,
+// with the right bin glowing from the start.
 export default class SorterScene extends Phaser.Scene {
   constructor() {
     super('Sorter');
   }
 
-  create() {
+  create(data) {
     const { states, sorter } = this.cache.json.get('items');
     this.config = sorter;
     this.generation = (this.generation || 0) + 1;
@@ -30,8 +32,21 @@ export default class SorterScene extends Phaser.Scene {
     });
 
     makeRoundButton(this, 130, 130, 90, 0xffffff, addEmoji(this, 0, 0, '🏠', 90), () => this.goHome());
+    makeRoundButton(this, W - 130, 130, 90, 0xffffff, addEmoji(this, 0, 0, '💡', 90),
+      () => this.scene.start('SorterIntro', { replay: true }));
 
-    this.queue = pickRound(sorter.items, sorter.roundSize, stateIds);
+    this.guidedLeft = 0;
+    if (data?.guided) {
+      const easy = sorter.items.filter((it) => sorter.guided.includes(it.id));
+      const rest = sorter.items.filter((it) => !sorter.guided.includes(it.id));
+      this.queue = [
+        ...Phaser.Utils.Array.Shuffle(easy),
+        ...pickRound(rest, sorter.roundSize - easy.length, stateIds),
+      ];
+      this.guidedLeft = easy.length;
+    } else {
+      this.queue = pickRound(sorter.items, sorter.roundSize, stateIds);
+    }
     this.events.once('shutdown', stopNarration);
 
     this.later(say(this, 'sorter.intro'), () => this.nextItem());
@@ -63,6 +78,10 @@ export default class SorterScene extends Phaser.Scene {
     item.setScale(0);
     this.tweens.add({ targets: item, scale: 1, duration: 400, ease: 'Back.easeOut' });
     say(this, `item.${data.id}.name`);
+    if (this.guidedLeft > 0) {
+      this.guidedLeft -= 1;
+      this.binFor(data.state).pulse(true);
+    }
 
     makeDraggable(this, item, {
       onTap: () => say(this, `item.${data.id}.name`),
@@ -82,6 +101,7 @@ export default class SorterScene extends Phaser.Scene {
   }
 
   correct(item, bin) {
+    bin.stopPulse();
     item.disableInteractive();
     this.current = null;
     const slot = bin.nextSlot();
@@ -100,7 +120,7 @@ export default class SorterScene extends Phaser.Scene {
     returnTo(this, item, SPAWN.x, SPAWN.y);
     if (item.misses >= 2) {
       say(this, 'sorter.hint');
-      this.bins.find((b) => b.state === item.info.state).pulse();
+      this.binFor(item.info.state).pulse();
     } else {
       say(this, 'sorter.tryAgain');
     }
@@ -141,11 +161,15 @@ export default class SorterScene extends Phaser.Scene {
     }
 
     this.later(say(this, 'sorter.done'), () => {
-      makeRoundButton(this, W / 2 - 220, H / 2 + 220, 140, 0x3ccf6e, addEmoji(this, 0, 0, '🔄', 130), () => this.scene.restart())
+      makeRoundButton(this, W / 2 - 220, H / 2 + 220, 140, 0x3ccf6e, addEmoji(this, 0, 0, '🔄', 130), () => this.scene.restart({}))
         .setDepth(2001);
       makeRoundButton(this, W / 2 + 220, H / 2 + 220, 140, 0x4f7cff, addEmoji(this, 0, 0, '🏠', 130), () => this.goHome())
         .setDepth(2001);
     });
+  }
+
+  binFor(state) {
+    return this.bins.find((b) => b.state === state);
   }
 
   goHome() {

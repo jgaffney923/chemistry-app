@@ -15,6 +15,13 @@ to a 6-year-old. The iPhone Voice Memos app records .m4a.
 | `state.solid` | Solid! A solid keeps its own shape. | TO RECORD |
 | `state.liquid` | Liquid! A liquid pours, and takes the shape of its cup. | TO RECORD |
 | `state.gas` | Gas! A gas spreads out to fill up all the space it has. | TO RECORD |
+| `intro.solid.try` | This block is a solid. Move it into the bowl! | TO RECORD |
+| `intro.solid` | Look! The block is still a block. A solid keeps its own shape. | TO RECORD |
+| `intro.liquid.try` | This juice is a liquid. Pour it into the bowl! | TO RECORD |
+| `intro.liquid` | Look! The juice spread out to fill the bottom of the bowl. A liquid takes the shape of its cup. | TO RECORD |
+| `intro.gas.try` | This jar is full of gas. We can't see most gases, so dots show where it is. Tap the jar! | TO RECORD |
+| `intro.gas` | Look! The gas spread out to fill the whole box. A gas fills all the space it has. | TO RECORD |
+| `intro.done` | Now you know solids, liquids, and gases. Let's sort! | TO RECORD |
 | `sorter.intro` | Is it a solid, a liquid, or a gas? Drag it into the right box! | TO RECORD |
 | `sorter.tryAgain` | Hmm, try again! | TO RECORD |
 | `sorter.hint` | Try this box! | TO RECORD |

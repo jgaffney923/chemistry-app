@@ -4,6 +4,7 @@ import { isSoundOn } from './systems/save.js';
 import BootScene from './scenes/BootScene.js';
 import MenuScene from './scenes/MenuScene.js';
 import SorterScene from './scenes/SorterScene.js';
+import SorterIntroScene from './scenes/SorterIntroScene.js';
 
 const game = new Phaser.Game({
   type: Phaser.AUTO,
@@ -16,7 +17,7 @@ const game = new Phaser.Game({
     height: H,
   },
   input: { activePointers: 4 }, // several small fingers at once
-  scene: [BootScene, MenuScene, SorterScene],
+  scene: [BootScene, MenuScene, SorterIntroScene, SorterScene],
 });
 
 installAudioGuards(game);

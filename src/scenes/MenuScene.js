@@ -5,7 +5,7 @@ import { makeRoundButton } from '../ui/button.js';
 import { addEmoji, addLabel } from '../ui/emoji.js';
 import { addParentCorner } from '../ui/parentCorner.js';
 import { say } from '../systems/audio.js';
-import { getStars } from '../systems/save.js';
+import { getStars, isSorterIntroSeen } from '../systems/save.js';
 
 const RADIUS = 260;
 
@@ -23,7 +23,7 @@ export default class MenuScene extends Phaser.Scene {
         color: 0x4f7cff,
         icon: () => this.sorterIcon(),
         ready: true,
-        onTap: () => this.scene.start('Sorter'),
+        onTap: () => this.scene.start(isSorterIntroSeen() ? 'Sorter' : 'SorterIntro'),
       },
       { x: W / 2, color: 0x1fb5c9, icon: () => addEmoji(this, 0, 0, '🧪', 230), ready: false },
       { x: W / 2 + 640, color: 0xa77cf2, icon: () => makeWater(this, 0, 30, 85), ready: false },

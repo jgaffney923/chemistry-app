@@ -7,6 +7,14 @@
   "state.liquid": { "text": "Liquid! A liquid pours, and takes the shape of its cup.", "recorded": false },
   "state.gas": { "text": "Gas! A gas spreads out to fill up all the space it has.", "recorded": false },
 
+  "intro.solid.try": { "text": "This block is a solid. Move it into the bowl!", "recorded": false },
+  "intro.solid": { "text": "Look! The block is still a block. A solid keeps its own shape.", "recorded": false },
+  "intro.liquid.try": { "text": "This juice is a liquid. Pour it into the bowl!", "recorded": false },
+  "intro.liquid": { "text": "Look! The juice spread out to fill the bottom of the bowl. A liquid takes the shape of its cup.", "recorded": false },
+  "intro.gas.try": { "text": "This jar is full of gas. We can't see most gases, so dots show where it is. Tap the jar!", "recorded": false },
+  "intro.gas": { "text": "Look! The gas spread out to fill the whole box. A gas fills all the space it has.", "recorded": false },
+  "intro.done": { "text": "Now you know solids, liquids, and gases. Let's sort!", "recorded": false },
+
   "sorter.intro": { "text": "Is it a solid, a liquid, or a gas? Drag it into the right box!", "recorded": false },
   "sorter.tryAgain": { "text": "Hmm, try again!", "recorded": false },
   "sorter.hint": { "text": "Try this box!", "recorded": false },

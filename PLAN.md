@@ -79,6 +79,13 @@ A touch-first game for kids ages 6-8 that teaches early chemistry concepts throu
 ## 6. Mini-games
 
 ### 6.1 State Sorter ("Solid, Liquid, or Gas?") — build first
+- **Warm-up first ("try it, then sort").** Before the first round, the kid does one small thing per state and sees the rule happen:
+  - Solid: drag a block from a glass into a bowl; it stays a block.
+  - Liquid: pour juice from the glass into the bowl; it spreads to fill the bottom of the bowl.
+  - Gas: tap a jar packed with gas dots; they spread to fill the whole box (narration notes most gases are invisible, so dots show where it is).
+  - A mini bin appears after each step, so the bins already mean something when sorting starts.
+  - Plays automatically the first time (and again after "reset progress"); a 💡 button in the Sorter replays it.
+- **Guided first round:** right after the warm-up, the first three items are one easy example per state (ice, water, air in a balloon) with the right bin glowing. The rest of the round plays normally.
 - Items drop in one at a time (ice cube, rock, juice, milk, water, steam from a kettle, balloon of air, honey, spoon, etc.).
 - Kid drags each item into one of three big bins, each with an icon and a narrated name.
 - Correct: happy sound, item settles in bin, short narrated fact ("Ice is a solid. It keeps its shape!").
@@ -125,7 +132,7 @@ A touch-first game for kids ages 6-8 that teaches early chemistry concepts throu
 | # | Milestone | Acceptance criteria |
 |---|-----------|--------------------|
 | M0 | Skeleton + PWA shell | Blank Phaser scene loads; "tap to start" works; installable from Safari; loads offline in airplane mode; deployed on GitHub Pages |
-| M1 | Menu + State Sorter MVP | Menu with 3 big icons (2 disabled); Sorter playable end-to-end with placeholder art and speech-fallback narration; stars saved; parent corner |
+| M1 | Menu + State Sorter MVP | Menu with 3 big icons (2 disabled); warm-up + guided first round; Sorter playable end-to-end with placeholder art and speech-fallback narration; stars saved; parent corner |
 | M2 | Sorter polish | Real art, owner-recorded narration, particle/sound feedback, level 2 state-change items |
 | M3 | Kitchen Lab | All changes in 6.2 working (physical and chemical), magnifier, discovery stickers saved |
 | M4 | Molecule Builder | H2, H2O, O2, CO2, CH4 buildable; double bonds; valence rules enforced; unnamed complete molecules celebrated |

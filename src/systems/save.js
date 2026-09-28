@@ -6,6 +6,7 @@ const KEY = 'chemistry-save-v1';
 const DEFAULTS = {
   sound: true,
   stars: { sorter: 0 },
+  sorterIntroSeen: false,
 };
 
 let data = load();
@@ -37,6 +38,15 @@ export function getStars(game) {
 
 export function addStars(game, count) {
   data.stars[game] = getStars(game) + count;
+  persist();
+}
+
+export function isSorterIntroSeen() {
+  return data.sorterIntroSeen;
+}
+
+export function markSorterIntroSeen() {
+  data.sorterIntroSeen = true;
   persist();
 }
 
