@@ -2,12 +2,14 @@
 // Run `node tools/update-sw.mjs` before each deploy: it rewrites the file list
 // below and bumps CACHE_VERSION so iPads pick up the new files.
 
-const CACHE_VERSION = 6;
+const CACHE_VERSION = 7;
 const CACHE_NAME = `chemistry-v${CACHE_VERSION}`;
 
 // PRECACHE-START
 const PRECACHE = [
   './',
+  'assets/audio/narration/boot.welcome.m4a',
+  'assets/audio/narration/intro.solid.try.m4a',
   'assets/icons/icon-180.png',
   'assets/icons/icon-192.png',
   'assets/icons/icon-512.png',

@@ -1,5 +1,5 @@
 {
-  "boot.welcome": { "text": "Hi! Let's play with chemistry!", "recorded": false },
+  "boot.welcome": { "text": "Hi! Let's play with chemistry!", "recorded": true },
 
   "menu.soon": { "text": "That one is coming soon!", "recorded": false },
 
@@ -7,7 +7,7 @@
   "state.liquid": { "text": "Liquid! A liquid pours, and takes the shape of its cup.", "recorded": false },
   "state.gas": { "text": "Gas! A gas spreads out to fill up all the space it has.", "recorded": false },
 
-  "intro.solid.try": { "text": "This block is a solid. Move it into the bowl!", "recorded": false },
+  "intro.solid.try": { "text": "This block is a solid. Move it into the bowl!", "recorded": true },
   "intro.solid": { "text": "Look! The block is still a block. A solid keeps its own shape.", "recorded": false },
   "intro.liquid.try": { "text": "This juice is a liquid. Pour it into the bowl!", "recorded": false },
   "intro.liquid": { "text": "Look! The juice spread out to fill the bottom of the bowl. A liquid takes the shape of its cup.", "recorded": false },

@@ -10,12 +10,12 @@ to a 6-year-old. The iPhone Voice Memos app records .m4a.
 
 | File name (id) | Say this | Status |
 |---|---|---|
-| `boot.welcome` | Hi! Let's play with chemistry! | TO RECORD |
+| `boot.welcome` | Hi! Let's play with chemistry! | done |
 | `menu.soon` | That one is coming soon! | TO RECORD |
 | `state.solid` | Solid! A solid keeps its own shape. | TO RECORD |
 | `state.liquid` | Liquid! A liquid pours, and takes the shape of its cup. | TO RECORD |
 | `state.gas` | Gas! A gas spreads out to fill up all the space it has. | TO RECORD |
-| `intro.solid.try` | This block is a solid. Move it into the bowl! | TO RECORD |
+| `intro.solid.try` | This block is a solid. Move it into the bowl! | done |
 | `intro.solid` | Look! The block is still a block. A solid keeps its own shape. | TO RECORD |
 | `intro.liquid.try` | This juice is a liquid. Pour it into the bowl! | TO RECORD |
 | `intro.liquid` | Look! The juice spread out to fill the bottom of the bowl. A liquid takes the shape of its cup. | TO RECORD |
