@@ -7,7 +7,8 @@
   - a 💡 button in the Sorter that replays the warm-up.
 - **M2 (Sorter polish)** partly done:
   - done: all Sorter items drawn in code (`src/art/items.js`), Level 2 heating/cooling chains (unlock at 6 stars, 🔥/❄️ buttons, level picker).
-  - not done: owner's voice recordings (2 of 103 lines done; process with `tools/prepare-narration.mjs`), real sound effects (current ones are generated beeps), UI icons are still emoji.
+  - voice: owner recorded 2 of 103 lines; the other 101 use a stand-in computer voice (Zira, marked `"placeholder": true` in narration.json) until recorded. Owner asked for this on 2026-09-28 so every line has a voice for now.
+  - not done: owner's remaining recordings, real sound effects (current ones are generated beeps), UI icons are still emoji.
 - **M3 Kitchen Lab** built (2026-09-28): shelf of 11 items, hot plate, freezer, beaker, spoon, magnifying glass, 15 discovery stickers + sticker book, guided first visit. Code in `src/lab/` and `src/scenes/LabScene.js`, data in `src/data/lab.json`. Tested in Edge only.
 - **M4 Molecule Builder, M5 kid test:** not started.
 

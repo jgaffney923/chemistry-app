@@ -43,7 +43,10 @@ Narration is recorded in a parent's voice. Every line is listed, with its file n
    Needs ffmpeg on PATH, or `FFMPEG` set to its full path.
 4. Run `node tools/make-narration-script.mjs` to update the checklist, then deploy.
 
-Lines that aren't recorded yet are read by the iPad's built-in voice, so nothing breaks while you record.
+Until you record a line, it plays a stand-in computer voice (Microsoft Zira), made with
+`node tools/make-placeholder-voices.mjs` (Windows only). Run it again after adding new
+lines to the game. Recording a line for real replaces its stand-in. Any line with no
+file at all falls back to the iPad's built-in voice.
 
 ## Replacing a drawing with a real picture
 Sorter items are drawn in code (`src/art/items.js`). To use a picture instead
@@ -56,3 +59,4 @@ that item in `src/data/items.json`. Any item without an image keeps its drawing.
 - `make-narration-script.mjs`: regenerates `narration-script.md`.
 - `make-icons.mjs`: redraws the placeholder app icons.
 - `prepare-narration.mjs`: cleans up a recording and adds it to the game.
+- `make-placeholder-voices.mjs`: stand-in computer voice for every unrecorded line.

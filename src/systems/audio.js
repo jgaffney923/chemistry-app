@@ -28,10 +28,18 @@ export function setMuted(game, value) {
 export function unlockAudio(scene) {
   const ctx = scene.sound.context;
   if (ctx && ctx.state !== 'running') ctx.resume();
+  // iOS also keeps the device voice silent until it has spoken once during a tap.
+  // A silent line wakes it up, so unrecorded lines can use it later.
+  if ('speechSynthesis' in window) {
+    const wake = new SpeechSynthesisUtterance(' ');
+    wake.volume = 0;
+    speechSynthesis.speak(wake);
+  }
 }
 
 let current = null;
 let finishCurrent = null;
+let usedSpeech = false;
 
 // Speaks a line. The promise resolves when it ends or is interrupted,
 // so callers can wait before moving on.
@@ -68,6 +76,7 @@ export function say(scene, id) {
       u.pitch = 1.1;
       u.onend = finish;
       u.onerror = finish;
+      usedSpeech = true;
       speechSynthesis.speak(u);
     } else {
       finish();
@@ -81,7 +90,11 @@ export function stopNarration() {
     current.destroy();
     current = null;
   }
-  if ('speechSynthesis' in window) speechSynthesis.cancel();
+  // Only cancel speech we started, so the silent wake-up line in unlockAudio survives.
+  if (usedSpeech) {
+    speechSynthesis.cancel();
+    usedSpeech = false;
+  }
   if (finishCurrent) finishCurrent();
 }
 

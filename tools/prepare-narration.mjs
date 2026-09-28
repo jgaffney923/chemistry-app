@@ -1,6 +1,8 @@
-// Turns a raw phone recording into a game narration file, and marks the line as recorded.
-// Usage: node tools/prepare-narration.mjs <recording> <line-id>
+// Turns a raw recording into a game narration file, and marks the line as recorded.
+// Usage: node tools/prepare-narration.mjs <recording> <line-id> [--placeholder]
 //   e.g. node tools/prepare-narration.mjs "recordings-raw/Voice 3.m4a" intro.solid
+// --placeholder marks the file as a stand-in computer voice, still to be recorded
+// for real (see make-placeholder-voices.mjs). Without it, the line counts as done.
 // Needs ffmpeg: on PATH, or set FFMPEG to its full path.
 //
 // What it does to the sound:
@@ -12,7 +14,9 @@ import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
 import { fileURLToPath } from 'node:url';
 
-const [input, id] = process.argv.slice(2);
+const args = process.argv.slice(2);
+const placeholder = args.includes('--placeholder');
+const [input, id] = args.filter((a) => a !== '--placeholder');
 if (!input || !id) {
   console.error('Usage: node tools/prepare-narration.mjs <recording> <line-id>');
   process.exit(1);
@@ -76,12 +80,13 @@ function findSpeech(file) {
   };
 }
 
-// Mark the line as recorded, keeping the file's layout as-is.
+// Mark the line as recorded by rewriting just its own line (each entry is on
+// one line), so the file keeps its grouping and blank lines.
+const entry = { text: lines[id].text, recorded: true, ...(placeholder && { placeholder: true }) };
+const body = Object.entries(entry).map(([k, v]) => `"${k}": ${JSON.stringify(v)}`).join(', ');
 const text = readFileSync(narrationPath, 'utf8');
-const lineStart = text.indexOf(`"${id}"`);
-const flag = text.indexOf('"recorded": false', lineStart);
-const lineEnd = text.indexOf('\n', lineStart);
-if (flag !== -1 && flag < lineEnd) {
-  writeFileSync(narrationPath, text.slice(0, flag) + '"recorded": true' + text.slice(flag + '"recorded": false'.length));
-}
-console.log(`${output}  <-  "${lines[id].text}"  (kept ${start.toFixed(2)}s to ${end.toFixed(2)}s)`);
+const pattern = new RegExp(`^  "${id.replace(/\./g, '\\.')}": \\{.*\\}(,?)$`, 'm');
+if (!pattern.test(text)) throw new Error(`Couldn't find the line for "${id}" to update`);
+writeFileSync(narrationPath, text.replace(pattern, (_, comma) => `  "${id}": { ${body} }${comma}`));
+const who = placeholder ? 'placeholder voice' : 'recorded';
+console.log(`${output}  <-  "${lines[id].text}"  (${who}, kept ${start.toFixed(2)}s to ${end.toFixed(2)}s)`);
