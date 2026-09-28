@@ -36,8 +36,11 @@ Notes:
 Narration is recorded in a parent's voice. Every line is listed, with its file name, in [narration-script.md](narration-script.md).
 
 1. Record each line with the iPhone **Voice Memos** app (it saves `.m4a`).
-2. Rename it to the line's id, e.g. `boot.welcome.m4a`, and put it in `assets/audio/narration/`.
-3. Set `"recorded": true` for that line in `src/data/narration.json`.
+2. Save it into `recordings-raw/` (kept on this PC only, never published).
+3. Run `node tools/prepare-narration.mjs "recordings-raw/<file>.m4a" <line-id>`.
+   It trims the quiet (and the phone's start click), evens out the volume, saves
+   `assets/audio/narration/<line-id>.m4a`, and marks the line as recorded.
+   Needs ffmpeg on PATH, or `FFMPEG` set to its full path.
 4. Run `node tools/make-narration-script.mjs` to update the checklist, then deploy.
 
 Lines that aren't recorded yet are read by the iPad's built-in voice, so nothing breaks while you record.
@@ -52,3 +55,4 @@ that item in `src/data/items.json`. Any item without an image keeps its drawing.
 - `update-sw.mjs`: offline file list + cache version.
 - `make-narration-script.mjs`: regenerates `narration-script.md`.
 - `make-icons.mjs`: redraws the placeholder app icons.
+- `prepare-narration.mjs`: cleans up a recording and adds it to the game.
