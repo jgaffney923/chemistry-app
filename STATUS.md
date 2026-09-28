@@ -1,7 +1,7 @@
-# Status (last updated 2026-09-27)
+# Status (last updated 2026-09-28)
 
 ## Where things stand
-- **M0 (app shell)** built. Deploying to GitHub Pages has NOT been done yet.
+- **M0 (app shell)** built. Pushed to https://github.com/jgaffney923/chemistry-app (public; commits use the GitHub noreply email `282106827+jgaffney923@users.noreply.github.com`, set in this repo's git config). GitHub Pages: owner is turning it on; site will be https://jgaffney923.github.io/chemistry-app/
 - **M1 (menu + State Sorter)** built, plus two additions requested during M1:
   - a "try it first" warm-up before the first round (solid block, pouring juice, gas jar), then a guided first round;
   - a 💡 button in the Sorter that replays the warm-up.
@@ -15,7 +15,7 @@ Only in Edge on the PC, with automated Playwright runs (full rounds, warm-up, Le
 **Never tried on the real iPad**: real touch, the iPad's voice, and Apple emoji are unchecked.
 
 ## Next steps (owner's choice)
-1. Put it on GitHub Pages (repo name `chemistry-app`, public) and test on the iPad. `gh` CLI isn't installed, so create the repo on github.com. Decide first whether commits should use a GitHub noreply email (the repo is public).
+1. Confirm GitHub Pages is live, then test on the iPad (install to home screen, airplane-mode check).
 2. Or keep building: finish M2 (sound effects), then M3 Kitchen Lab.
 3. Owner records narration whenever convenient; the game falls back to the device voice until then.
 
