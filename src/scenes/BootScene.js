@@ -9,6 +9,7 @@ export default class BootScene extends Phaser.Scene {
 
   preload() {
     this.load.json('narration', 'src/data/narration.json');
+    this.load.json('items', 'src/data/items.json');
     this.load.once('filecomplete-json-narration', () => preloadNarration(this));
   }
 

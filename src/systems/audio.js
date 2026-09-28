@@ -18,8 +18,9 @@ export function preloadNarration(scene) {
   }
 }
 
-export function setMuted(value) {
+export function setMuted(game, value) {
   muted = value;
+  game.sound.mute = value;
   if (muted) stopNarration();
 }
 
@@ -30,25 +31,48 @@ export function unlockAudio(scene) {
 }
 
 let current = null;
+let finishCurrent = null;
 
+// Speaks a line. The promise resolves when it ends or is interrupted,
+// so callers can wait before moving on.
 export function say(scene, id) {
-  if (muted) return;
   stopNarration();
-  const key = narrationKey(id);
-  if (scene.cache.audio.exists(key)) {
-    const sound = scene.sound.add(key);
-    sound.once('complete', () => {
-      sound.destroy();
-      if (current === sound) current = null;
-    });
-    current = sound;
-    sound.play();
-  } else if (lines[id] && 'speechSynthesis' in window) {
-    const u = new SpeechSynthesisUtterance(lines[id].text);
-    u.rate = 0.9;
-    u.pitch = 1.1;
-    speechSynthesis.speak(u);
-  }
+  if (muted || !lines[id]) return Promise.resolve();
+
+  return new Promise((resolve) => {
+    let done = false;
+    const finish = () => {
+      if (done) return;
+      done = true;
+      clearTimeout(safety);
+      if (finishCurrent === finish) finishCurrent = null;
+      resolve();
+    };
+    finishCurrent = finish;
+    // Speech "end" events are unreliable on iOS, so never wait forever.
+    const safety = setTimeout(finish, 1500 + lines[id].text.length * 90);
+
+    const key = narrationKey(id);
+    if (scene.cache.audio.exists(key)) {
+      const sound = scene.sound.add(key);
+      sound.once('complete', () => {
+        sound.destroy();
+        if (current === sound) current = null;
+        finish();
+      });
+      current = sound;
+      sound.play();
+    } else if ('speechSynthesis' in window) {
+      const u = new SpeechSynthesisUtterance(lines[id].text);
+      u.rate = 0.9;
+      u.pitch = 1.1;
+      u.onend = finish;
+      u.onerror = finish;
+      speechSynthesis.speak(u);
+    } else {
+      finish();
+    }
+  });
 }
 
 export function stopNarration() {
@@ -58,6 +82,34 @@ export function stopNarration() {
     current = null;
   }
   if ('speechSynthesis' in window) speechSynthesis.cancel();
+  if (finishCurrent) finishCurrent();
+}
+
+// Placeholder sound effects made from simple tones, until real SFX files exist.
+const SFX = {
+  good: [[523, 0, 0.12], [784, 0.1, 0.22]],
+  boing: [[330, 0, 0.25, 180]],
+  pop: [[660, 0, 0.08]],
+  star: [[784, 0, 0.1], [988, 0.08, 0.1], [1319, 0.16, 0.3]],
+};
+
+export function sfx(scene, name) {
+  const ctx = scene.sound.context;
+  if (muted || !ctx || ctx.state !== 'running') return;
+  const now = ctx.currentTime;
+  for (const [freq, start, length, slideTo] of SFX[name]) {
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    osc.type = 'triangle';
+    osc.frequency.setValueAtTime(freq, now + start);
+    if (slideTo) osc.frequency.exponentialRampToValueAtTime(slideTo, now + start + length);
+    gain.gain.setValueAtTime(0.0001, now + start);
+    gain.gain.exponentialRampToValueAtTime(0.25, now + start + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, now + start + length);
+    osc.connect(gain).connect(ctx.destination);
+    osc.start(now + start);
+    osc.stop(now + start + length + 0.05);
+  }
 }
 
 // iOS suspends audio when the app is backgrounded and only lets it resume on a tap.

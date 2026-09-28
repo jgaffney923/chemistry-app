@@ -1,0 +1,26 @@
+{
+  "states": {
+    "solid": { "label": "Solid", "color": "0x4f7cff" },
+    "liquid": { "label": "Liquid", "color": "0x1fb5c9" },
+    "gas": { "label": "Gas", "color": "0xa77cf2" }
+  },
+  "sorter": {
+    "roundSize": 6,
+    "starsPerRound": 3,
+    "items": [
+      { "id": "ice", "name": "ice cube", "emoji": "🧊", "state": "solid" },
+      { "id": "rock", "name": "rock", "emoji": "🪨", "state": "solid" },
+      { "id": "spoon", "name": "spoon", "emoji": "🥄", "state": "solid" },
+      { "id": "brick", "name": "brick", "emoji": "🧱", "state": "solid" },
+      { "id": "teddy", "name": "teddy bear", "emoji": "🧸", "state": "solid" },
+      { "id": "crayon", "name": "crayon", "emoji": "🖍️", "state": "solid" },
+      { "id": "water", "name": "water", "emoji": "💧", "state": "liquid" },
+      { "id": "milk", "name": "milk", "emoji": "🥛", "state": "liquid" },
+      { "id": "juice", "name": "juice", "emoji": "🧃", "state": "liquid" },
+      { "id": "honey", "name": "honey", "emoji": "🍯", "state": "liquid" },
+      { "id": "balloon", "name": "air in a balloon", "emoji": "🎈", "state": "gas" },
+      { "id": "steam", "name": "steam from a teapot", "emoji": "🫖", "state": "gas" },
+      { "id": "puff", "name": "a puff of air", "emoji": "💨", "state": "gas" }
+    ]
+  }
+}

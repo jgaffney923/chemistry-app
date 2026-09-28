@@ -1,4 +1,43 @@
 {
   "boot.welcome": { "text": "Hi! Let's play with chemistry!", "recorded": false },
-  "menu.water": { "text": "This is water. It's made of tiny building blocks.", "recorded": false }
+
+  "menu.soon": { "text": "That one is coming soon!", "recorded": false },
+
+  "state.solid": { "text": "Solid! A solid keeps its own shape.", "recorded": false },
+  "state.liquid": { "text": "Liquid! A liquid pours, and takes the shape of its cup.", "recorded": false },
+  "state.gas": { "text": "Gas! A gas spreads out to fill up all the space it has.", "recorded": false },
+
+  "sorter.intro": { "text": "Is it a solid, a liquid, or a gas? Drag it into the right box!", "recorded": false },
+  "sorter.tryAgain": { "text": "Hmm, try again!", "recorded": false },
+  "sorter.hint": { "text": "Try this box!", "recorded": false },
+  "sorter.done": { "text": "You did it! You sorted them all!", "recorded": false },
+
+  "item.ice.name": { "text": "An ice cube!", "recorded": false },
+  "item.ice.fact": { "text": "Ice is a solid. It keeps its shape!", "recorded": false },
+  "item.rock.name": { "text": "A rock!", "recorded": false },
+  "item.rock.fact": { "text": "A rock is a solid. It's hard, and it keeps its shape.", "recorded": false },
+  "item.spoon.name": { "text": "A spoon!", "recorded": false },
+  "item.spoon.fact": { "text": "A spoon is a solid. Put it anywhere, and it stays spoon-shaped.", "recorded": false },
+  "item.brick.name": { "text": "A brick!", "recorded": false },
+  "item.brick.fact": { "text": "A brick is a solid. It's hard and strong!", "recorded": false },
+  "item.teddy.name": { "text": "A teddy bear!", "recorded": false },
+  "item.teddy.fact": { "text": "A teddy bear is a solid. Squish it, let go, and it's still teddy-shaped!", "recorded": false },
+  "item.crayon.name": { "text": "A crayon!", "recorded": false },
+  "item.crayon.fact": { "text": "A crayon is a solid. It has its own shape.", "recorded": false },
+
+  "item.water.name": { "text": "Water!", "recorded": false },
+  "item.water.fact": { "text": "Water is a liquid. It pours, and takes the shape of its cup!", "recorded": false },
+  "item.milk.name": { "text": "Milk!", "recorded": false },
+  "item.milk.fact": { "text": "Milk is a liquid. You can pour it!", "recorded": false },
+  "item.juice.name": { "text": "Juice!", "recorded": false },
+  "item.juice.fact": { "text": "Juice is a liquid. It flows and splashes!", "recorded": false },
+  "item.honey.name": { "text": "Honey!", "recorded": false },
+  "item.honey.fact": { "text": "Honey is a liquid too. It's thick and slow, but it still pours!", "recorded": false },
+
+  "item.balloon.name": { "text": "Air in a balloon!", "recorded": false },
+  "item.balloon.fact": { "text": "Air is a gas. It spreads out to fill the whole balloon!", "recorded": false },
+  "item.steam.name": { "text": "Steam from a teapot!", "recorded": false },
+  "item.steam.fact": { "text": "Steam is water that turned into a gas. It floats up and spreads out!", "recorded": false },
+  "item.puff.name": { "text": "A puff of air!", "recorded": false },
+  "item.puff.fact": { "text": "When you blow, you push out air. Air is a gas!", "recorded": false }
 }
