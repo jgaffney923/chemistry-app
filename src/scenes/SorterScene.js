@@ -5,24 +5,33 @@ import { addEmoji } from '../ui/emoji.js';
 import { addItemArt } from '../art/items.js';
 import { makeDraggable, returnTo } from '../systems/drag.js';
 import { say, sfx, stopNarration } from '../systems/audio.js';
-import { addStars } from '../systems/save.js';
+import { addStars, getStars } from '../systems/save.js';
 
 const SPAWN = { x: W / 2, y: 420 };
 const PLATE = 170;
+const ACTIONS = {
+  heat: { emoji: '🔥', color: 0xff7a3d, sparks: [0xff7a3d, 0xffc53d, 0xff4d2e] },
+  cool: { emoji: '❄️', color: 0x8fd3ff, sparks: [0xffffff, 0xbfe8ff, 0x8fd3ff] },
+};
 
 // State Sorter: drag each item into the Solid, Liquid, or Gas bin.
 // Wrong drops just bounce back; after two misses the right bin glows.
-// A guided round (right after the warm-up) starts with one easy item per state,
-// with the right bin glowing from the start.
+//
+// Level 1 sorts single items. A guided round (right after the warm-up) starts
+// with one easy item per state, with the right bin glowing from the start.
+// Level 2 (unlocked by stars) sorts "change chains": sort the item, heat or cool
+// it, watch it change state, and sort the new form.
 export default class SorterScene extends Phaser.Scene {
   constructor() {
     super('Sorter');
   }
 
-  create(data) {
+  create(data = {}) {
     const { states, sorter } = this.cache.json.get('items');
     this.config = sorter;
+    this.itemsById = Object.fromEntries([...sorter.items, ...sorter.changeItems].map((it) => [it.id, it]));
     this.generation = (this.generation || 0) + 1;
+    this.events.once('shutdown', stopNarration);
 
     const stateIds = Object.keys(states);
     const gap = (W - stateIds.length * BIN_W) / (stateIds.length + 1);
@@ -32,25 +41,45 @@ export default class SorterScene extends Phaser.Scene {
       return bin;
     });
 
-    makeRoundButton(this, 130, 130, 90, 0xffffff, addEmoji(this, 0, 0, '🏠', 90), () => this.goHome());
+    this.homeButton = makeRoundButton(this, 130, 130, 90, 0xffffff, addEmoji(this, 0, 0, '🏠', 90), () => this.goHome());
     makeRoundButton(this, W - 130, 130, 90, 0xffffff, addEmoji(this, 0, 0, '💡', 90),
       () => this.scene.start('SorterIntro', { replay: true }));
 
+    if (!data.level && !data.guided && this.level2Unlocked()) {
+      this.showLevelPicker();
+      return;
+    }
+    this.level = data.level || 1;
+
     this.guidedLeft = 0;
-    if (data?.guided) {
+    if (this.level === 2) {
+      const { chains, chainsPerRound } = sorter.level2;
+      this.queue = Phaser.Utils.Array.Shuffle(chains.slice()).slice(0, chainsPerRound).map((c) => this.parseChain(c));
+    } else if (data.guided) {
       const easy = sorter.items.filter((it) => sorter.guided.includes(it.id));
       const rest = sorter.items.filter((it) => !sorter.guided.includes(it.id));
       this.queue = [
         ...Phaser.Utils.Array.Shuffle(easy),
         ...pickRound(rest, sorter.roundSize - easy.length, stateIds),
-      ];
+      ].map((it) => ({ items: [it], actions: [] }));
       this.guidedLeft = easy.length;
     } else {
-      this.queue = pickRound(sorter.items, sorter.roundSize, stateIds);
+      this.queue = pickRound(sorter.items, sorter.roundSize, stateIds).map((it) => ({ items: [it], actions: [] }));
     }
-    this.events.once('shutdown', stopNarration);
 
-    this.later(say(this, 'sorter.intro'), () => this.nextItem());
+    this.later(say(this, this.level === 2 ? 'level2.intro' : 'sorter.intro'), () => this.nextChain());
+  }
+
+  // ["ice", "heat", "water"] -> { items: [ice, water], actions: ["heat"] }
+  parseChain(list) {
+    return {
+      items: list.filter((_, i) => i % 2 === 0).map((id) => this.itemsById[id]),
+      actions: list.filter((_, i) => i % 2 === 1),
+    };
+  }
+
+  level2Unlocked() {
+    return getStars('sorter') >= this.config.level2.unlockStars;
   }
 
   // Runs `then` after a promise, unless the scene was left or restarted meanwhile.
@@ -61,31 +90,55 @@ export default class SorterScene extends Phaser.Scene {
     });
   }
 
-  nextItem() {
-    const data = this.queue.shift();
-    if (!data) {
+  showLevelPicker() {
+    this.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0.45).setDepth(2000).setInteractive();
+    const art = (id, x, y) => addItemArt(this, this.itemsById[id], x, y, 150);
+    const buttons = [
+      makeRoundButton(this, W / 2 - 330, H / 2 - 80, 250, 0x4f7cff,
+        [art('ice', -95, 45), art('water', 0, -75), art('balloon', 95, 45)],
+        () => this.scene.restart({ level: 1 })),
+      makeRoundButton(this, W / 2 + 330, H / 2 - 80, 250, 0xff7a3d,
+        [addEmoji(this, -70, 0, '🔥', 150), addEmoji(this, 75, 0, '❄️', 150)],
+        () => this.scene.restart({ level: 2 })),
+    ];
+    buttons.forEach((b, i) => {
+      b.setDepth(2001).setScale(0);
+      this.tweens.add({ targets: b, scale: 1, duration: 400, delay: i * 120, ease: 'Back.easeOut' });
+    });
+    this.homeButton.setDepth(2001);
+    say(this, 'sorter.pickLevel');
+  }
+
+  nextChain() {
+    this.chain = this.queue.shift();
+    if (!this.chain) {
       this.finishRound();
       return;
     }
+    this.step = 0;
+    this.spawnItem(this.chain.items[0]);
+  }
 
+  spawnItem(info) {
     const item = this.add.container(SPAWN.x, SPAWN.y);
     const plate = this.add.circle(0, 0, PLATE, 0xfdf6e3).setStrokeStyle(8, 0x000000, 0.1);
-    item.add([plate, addItemArt(this, data, 0, 0)]);
+    item.art = addItemArt(this, info, 0, 0);
+    item.add([plate, item.art]);
     item.setInteractive(new Phaser.Geom.Circle(0, 0, PLATE), Phaser.Geom.Circle.Contains);
-    item.info = data;
+    item.info = info;
     item.misses = 0;
     this.current = item;
 
     item.setScale(0);
     this.tweens.add({ targets: item, scale: 1, duration: 400, ease: 'Back.easeOut' });
-    say(this, `item.${data.id}.name`);
+    say(this, `item.${info.id}.name`);
     if (this.guidedLeft > 0) {
       this.guidedLeft -= 1;
-      this.binFor(data.state).pulse(true);
+      this.binFor(info.state).pulse(true);
     }
 
     makeDraggable(this, item, {
-      onTap: () => say(this, `item.${data.id}.name`),
+      onTap: () => say(this, `item.${item.info.id}.name`),
       onDrop: (x, y) => this.drop(item, x, y),
     });
   }
@@ -104,14 +157,22 @@ export default class SorterScene extends Phaser.Scene {
   correct(item, bin) {
     bin.stopPulse();
     item.disableInteractive();
-    this.current = null;
-    const slot = bin.nextSlot();
-    this.tweens.add({ targets: item, x: slot.x, y: slot.y, scale: 0.4, duration: 350, ease: 'Quad.easeIn' });
     sfx(this, 'good');
     bin.bounce();
-    this.burst(bin.x, bin.y - 60, bin.color);
-    this.later(say(this, `item.${item.info.id}.fact`), () => {
-      this.time.delayedCall(400, () => this.nextItem());
+    this.burst(bin.x, bin.y - 60, [bin.color, 0xffffff]);
+    const fact = say(this, `item.${item.info.id}.fact`);
+
+    if (this.step < this.chain.actions.length) {
+      // More changes to come: dip into the bin, then come back out to be changed.
+      this.tweens.add({ targets: item, x: bin.x, y: bin.y - 40, scale: 0.55, duration: 350, ease: 'Quad.easeIn' });
+      this.later(fact, () => this.offerChange(item));
+      return;
+    }
+
+    const slot = bin.nextSlot();
+    this.tweens.add({ targets: item, x: slot.x, y: slot.y, scale: 0.4, duration: 350, ease: 'Quad.easeIn' });
+    this.later(fact, () => {
+      this.time.delayedCall(400, () => this.nextChain());
     });
   }
 
@@ -127,10 +188,76 @@ export default class SorterScene extends Phaser.Scene {
     }
   }
 
-  burst(x, y, color) {
+  // Level 2: bring the item back and show the heat or cool button beside it.
+  offerChange(item) {
+    const action = this.chain.actions[this.step];
+    const { emoji, color } = ACTIONS[action];
+    this.tweens.add({ targets: item, x: SPAWN.x, y: SPAWN.y, scale: 1, duration: 450, ease: 'Back.easeOut' });
+
+    const button = makeRoundButton(this, SPAWN.x + 380, SPAWN.y, 130, color, addEmoji(this, 0, 0, emoji, 140), () => {
+      this.changeButton = null;
+      button.destroy();
+      this.change(item, action);
+    });
+    this.changeButton = button;
+    button.setScale(0);
+    this.tweens.add({ targets: button, scale: 1, duration: 350, delay: 300, ease: 'Back.easeOut' });
+    this.tweens.add({ targets: button, angle: { from: -8, to: 8 }, duration: 400, yoyo: true, repeat: -1, delay: 700 });
+    say(this, `level2.${action}`);
+  }
+
+  change(item, action) {
+    const from = item.info;
+    const to = this.chain.items[this.step + 1];
+    this.step += 1;
+
+    this.changeEffect(action);
+    this.tweens.add({ targets: item, angle: { from: -6, to: 6 }, duration: 90, yoyo: true, repeat: 7, onComplete: () => item.setAngle(0) });
+
+    const oldArt = item.art;
+    item.art = addItemArt(this, to, 0, 0).setAlpha(0);
+    item.add(item.art);
+    this.tweens.add({ targets: oldArt, alpha: 0, duration: 700, delay: 500, onComplete: () => oldArt.destroy() });
+    this.tweens.add({
+      targets: item.art,
+      alpha: 1,
+      duration: 700,
+      delay: 500,
+      onComplete: () => {
+        item.info = to;
+        item.misses = 0;
+        this.input.enable(item);
+        say(this, `change.${from.id}.${to.id}`);
+      },
+    });
+  }
+
+  // Heat: warm sparks rise from below. Cool: snowflakes drift down.
+  changeEffect(action) {
+    const heat = action === 'heat';
+    const { sparks } = ACTIONS[action];
+    sfx(this, heat ? 'good' : 'star');
+    for (let i = 0; i < 26; i++) {
+      const x = SPAWN.x + Phaser.Math.Between(-PLATE * 1.2, PLATE * 1.2);
+      const startY = heat ? SPAWN.y + PLATE + 40 : SPAWN.y - PLATE - 60;
+      const p = this.add.circle(x, startY, Phaser.Math.Between(10, 20), sparks[i % sparks.length]).setDepth(1100).setAlpha(0);
+      this.tweens.add({
+        targets: p,
+        y: heat ? SPAWN.y - PLATE : SPAWN.y + PLATE,
+        x: x + Phaser.Math.Between(-40, 40),
+        alpha: { from: 0.9, to: 0 },
+        duration: 1000,
+        delay: i * 35,
+        ease: heat ? 'Quad.easeOut' : 'Sine.easeIn',
+        onComplete: () => p.destroy(),
+      });
+    }
+  }
+
+  burst(x, y, colors) {
     for (let i = 0; i < 14; i++) {
       const angle = (Math.PI * 2 * i) / 14;
-      const spark = this.add.circle(x, y, 18, i % 2 ? 0xffffff : color).setDepth(900);
+      const spark = this.add.circle(x, y, 18, colors[i % colors.length]).setDepth(900);
       this.tweens.add({
         targets: spark,
         x: x + Math.cos(angle) * 260,
@@ -145,8 +272,10 @@ export default class SorterScene extends Phaser.Scene {
   }
 
   finishRound() {
-    const count = this.config.starsPerRound;
+    const count = this.level === 2 ? this.config.level2.starsPerRound : this.config.starsPerRound;
+    const wasUnlocked = this.level2Unlocked();
     addStars('sorter', count);
+    const justUnlocked = !wasUnlocked && this.level2Unlocked();
 
     this.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0.45).setDepth(2000).setInteractive();
     for (let i = 0; i < count; i++) {
@@ -162,11 +291,26 @@ export default class SorterScene extends Phaser.Scene {
     }
 
     this.later(say(this, 'sorter.done'), () => {
-      makeRoundButton(this, W / 2 - 220, H / 2 + 220, 140, 0x3ccf6e, addEmoji(this, 0, 0, '🔄', 130), () => this.scene.restart({}))
-        .setDepth(2001);
-      makeRoundButton(this, W / 2 + 220, H / 2 + 220, 140, 0x4f7cff, addEmoji(this, 0, 0, '🏠', 130), () => this.goHome())
-        .setDepth(2001);
+      const level = this.level;
+      // With a new game to offer, spread the buttons out to make room for it in the middle.
+      const spread = justUnlocked ? 420 : 220;
+      makeRoundButton(this, W / 2 - spread, H / 2 + 220, 140, 0x3ccf6e, addEmoji(this, 0, 0, '🔄', 130),
+        () => this.scene.restart({ level })).setDepth(2001);
+      makeRoundButton(this, W / 2 + spread, H / 2 + 220, 140, 0x4f7cff, addEmoji(this, 0, 0, '🏠', 130),
+        () => this.goHome()).setDepth(2001);
+      if (justUnlocked) this.showUnlock();
     });
+  }
+
+  showUnlock() {
+    const button = makeRoundButton(this, W / 2, H / 2 + 220, 190, 0xff7a3d,
+      [addEmoji(this, -60, 0, '🔥', 130), addEmoji(this, 65, 0, '❄️', 130)],
+      () => this.scene.restart({ level: 2 }));
+    button.setDepth(2001).setScale(0);
+    this.tweens.add({ targets: button, scale: 1, duration: 450, ease: 'Back.easeOut' });
+    this.tweens.add({ targets: button, angle: { from: -6, to: 6 }, duration: 350, yoyo: true, repeat: -1, delay: 500 });
+    sfx(this, 'star');
+    say(this, 'level2.unlocked');
   }
 
   binFor(state) {

@@ -26,6 +26,18 @@ to a 6-year-old. The iPhone Voice Memos app records .m4a.
 | `sorter.tryAgain` | Hmm, try again! | TO RECORD |
 | `sorter.hint` | Try this box! | TO RECORD |
 | `sorter.done` | You did it! You sorted them all! | TO RECORD |
+| `sorter.pickLevel` | Which game? Sorting, or heating and cooling? | TO RECORD |
+| `level2.unlocked` | Wow! You found a new game: heating and cooling! | TO RECORD |
+| `level2.intro` | Heating and cooling can change things! Sort it, then change it, and sort it again! | TO RECORD |
+| `level2.heat` | Now tap the fire to heat it up! | TO RECORD |
+| `level2.cool` | Now tap the snowflake to cool it down! | TO RECORD |
+| `change.ice.water` | The ice got warm and melted into water! Where does water go? | TO RECORD |
+| `change.water.steam` | The water got so hot it boiled into steam! Where does steam go? | TO RECORD |
+| `change.steam.water` | The steam cooled down and turned back into water! Where does it go now? | TO RECORD |
+| `change.water.ice` | The water got so cold it froze into ice! Where does ice go? | TO RECORD |
+| `change.chocolate.meltedChocolate` | The chocolate got warm and melted! Where does melted chocolate go? | TO RECORD |
+| `change.meltedChocolate.chocolate` | The chocolate cooled down and got hard again! Where does it go now? | TO RECORD |
+| `change.butter.meltedButter` | The butter got warm and melted! Where does melted butter go? | TO RECORD |
 | `item.ice.name` | An ice cube! | TO RECORD |
 | `item.ice.fact` | Ice is a solid. It keeps its shape! | TO RECORD |
 | `item.rock.name` | A rock! | TO RECORD |
@@ -46,6 +58,14 @@ to a 6-year-old. The iPhone Voice Memos app records .m4a.
 | `item.juice.fact` | Juice is a liquid. It flows and splashes! | TO RECORD |
 | `item.honey.name` | Honey! | TO RECORD |
 | `item.honey.fact` | Honey is a liquid too. It's thick and slow, but it still pours! | TO RECORD |
+| `item.chocolate.name` | A chocolate bar! | TO RECORD |
+| `item.chocolate.fact` | Chocolate is a solid. It keeps its shape, until it gets warm! | TO RECORD |
+| `item.meltedChocolate.name` | Melted chocolate! | TO RECORD |
+| `item.meltedChocolate.fact` | Melted chocolate is a liquid. It pours! | TO RECORD |
+| `item.butter.name` | A block of butter! | TO RECORD |
+| `item.butter.fact` | Cold butter is a solid. It keeps its shape. | TO RECORD |
+| `item.meltedButter.name` | Melted butter! | TO RECORD |
+| `item.meltedButter.fact` | Melted butter is a liquid. It pours! | TO RECORD |
 | `item.balloon.name` | Air in a balloon! | TO RECORD |
 | `item.balloon.fact` | Air is a gas. It spreads out to fill the whole balloon! | TO RECORD |
 | `item.steam.name` | Steam from a teapot! | TO RECORD |

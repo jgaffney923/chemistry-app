@@ -207,6 +207,36 @@ const DRAW = {
     fill(g, ellipse(-40, 104, 30, 7), light);
   },
 
+  chocolate(g) {
+    const y = 15;
+    shape(g, [[-125, y], [65, y], [65, y + 40], [-125, y + 40]], 0x5e3620);
+    shape(g, [[65, y], [125, y - 70], [125, y - 30], [65, y + 40]], 0x4a2a18);
+    shape(g, [[-125, y], [-65, y - 70], [125, y - 70], [65, y]], 0x7b4a2d);
+    for (let i = 1; i < 4; i++) {
+      const dx = (190 * i) / 4;
+      stroke(g, [[-125 + dx, y], [-65 + dx, y - 70]], false, 5, 0x4a2a18);
+    }
+    stroke(g, [[-95, y - 35], [95, y - 35]], false, 5, 0x4a2a18);
+    fill(g, [[-100, y - 12], [-80, y - 12], [-62, y - 30], [-82, y - 30]], 0x9c6a4a);
+  },
+
+  meltedChocolate(g) {
+    pour(g, 0x6b3e26, 0x9c6a4a, { width: 38 });
+    for (const [x, y, r] of [[-92, 58, 11], [96, 50, 10], [-55, 26, 7]]) shape(g, circle(x, y, r), 0x6b3e26);
+  },
+
+  butter(g) {
+    shape(g, [[-110, -10], [70, -10], [70, 70], [-110, 70]], 0xffd966);
+    shape(g, [[70, -10], [110, -55], [110, 25], [70, 70]], 0xf2c14e);
+    shape(g, [[-110, -10], [-70, -55], [110, -55], [70, -10]], 0xffe8a3);
+    fill(g, [[-90, 5], [-70, 5], [-70, 50], [-90, 50]], 0xfff3cc);
+  },
+
+  meltedButter(g) {
+    pour(g, 0xffd54f, 0xfff0a8, { width: 32 });
+    for (const [x, y, r] of [[-94, 56, 10], [98, 50, 12], [62, 22, 8]]) shape(g, circle(x, y, r), 0xffd54f);
+  },
+
   balloon(g) {
     // See-through, so you can see the air (gas dots) inside.
     const body = ellipse(0, -35, 95, 112);

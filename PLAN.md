@@ -93,7 +93,8 @@ A touch-first game for kids ages 6-8 that teaches early chemistry concepts throu
 - Round = 6 items. Finishing a round earns its stars (not reduced by wrong tries), saved locally.
 - Level 1 uses only unambiguous items. Leave out sand, sugar, toothpaste, jelly, slime, whipped cream (they pour or squish and confuse the categories).
 - Steam: show a kettle spout; narration says steam is water as a gas (see section 9).
-- **Level 2 (after MVP):** items that change state. A sun/snowflake button melts or freezes the item and it must be re-sorted.
+- **Level 2: heating and cooling.** Unlocks at 6 Sorter stars (two rounds); the finish screen announces it, and from then on the Sorter asks which game to play. A round is 3 "change chains" from `items.json`: sort the item, it comes back out, tap the 🔥 (heat) or ❄️ (cool) button, watch it change, and sort the new form. Chains: ice → water → steam, steam → water → ice, chocolate → melted → hard again, butter → melted.
+  - Heat is a flame, not a sun: sunshine melts ice, but it can't boil water into steam.
 - Data-driven: all items defined in `items.json` (name, sprite, state, narration ID, fun fact).
 
 ### 6.2 Kitchen Lab (sandbox) — build second

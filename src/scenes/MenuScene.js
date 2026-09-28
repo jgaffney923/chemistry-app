@@ -24,7 +24,9 @@ export default class MenuScene extends Phaser.Scene {
         color: 0x4f7cff,
         icon: () => this.sorterIcon(),
         ready: true,
-        onTap: () => this.scene.start(isSorterIntroSeen() ? 'Sorter' : 'SorterIntro'),
+        // Always pass data: with none, Phaser reuses the last run's data
+        // (e.g. { level: 2 } or { guided: true }).
+        onTap: () => this.scene.start(isSorterIntroSeen() ? 'Sorter' : 'SorterIntro', {}),
       },
       { x: W / 2, color: 0x1fb5c9, icon: () => addEmoji(this, 0, 0, '🧪', 230), ready: false },
       { x: W / 2 + 640, color: 0xa77cf2, icon: () => makeWater(this, 0, 30, 85), ready: false },

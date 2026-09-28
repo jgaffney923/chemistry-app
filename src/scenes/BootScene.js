@@ -13,7 +13,8 @@ export default class BootScene extends Phaser.Scene {
     this.load.once('filecomplete-json-narration', () => preloadNarration(this));
     // Real pictures, for items that have one. Others are drawn in code.
     this.load.once('filecomplete-json-items', () => {
-      for (const item of this.cache.json.get('items').sorter.items) {
+      const { items, changeItems } = this.cache.json.get('items').sorter;
+      for (const item of [...items, ...changeItems]) {
         if (item.image) this.load.image(`item-${item.id}`, item.image);
       }
     });

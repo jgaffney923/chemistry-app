@@ -20,6 +20,20 @@
   "sorter.hint": { "text": "Try this box!", "recorded": false },
   "sorter.done": { "text": "You did it! You sorted them all!", "recorded": false },
 
+  "sorter.pickLevel": { "text": "Which game? Sorting, or heating and cooling?", "recorded": false },
+  "level2.unlocked": { "text": "Wow! You found a new game: heating and cooling!", "recorded": false },
+  "level2.intro": { "text": "Heating and cooling can change things! Sort it, then change it, and sort it again!", "recorded": false },
+  "level2.heat": { "text": "Now tap the fire to heat it up!", "recorded": false },
+  "level2.cool": { "text": "Now tap the snowflake to cool it down!", "recorded": false },
+
+  "change.ice.water": { "text": "The ice got warm and melted into water! Where does water go?", "recorded": false },
+  "change.water.steam": { "text": "The water got so hot it boiled into steam! Where does steam go?", "recorded": false },
+  "change.steam.water": { "text": "The steam cooled down and turned back into water! Where does it go now?", "recorded": false },
+  "change.water.ice": { "text": "The water got so cold it froze into ice! Where does ice go?", "recorded": false },
+  "change.chocolate.meltedChocolate": { "text": "The chocolate got warm and melted! Where does melted chocolate go?", "recorded": false },
+  "change.meltedChocolate.chocolate": { "text": "The chocolate cooled down and got hard again! Where does it go now?", "recorded": false },
+  "change.butter.meltedButter": { "text": "The butter got warm and melted! Where does melted butter go?", "recorded": false },
+
   "item.ice.name": { "text": "An ice cube!", "recorded": false },
   "item.ice.fact": { "text": "Ice is a solid. It keeps its shape!", "recorded": false },
   "item.rock.name": { "text": "A rock!", "recorded": false },
@@ -41,6 +55,15 @@
   "item.juice.fact": { "text": "Juice is a liquid. It flows and splashes!", "recorded": false },
   "item.honey.name": { "text": "Honey!", "recorded": false },
   "item.honey.fact": { "text": "Honey is a liquid too. It's thick and slow, but it still pours!", "recorded": false },
+
+  "item.chocolate.name": { "text": "A chocolate bar!", "recorded": false },
+  "item.chocolate.fact": { "text": "Chocolate is a solid. It keeps its shape, until it gets warm!", "recorded": false },
+  "item.meltedChocolate.name": { "text": "Melted chocolate!", "recorded": false },
+  "item.meltedChocolate.fact": { "text": "Melted chocolate is a liquid. It pours!", "recorded": false },
+  "item.butter.name": { "text": "A block of butter!", "recorded": false },
+  "item.butter.fact": { "text": "Cold butter is a solid. It keeps its shape.", "recorded": false },
+  "item.meltedButter.name": { "text": "Melted butter!", "recorded": false },
+  "item.meltedButter.fact": { "text": "Melted butter is a liquid. It pours!", "recorded": false },
 
   "item.balloon.name": { "text": "Air in a balloon!", "recorded": false },
   "item.balloon.fact": { "text": "Air is a gas. It spreads out to fill the whole balloon!", "recorded": false },
