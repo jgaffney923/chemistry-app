@@ -2,6 +2,7 @@ import { W, H } from '../layout.js';
 import { Bin, BIN_W } from '../sorter/Bin.js';
 import { makeRoundButton } from '../ui/button.js';
 import { addEmoji } from '../ui/emoji.js';
+import { addItemArt } from '../art/items.js';
 import { makeDraggable, returnTo } from '../systems/drag.js';
 import { say, sfx, stopNarration } from '../systems/audio.js';
 import { addStars } from '../systems/save.js';
@@ -68,8 +69,8 @@ export default class SorterScene extends Phaser.Scene {
     }
 
     const item = this.add.container(SPAWN.x, SPAWN.y);
-    const plate = this.add.circle(0, 0, PLATE, 0xffffff, 0.95).setStrokeStyle(8, 0x000000, 0.1);
-    item.add([plate, addEmoji(this, 0, 0, data.emoji, 200)]);
+    const plate = this.add.circle(0, 0, PLATE, 0xfdf6e3).setStrokeStyle(8, 0x000000, 0.1);
+    item.add([plate, addItemArt(this, data, 0, 0)]);
     item.setInteractive(new Phaser.Geom.Circle(0, 0, PLATE), Phaser.Geom.Circle.Contains);
     item.info = data;
     item.misses = 0;

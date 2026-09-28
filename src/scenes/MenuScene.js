@@ -3,6 +3,7 @@ import { APP_VERSION } from '../version.js';
 import { makeWater } from '../art/atoms.js';
 import { makeRoundButton } from '../ui/button.js';
 import { addEmoji, addLabel } from '../ui/emoji.js';
+import { addItemArt } from '../art/items.js';
 import { addParentCorner } from '../ui/parentCorner.js';
 import { say } from '../systems/audio.js';
 import { getStars, isSorterIntroSeen } from '../systems/save.js';
@@ -55,10 +56,8 @@ export default class MenuScene extends Phaser.Scene {
 
   // Ice, water, and a balloon: one of each state.
   sorterIcon() {
-    return [
-      addEmoji(this, -120, 40, '🧊', 130),
-      addEmoji(this, 0, -80, '💧', 130),
-      addEmoji(this, 120, 40, '🎈', 130),
-    ];
+    const items = this.cache.json.get('items').sorter.items;
+    const art = (id, x, y) => addItemArt(this, items.find((it) => it.id === id), x, y, 170);
+    return [art('ice', -120, 50), art('water', 0, -85), art('balloon', 120, 50)];
   }
 }

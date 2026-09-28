@@ -42,6 +42,12 @@ Narration is recorded in a parent's voice. Every line is listed, with its file n
 
 Lines that aren't recorded yet are read by the iPad's built-in voice, so nothing breaks while you record.
 
+## Replacing a drawing with a real picture
+Sorter items are drawn in code (`src/art/items.js`). To use a picture instead
+(a photo, or one of the kids' drawings): save it as a PNG with a transparent or
+plain background in `assets/img/`, then add `"image": "assets/img/<name>.png"` to
+that item in `src/data/items.json`. Any item without an image keeps its drawing.
+
 ## Dev tools (`tools/`, never loaded by the game)
 - `update-sw.mjs`: offline file list + cache version.
 - `make-narration-script.mjs`: regenerates `narration-script.md`.
