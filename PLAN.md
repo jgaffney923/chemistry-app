@@ -224,11 +224,12 @@ Learned from building M1-M4:
 - **Builds on:** the bins' particle pictures, Sorter Level 2, the magnifier.
 - **Size:** small to medium.
 
-#### 10.3 Can It Be Undone? (reversible and irreversible changes)
+#### 10.3 Can It Be Undone? (reversible and irreversible changes) — built as M7
 - **Kids do:** watch a short before-and-after change, then sort it into ↺ "can undo" or ✗ "can't undo". For "can undo", a reverse button plays it backward (water freezes back into ice).
   - **Can undo:** ice melting, chocolate melting, water freezing, sugar dissolving (dry the water and the sugar comes back).
   - **Can't undo:** bread toasting, egg cooking, cake baking, an apple slice turning brown, a nail rusting.
 - **Teaches:** the difference between changes that can be reversed and ones that make a new material. An optional second level introduces the words "physical change" and "chemical change".
+- **As built: predict, then test.** Every guess is followed by a real test: the game tries to reverse the change (cool the toast, warm the ice, let the sun dry the sugar water, dry the rusty nail) and shows what happens. A wrong guess gets "Surprise!" and the card slides into the right box; there is no failing. Data in `src/data/changes.json`; 10 changes, 5 each way; rounds of 6 (3 + 3).
 - **Builds on:** the Sorter engine (bins, rounds, stars, warm-up); Lab toast and chocolate.
 - **Size:** small (mostly new art and data).
 

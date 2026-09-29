@@ -1,8 +1,8 @@
 {
   "rooms": [
-    { "id": "kitchen", "label": "Kitchen", "color": "0xe98a3f", "games": ["sorter", "lab"] },
+    { "id": "kitchen", "label": "Kitchen", "color": "0xe98a3f", "games": ["sorter", "lab", "undo"] },
     { "id": "lab", "label": "Lab", "color": "0x7a5ce0", "games": ["builder"] }
   ],
 
-  "suggestedOrder": ["sorter", "lab", "builder"]
+  "suggestedOrder": ["sorter", "lab", "undo", "builder"]
 }

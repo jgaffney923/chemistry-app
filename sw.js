@@ -2,7 +2,7 @@
 // Run `node tools/update-sw.mjs` before each deploy: it rewrites the file list
 // below and bumps CACHE_VERSION so iPads pick up the new files.
 
-const CACHE_VERSION = 13;
+const CACHE_VERSION = 14;
 const CACHE_NAME = `chemistry-v${CACHE_VERSION}`;
 
 // PRECACHE-START
@@ -31,6 +31,26 @@ const PRECACHE = [
   'assets/audio/narration/change.steam.water.m4a',
   'assets/audio/narration/change.water.ice.m4a',
   'assets/audio/narration/change.water.steam.m4a',
+  'assets/audio/narration/chg.bakeCake.do.m4a',
+  'assets/audio/narration/chg.bakeCake.result.m4a',
+  'assets/audio/narration/chg.brownApple.do.m4a',
+  'assets/audio/narration/chg.brownApple.result.m4a',
+  'assets/audio/narration/chg.cookEgg.do.m4a',
+  'assets/audio/narration/chg.cookEgg.result.m4a',
+  'assets/audio/narration/chg.dissolveSugar.do.m4a',
+  'assets/audio/narration/chg.dissolveSugar.result.m4a',
+  'assets/audio/narration/chg.freezeWater.do.m4a',
+  'assets/audio/narration/chg.freezeWater.result.m4a',
+  'assets/audio/narration/chg.meltButter.do.m4a',
+  'assets/audio/narration/chg.meltButter.result.m4a',
+  'assets/audio/narration/chg.meltChocolate.do.m4a',
+  'assets/audio/narration/chg.meltChocolate.result.m4a',
+  'assets/audio/narration/chg.meltIce.do.m4a',
+  'assets/audio/narration/chg.meltIce.result.m4a',
+  'assets/audio/narration/chg.rustNail.do.m4a',
+  'assets/audio/narration/chg.rustNail.result.m4a',
+  'assets/audio/narration/chg.toast.do.m4a',
+  'assets/audio/narration/chg.toast.result.m4a',
   'assets/audio/narration/disc.boilWater.m4a',
   'assets/audio/narration/disc.fizz.m4a',
   'assets/audio/narration/disc.freezeWater.m4a',
@@ -158,6 +178,14 @@ const PRECACHE = [
   'assets/audio/narration/state.gas.m4a',
   'assets/audio/narration/state.liquid.m4a',
   'assets/audio/narration/state.solid.m4a',
+  'assets/audio/narration/undo.ask.m4a',
+  'assets/audio/narration/undo.binNo.m4a',
+  'assets/audio/narration/undo.binYes.m4a',
+  'assets/audio/narration/undo.done.m4a',
+  'assets/audio/narration/undo.intro.m4a',
+  'assets/audio/narration/undo.right.m4a',
+  'assets/audio/narration/undo.surprise.m4a',
+  'assets/audio/narration/undo.test.m4a',
   'assets/icons/icon-180.png',
   'assets/icons/icon-192.png',
   'assets/icons/icon-512.png',
@@ -167,6 +195,7 @@ const PRECACHE = [
   'src/art/items.js',
   'src/builder/Atom.js',
   'src/builder/shapes.js',
+  'src/data/changes.json',
   'src/data/items.json',
   'src/data/lab.json',
   'src/data/molecules.json',
@@ -187,6 +216,7 @@ const PRECACHE = [
   'src/scenes/MenuScene.js',
   'src/scenes/SorterIntroScene.js',
   'src/scenes/SorterScene.js',
+  'src/scenes/UndoScene.js',
   'src/sorter/Bin.js',
   'src/systems/audio.js',
   'src/systems/drag.js',

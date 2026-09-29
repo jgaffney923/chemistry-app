@@ -1,6 +1,6 @@
 # Narration script
 
-**2 of 150 lines recorded.** Lines marked "computer voice for now"
+**2 of 178 lines recorded.** Lines marked "computer voice for now"
 play a stand-in voice until you record them.
 
 How to add a recording (details in README.md):
@@ -46,6 +46,34 @@ to a 6-year-old.
 | `change.chocolate.meltedChocolate` | The chocolate got warm and melted! Where does melted chocolate go? | TO RECORD (computer voice for now) |
 | `change.meltedChocolate.chocolate` | The chocolate cooled down and got hard again! Where does it go now? | TO RECORD (computer voice for now) |
 | `change.butter.meltedButter` | The butter got warm and melted! Where does melted butter go? | TO RECORD (computer voice for now) |
+| `undo.intro` | Some changes can be undone, and some can't! Watch each change, then guess: does it go in the can undo box, or the can't undo box? Then we'll test it! | TO RECORD (computer voice for now) |
+| `undo.ask` | Can we undo it? Put it in a box! | TO RECORD (computer voice for now) |
+| `undo.test` | Let's test it! | TO RECORD (computer voice for now) |
+| `undo.right` | You were right! | TO RECORD (computer voice for now) |
+| `undo.surprise` | Surprise! | TO RECORD (computer voice for now) |
+| `undo.binYes` | Can undo! It can go back the way it was. | TO RECORD (computer voice for now) |
+| `undo.binNo` | Can't undo! It changed into something new. | TO RECORD (computer voice for now) |
+| `undo.done` | Great testing! You're a real scientist! | TO RECORD (computer voice for now) |
+| `chg.meltIce.do` | Watch! We warm up the ice cube. | TO RECORD (computer voice for now) |
+| `chg.meltIce.result` | We cooled the water down, and it froze back into ice! Melting can be undone. | TO RECORD (computer voice for now) |
+| `chg.freezeWater.do` | Watch! We put some water in the freezer. | TO RECORD (computer voice for now) |
+| `chg.freezeWater.result` | We warmed the ice up, and it melted back into water! Freezing can be undone. | TO RECORD (computer voice for now) |
+| `chg.meltChocolate.do` | Watch! We warm up the chocolate. | TO RECORD (computer voice for now) |
+| `chg.meltChocolate.result` | We cooled the chocolate down, and it got hard again! Melting can be undone. | TO RECORD (computer voice for now) |
+| `chg.meltButter.do` | Watch! We warm up the butter. | TO RECORD (computer voice for now) |
+| `chg.meltButter.result` | We cooled the butter down, and it turned solid again! Melting can be undone. | TO RECORD (computer voice for now) |
+| `chg.dissolveSugar.do` | Watch! We stir sugar into water until it dissolves. | TO RECORD (computer voice for now) |
+| `chg.dissolveSugar.result` | We let the sun dry up the water, and the sugar came back as crystals! Dissolving can be undone. | TO RECORD (computer voice for now) |
+| `chg.toast.do` | Watch! We heat a slice of bread. | TO RECORD (computer voice for now) |
+| `chg.toast.result` | We cooled it down, but it's still toast! The heat made something new, so it can't be undone. | TO RECORD (computer voice for now) |
+| `chg.cookEgg.do` | Watch! We cook an egg. | TO RECORD (computer voice for now) |
+| `chg.cookEgg.result` | We cooled it down, but the egg stayed cooked! Cooking an egg can't be undone. | TO RECORD (computer voice for now) |
+| `chg.bakeCake.do` | Watch! We bake the cake batter. | TO RECORD (computer voice for now) |
+| `chg.bakeCake.result` | We cooled it down, but it's still cake! Baking can't be undone. | TO RECORD (computer voice for now) |
+| `chg.brownApple.do` | Watch! We leave an apple slice out in the air for a while. | TO RECORD (computer voice for now) |
+| `chg.brownApple.result` | We cooled it in the fridge, but it stayed brown! The air changed it into something new, so it can't be undone. | TO RECORD (computer voice for now) |
+| `chg.rustNail.do` | Watch! We leave a nail out where it's wet, for a long time. | TO RECORD (computer voice for now) |
+| `chg.rustNail.result` | We dried it in the sun, but the rust stayed! Rust is something new, so it can't be undone. | TO RECORD (computer voice for now) |
 | `lab.intro` | Welcome to the kitchen lab! Let's try something. Put the ice cube on the hot plate! | TO RECORD (computer voice for now) |
 | `lab.free` | You made a discovery, and you got a sticker! There are lots more to find. Try anything you like! | TO RECORD (computer voice for now) |
 | `lab.stickers` | Your discovery stickers! Can you find them all? | TO RECORD (computer voice for now) |

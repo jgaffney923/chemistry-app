@@ -39,6 +39,27 @@ export const GAMES = {
     },
   },
 
+  undo: {
+    color: 0x3ccf6e,
+    icon(scene) {
+      const items = { bread: { id: 'bread', emoji: '🍞' }, toast: { id: 'toast', emoji: '🍞' } };
+      return [
+        addItemArt(scene, items.bread, -95, 0, 160),
+        addEmoji(scene, 0, 0, '➜', 70),
+        addItemArt(scene, items.toast, 95, 0, 160),
+        addEmoji(scene, 0, 150, '🔄', 70),
+      ];
+    },
+    start(scene) {
+      scene.scene.start('Undo', {});
+    },
+    progress() {
+      const stars = getStars('undo');
+      // Two rounds counts as having explored it.
+      return { label: stars ? `⭐ ${stars}` : '', fraction: Math.min(stars / 6, 1) };
+    },
+  },
+
   builder: {
     color: 0xa77cf2,
     icon(scene) {

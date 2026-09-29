@@ -1,0 +1,47 @@
+{
+  "roundSize": 6,
+  "starsPerRound": 3,
+
+  "actions": {
+    "heat": { "emoji": "🔥", "effect": "heat" },
+    "cool": { "emoji": "❄️", "effect": "cool" },
+    "stir": { "emoji": "🥄", "effect": "stir" },
+    "sun": { "emoji": "☀️", "effect": "heat" },
+    "wait": { "emoji": "⏰", "effect": "wait" }
+  },
+
+  "changes": [
+    { "id": "meltIce", "before": "ice", "after": "water", "do": "heat", "undo": "cool", "undoTo": "ice", "reversible": true },
+    { "id": "freezeWater", "before": "water", "after": "ice", "do": "cool", "undo": "heat", "undoTo": "water", "reversible": true },
+    { "id": "meltChocolate", "before": "chocolate", "after": "meltedChocolate", "do": "heat", "undo": "cool", "undoTo": "chocolate", "reversible": true },
+    { "id": "meltButter", "before": "butter", "after": "meltedButter", "do": "heat", "undo": "cool", "undoTo": "butter", "reversible": true },
+    { "id": "dissolveSugar", "before": "sugar", "after": "sugarWater", "do": "stir", "undo": "sun", "undoTo": "sugar", "reversible": true },
+
+    { "id": "toast", "before": "bread", "after": "toast", "do": "heat", "undo": "cool", "reversible": false },
+    { "id": "cookEgg", "before": "rawEgg", "after": "friedEgg", "do": "heat", "undo": "cool", "reversible": false },
+    { "id": "bakeCake", "before": "batter", "after": "cake", "do": "heat", "undo": "cool", "reversible": false },
+    { "id": "brownApple", "before": "apple", "after": "brownApple", "do": "wait", "undo": "cool", "reversible": false },
+    { "id": "rustNail", "before": "nail", "after": "rustyNail", "do": "wait", "undo": "sun", "reversible": false }
+  ],
+
+  "items": [
+    { "id": "ice", "emoji": "🧊" },
+    { "id": "water", "emoji": "💧" },
+    { "id": "chocolate", "emoji": "🍫" },
+    { "id": "meltedChocolate", "emoji": "🟤" },
+    { "id": "butter", "emoji": "🧈" },
+    { "id": "meltedButter", "emoji": "🟡" },
+    { "id": "sugar", "emoji": "🍬" },
+    { "id": "sugarWater", "emoji": "🥛" },
+    { "id": "bread", "emoji": "🍞" },
+    { "id": "toast", "emoji": "🍞" },
+    { "id": "rawEgg", "emoji": "🥚" },
+    { "id": "friedEgg", "emoji": "🍳" },
+    { "id": "batter", "emoji": "🥣" },
+    { "id": "cake", "emoji": "🍰" },
+    { "id": "apple", "emoji": "🍎" },
+    { "id": "brownApple", "emoji": "🍂" },
+    { "id": "nail", "emoji": "🔩" },
+    { "id": "rustyNail", "emoji": "🔩" }
+  ]
+}

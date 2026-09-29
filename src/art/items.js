@@ -104,6 +104,34 @@ function drawSlice(g, crust, middle) {
   fill(g, inner, middle);
 }
 
+// Half an apple from the front: red skin around the flesh, a stalk, two seeds.
+function drawAppleSlice(g, flesh, spots) {
+  const outline = [];
+  for (let a = 0; a < 360; a += 8) {
+    const t = Phaser.Math.DegToRad(a);
+    const dent = 1 - 0.18 * Math.max(0, Math.cos(t + Math.PI / 2)) ** 6; // dip at the top
+    outline.push([118 * Math.cos(t) * dent, 15 + 108 * Math.sin(t) * dent]);
+  }
+  shape(g, outline, 0xd83a3a);
+  fill(g, outline.map(([x, y]) => [x * 0.86, 15 + (y - 15) * 0.86]), flesh);
+  for (const [x, y, r] of spots) fill(g, circle(x, y, r), 0x9c6230, 0.7);
+  for (const x of [-16, 16]) shape(g, ellipse(x, 20, 9, 16, x > 0 ? 20 : -20), 0x3b2412);
+  stroke(g, [[0, -80], [8, -125]], false, 9, 0x6b4a2b);
+}
+
+// A nail lying at a slant: flat head, long shaft, sharp point.
+function drawNail(g, metal, shine, spots) {
+  const r = (pts) => rotate(pts, -40);
+  shape(g, r([[-120, -18], [85, -18], [128, 0], [85, 18], [-120, 18]]), metal);
+  fill(g, r([[-110, -10], [70, -10], [70, -4], [-110, -4]]), shine);
+  shape(g, r(ellipse(-122, 0, 16, 46)), metal);
+  // Spots are [distance along the nail, size], so they follow its slant.
+  for (const [t, rad] of spots) {
+    const [[x, y]] = r([[t, 0]]);
+    fill(g, circle(x, y, rad), 0x7a3517, 0.8);
+  }
+}
+
 // --- Items
 
 const DRAW = {
@@ -321,6 +349,74 @@ const DRAW = {
   toast(g) {
     drawSlice(g, 0x7a4a22, 0xc98b4a);
     for (const [x, y, r] of [[-30, -10, 12], [25, 30, 10], [40, -35, 8], [-45, 45, 9]]) fill(g, circle(x, y, r), 0x9c6230);
+  },
+
+  // A glass of water with sugar dissolved in it: it looks just like clear water.
+  sugarWater(g) {
+    const glass = [[-80, -115], [80, -115], [65, 125], [-65, 125]];
+    fill(g, glass, 0xffffff, 0.3);
+    fill(g, [[-76, -60], [76, -60], [64, 120], [-64, 120]], 0xcfeaff);
+    fill(g, [[-58, -45], [-46, -45], [-40, 105], [-50, 105]], 0xffffff, 0.8);
+    stroke(g, glass);
+    for (const [x, y] of [[30, -10], [-10, 40], [40, 70]]) {
+      stroke(g, [[x - 10, y], [x + 10, y]], false, 4, 0xffffff);
+      stroke(g, [[x, y - 10], [x, y + 10]], false, 4, 0xffffff);
+    }
+  },
+
+  rawEgg(g) {
+    shape(g, ellipse(0, 10, 82, 108), 0xf5e3c3);
+    fill(g, ellipse(-30, -35, 16, 30, -20), 0xffffff, 0.8);
+    for (const [x, y] of [[25, 40], [40, 0], [-15, 70]]) fill(g, circle(x, y, 5), 0xe2c9a0);
+  },
+
+  friedEgg(g) {
+    const white = [[-120, 10], [-95, -60], [-30, -95], [45, -85], [110, -40], [120, 30], [80, 90], [0, 105], [-80, 85]];
+    shape(g, white, 0xffffff);
+    shape(g, circle(-5, 0, 45), 0xffc21a);
+    fill(g, circle(-20, -15, 13), 0xffe38a);
+  },
+
+  batter(g) {
+    // A bowl of runny cake batter with a spoonful dripping.
+    fill(g, ellipse(0, -20, 125, 32), 0xf3d27a);
+    fill(g, ellipse(-30, -26, 40, 9), 0xfbe6a8);
+    const bowl = [];
+    for (let a = 0; a <= 180; a += 10) {
+      const t = Phaser.Math.DegToRad(a);
+      bowl.push([130 * Math.cos(t), -20 + 115 * Math.sin(t)]);
+    }
+    shape(g, bowl, 0x7fb3d5);
+    stroke(g, ellipse(0, -20, 130, 34));
+    fill(g, ellipse(-50, 30, 22, 38, 20), 0xa7cde6);
+  },
+
+  cake(g) {
+    // A round cake from the side: two sponge layers, cream, frosting on top.
+    shape(g, [[-120, -10], [120, -10], [120, 110], [-120, 110]], 0xf5cf8a);
+    fill(g, [[-120, 40], [120, 40], [120, 58], [-120, 58]], 0xfff4e0);
+    stroke(g, [[-120, 40], [120, 40]], false, 4);
+    stroke(g, [[-120, 58], [120, 58]], false, 4);
+    const top = [[-125, -10], [-125, -45], [125, -45], [125, -10], [95, 10], [70, -10], [35, 15], [0, -10], [-35, 12], [-70, -10], [-100, 8]];
+    shape(g, top, 0xf49ac1);
+    shape(g, circle(0, -70, 24), 0xe0303a);
+    stroke(g, [[5, -93], [20, -120]], false, 5, 0x3c8d4a);
+  },
+
+  apple(g) {
+    drawAppleSlice(g, 0xfff3c4, []);
+  },
+
+  brownApple(g) {
+    drawAppleSlice(g, 0xd39c5f, [[-40, -10, 26], [30, 30, 30], [10, -50, 18], [-20, 60, 20]]);
+  },
+
+  nail(g) {
+    drawNail(g, 0xc5ccd6, 0xeef1f5, []);
+  },
+
+  rustyNail(g) {
+    drawNail(g, 0xa9562e, 0xc97a4a, [[-80, 14], [-25, 16], [30, 13], [75, 10]]);
   },
 
   balloon(g) {
