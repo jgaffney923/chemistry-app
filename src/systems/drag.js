@@ -9,14 +9,21 @@ export function makeDraggable(scene, obj, { onTap, onDrop, onPickUp }) {
   scene.input.setDraggable(obj);
   scene.input.dragDistanceThreshold = TAP_SLOP;
 
+  // Where on the object the finger landed. Phaser only starts a drag after
+  // TAP_SLOP of movement and measures from there, which would leave the object
+  // trailing behind the finger; keeping the grab point under the finger fixes that.
+  let grab = { x: 0, y: 0 };
+  obj.on('pointerdown', (pointer) => {
+    grab = { x: pointer.worldX - obj.x, y: pointer.worldY - obj.y };
+  });
   obj.on('dragstart', () => {
     scene.tweens.killTweensOf(obj);
     obj.setDepth(1000);
     scene.tweens.add({ targets: obj, scale: 1.12, duration: 100 });
     onPickUp?.();
   });
-  obj.on('drag', (pointer, x, y) => {
-    obj.setPosition(x, y);
+  obj.on('drag', (pointer) => {
+    obj.setPosition(pointer.worldX - grab.x, pointer.worldY - grab.y);
   });
   obj.on('dragend', () => {
     scene.tweens.add({ targets: obj, scale: 1, duration: 100 });

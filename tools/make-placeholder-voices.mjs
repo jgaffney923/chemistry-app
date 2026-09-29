@@ -4,6 +4,8 @@
 // and recording it for real (prepare-narration.mjs) replaces it.
 // Usage: node tools/make-placeholder-voices.mjs            (only lines with no audio)
 //        node tools/make-placeholder-voices.mjs --redo     (also remake existing placeholders)
+//        node tools/make-placeholder-voices.mjs <id> ...   (remake just these, e.g. after
+//                                                          changing their text)
 // Windows only (uses System.Speech). Needs ffmpeg, like prepare-narration.mjs.
 import { execFileSync } from 'node:child_process';
 import { readFileSync, writeFileSync, mkdirSync } from 'node:fs';
@@ -14,12 +16,25 @@ import { fileURLToPath } from 'node:url';
 const VOICE = 'Microsoft Zira Desktop';
 const RATE = -1; // a little slower than normal, for young listeners
 
-const redo = process.argv.includes('--redo');
+const args = process.argv.slice(2);
+const redo = args.includes('--redo');
+const named = args.filter((a) => !a.startsWith('--'));
 const root = fileURLToPath(new URL('..', import.meta.url));
 const lines = JSON.parse(readFileSync(join(root, 'src/data/narration.json'), 'utf8'));
+// A line is ours to (re)make if it has no audio yet or only a stand-in. Lines
+// recorded by a person are never touched.
+const replaceable = (line) => !line.recorded || line.placeholder;
 const todo = Object.entries(lines)
-  .filter(([, line]) => !line.recorded || (redo && line.placeholder))
+  .filter(([id, line]) => {
+    if (named.length) return named.includes(id) && replaceable(line);
+    return !line.recorded || (redo && line.placeholder);
+  })
   .map(([id, line]) => ({ id, text: line.text }));
+const unknown = named.filter((id) => !lines[id]);
+if (unknown.length) {
+  console.error(`Not in narration.json: ${unknown.join(', ')}`);
+  process.exit(1);
+}
 
 if (!todo.length) {
   console.log('Every line already has audio.');

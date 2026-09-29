@@ -7,7 +7,7 @@ import { addEmoji, addLabel } from '../ui/emoji.js';
 import { burst } from '../ui/effects.js';
 import { makeDraggable } from '../systems/drag.js';
 import { say, sfx, stopNarration } from '../systems/audio.js';
-import { addMolecule, hasMolecule, isBuilderIntroSeen, markBuilderIntroSeen } from '../systems/save.js';
+import { addMolecule, hasMolecule, isBuilderIntroSeen, markBuilderIntroSeen, tipShown, markTipShown } from '../systems/save.js';
 
 const TRAY_TOP = 1290;
 const TRAY_Y = 1410;
@@ -17,7 +17,8 @@ const BREAK_STRETCH = 230; // how far past bond length a pull breaks the bond
 const MAX_ATOMS = 30;
 
 // Molecule Builder: drag atoms from the tray; drop one near another to join them.
-// Pull an atom away to break its bonds; push two joined atoms together for a
+// Pull an atom away to break its bonds. Two joined atoms that both still have a
+// free spot get a + button on their bond: tap it (or push them together) for a
 // double bond. When every bond spot in a molecule is used, it's complete: named
 // molecules snap into their real shape and fly into their recipe card.
 // The first visit is guided: build water.
@@ -32,6 +33,9 @@ export default class BuilderScene extends Phaser.Scene {
     this.molecules = molecules;
     this.atoms = new Set();
     this.announced = new Set();
+    this.plusButtons = new Map();
+    this.nextId = 0;
+    this.dragging = false;
     this.events.once('shutdown', stopNarration);
 
     this.bondLines = this.add.graphics().setDepth(5);
@@ -59,6 +63,52 @@ export default class BuilderScene extends Phaser.Scene {
       }
       atom.drawNubs(time);
     }
+    this.syncPlusButtons(time);
+  }
+
+  // A + sits on every bond whose two atoms both still have a free spot.
+  // Tapping it joins them once more (a double bond). Hidden while dragging.
+  syncPlusButtons(time) {
+    const wanted = new Map();
+    if (!this.dragging) {
+      for (const a of this.atoms) {
+        for (const [b, order] of a.bonds) {
+          if (a.id < b.id && !a.done && order < 3 && a.free() > 0 && b.free() > 0) wanted.set(`${a.id}-${b.id}`, [a, b]);
+        }
+      }
+    }
+    for (const [key, button] of this.plusButtons) {
+      if (!wanted.has(key)) {
+        button.destroy();
+        this.plusButtons.delete(key);
+      }
+    }
+    for (const [key, [a, b]] of wanted) {
+      const button = this.plusButtons.get(key) || this.makePlus(key, a, b);
+      button.setPosition((a.x + b.x) / 2, (a.y + b.y) / 2).setScale(1 + Math.sin(time / 180) * 0.08);
+    }
+  }
+
+  makePlus(key, a, b) {
+    const button = this.add.container(0, 0).setDepth(12);
+    button.add([
+      this.add.circle(0, 0, 38, 0xffe066).setStrokeStyle(6, 0x2b2350),
+      addLabel(this, 0, -3, '+', 70, '#2b2350'),
+    ]);
+    button.setInteractive(new Phaser.Geom.Circle(0, 0, 75), Phaser.Geom.Circle.Contains);
+    button.on('pointerup', () => {
+      if (this.strengthen(a, b)) this.checkComplete(a);
+    });
+    this.plusButtons.set(key, button);
+
+    // The first + ever: explain double bonds, with a hand pointing at it.
+    if (!tipShown('plus') && !this.guide) {
+      markTipShown('plus');
+      say(this, 'builder.plusTip');
+      this.pointAt({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }, 'below');
+      this.time.delayedCall(5000, () => this.clearHand());
+    }
+    return button;
   }
 
   // --- Recipe cards: the molecules to make, drawn in their real shapes.
@@ -116,11 +166,16 @@ export default class BuilderScene extends Phaser.Scene {
 
   placeNew(symbol, x, y) {
     const atom = new Atom(this, x, Math.max(y, 330), symbol, this.atomInfo[symbol]);
+    atom.id = this.nextId++;
     this.atoms.add(atom);
     sfx(this, 'pop');
     makeDraggable(this, atom, {
+      onPickUp: () => { this.dragging = true; },
       onTap: () => say(this, `atom.${symbol}`),
-      onDrop: () => this.dropped(atom),
+      onDrop: () => {
+        this.dragging = false;
+        this.dropped(atom);
+      },
     });
     this.dropped(atom);
     if (this.guide?.step === 'placeO' && symbol === 'O') {
@@ -142,14 +197,9 @@ export default class BuilderScene extends Phaser.Scene {
     let changed = false;
     for (const [other, order] of [...atom.bonds]) {
       const d = Phaser.Math.Distance.Between(atom.x, atom.y, other.x, other.y);
-      if (d < (atom.radius + other.radius) * 0.85) {
-        // Pushed into a partner: add another bond if both have a spot left.
-        if (order < 3 && atom.free() > 0 && other.free() > 0) {
-          this.setBond(atom, other, order + 1);
-          sfx(this, 'good');
-          say(this, 'builder.double');
-          changed = true;
-        }
+      if (d < atom.radius + other.radius + 20) {
+        // Pushed up against a partner (touching counts): join them once more.
+        if (this.strengthen(atom, other)) changed = true;
         this.moveTo(atom, other);
       } else if (d > bondLength(atom, other) + BREAK_STRETCH) {
         this.setBond(atom, other, 0);
@@ -190,6 +240,17 @@ export default class BuilderScene extends Phaser.Scene {
       }
     }
     return best;
+  }
+
+  // Adds one more bond between two joined atoms, if both have a free spot.
+  strengthen(a, b) {
+    const order = a.bonds.get(b);
+    if (!order || order >= 3 || a.free() === 0 || b.free() === 0) return false;
+    this.setBond(a, b, order + 1);
+    sfx(this, 'good');
+    burst(this, (a.x + b.x) / 2, (a.y + b.y) / 2, [0xffe066, 0xffffff]);
+    say(this, order + 1 === 2 ? 'builder.double' : 'builder.triple');
+    return true;
   }
 
   setBond(a, b, order) {
@@ -253,6 +314,7 @@ export default class BuilderScene extends Phaser.Scene {
   }
 
   celebrate(group, molecule) {
+    if (!this.guide) this.clearHand();
     group.forEach((a) => {
       a.done = true;
       a.disableInteractive();
@@ -268,18 +330,21 @@ export default class BuilderScene extends Phaser.Scene {
       lowest = Math.max(lowest, y + a.radius);
       this.tweens.add({ targets: a, x: center.x + spot.ux * spot.len, y, duration: 500, ease: 'Back.easeOut' });
     }
+    // Everything that says "done!" happens right away; the voice explains while it shows.
     sfx(this, 'star');
-    this.time.delayedCall(450, () => burst(this, center.x, center.y, [0xffd84d, 0xffffff, 0x8fd3ff]));
+    burst(this, center.x, center.y, [0xffd84d, 0xffffff, 0x8fd3ff]);
     const label = addLabel(this, center.x, lowest + 70, molecule.label, 72, '#ffd84d').setDepth(20).setAlpha(0);
-    this.tweens.add({ targets: label, alpha: 1, duration: 400, delay: 600 });
+    this.tweens.add({ targets: label, alpha: 1, duration: 300, delay: 200 });
 
     const firstTime = !hasMolecule(molecule.id);
     addMolecule(molecule.id);
+    const card = this.cards[molecule.id];
+    this.markCard(molecule.id, true);
+    this.tweens.add({ targets: card, scale: 1.15, duration: 150, yoyo: true, repeat: 1 });
     const told = say(this, `mol.${molecule.id}`);
 
-    told.then(() => {
-      if (!this.sys.isActive()) return;
-      const card = this.cards[molecule.id];
+    // After a short look, the molecule flies into its card (the voice keeps going).
+    this.time.delayedCall(2200, () => {
       label.destroy();
       // Skip any atoms the broom already cleared away.
       group.filter((a) => this.atoms.has(a)).forEach((a) => {
@@ -290,12 +355,12 @@ export default class BuilderScene extends Phaser.Scene {
           onComplete: () => a.destroy(),
         });
       });
-      this.time.delayedCall(600, () => {
-        this.markCard(molecule.id, true);
-        this.tweens.add({ targets: card, scale: 1.15, duration: 150, yoyo: true });
-        if (this.guide) this.finishGuide();
-        else if (firstTime && this.molecules.every((m) => hasMolecule(m.id))) say(this, 'builder.allMade');
-      });
+    });
+
+    told.then(() => {
+      if (!this.sys.isActive()) return;
+      if (this.guide) this.finishGuide();
+      else if (firstTime && this.molecules.every((m) => hasMolecule(m.id))) say(this, 'builder.allMade');
     });
   }
 
@@ -317,10 +382,13 @@ export default class BuilderScene extends Phaser.Scene {
     say(this, 'builder.free');
   }
 
-  pointAt(target) {
+  // Points from the right (tray atoms), or up from below (things between atoms).
+  pointAt(target, from = 'right') {
     this.clearHand();
-    this.hand = addEmoji(this, target.x + 150, target.y, '👈', 120).setDepth(3000);
-    this.tweens.add({ targets: this.hand, x: this.hand.x + 40, duration: 450, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
+    const below = from === 'below';
+    this.hand = addEmoji(this, target.x + (below ? 0 : 150), target.y + (below ? 150 : 0), below ? '👆' : '👈', 120).setDepth(3000);
+    const nudge = below ? { y: this.hand.y + 40 } : { x: this.hand.x + 40 };
+    this.tweens.add({ targets: this.hand, ...nudge, duration: 450, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
   }
 
   clearHand() {

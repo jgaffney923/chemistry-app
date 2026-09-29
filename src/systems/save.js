@@ -11,6 +11,7 @@ const DEFAULTS = {
   stickers: [],
   builderIntroSeen: false,
   molecules: [],
+  tips: [], // one-time explanations already given, by name
 };
 
 let data = load();
@@ -99,6 +100,16 @@ export function moleculeCount() {
 export function addMolecule(id) {
   if (hasMolecule(id)) return;
   data.molecules = [...data.molecules, id];
+  persist();
+}
+
+export function tipShown(name) {
+  return data.tips.includes(name);
+}
+
+export function markTipShown(name) {
+  if (tipShown(name)) return;
+  data.tips = [...data.tips, name];
   persist();
 }
 

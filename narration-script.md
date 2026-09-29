@@ -1,6 +1,6 @@
 # Narration script
 
-**2 of 144 lines recorded.** Lines marked "computer voice for now"
+**2 of 146 lines recorded.** Lines marked "computer voice for now"
 play a stand-in voice until you record them.
 
 How to add a recording (details in README.md):
@@ -104,9 +104,11 @@ to a 6-year-old.
 | `builder.intro` | Atoms are tiny building blocks. They join together to make molecules. Let's make water! Drag an oxygen atom onto the table. | TO RECORD (computer voice for now) |
 | `builder.addH` | Now bring a hydrogen atom right next to the oxygen, so they join! | TO RECORD (computer voice for now) |
 | `builder.addH2` | The oxygen has one more bond spot. Add another hydrogen! | TO RECORD (computer voice for now) |
-| `builder.free` | Now try the other molecules at the top, or build anything you like! Pull atoms apart to break a bond, and push joined atoms together to make a double bond. | TO RECORD (computer voice for now) |
+| `builder.free` | Now try the other molecules at the top, or build anything you like! Pull an atom away to break a bond. Tap a plus sign to make a double bond. | TO RECORD (computer voice for now) |
 | `builder.full` | That atom's bond spots are all full! | TO RECORD (computer voice for now) |
-| `builder.double` | A double bond! Those two atoms are joined twice. | TO RECORD (computer voice for now) |
+| `builder.double` | A double bond! The two atoms are joined twice, so each one used up two of its bond spots. | TO RECORD (computer voice for now) |
+| `builder.plusTip` | See the plus sign? These two atoms each still have a free bond spot. Tap the plus to join them again. That makes a double bond! | TO RECORD (computer voice for now) |
+| `builder.triple` | A triple bond! The two atoms are joined three times. | TO RECORD (computer voice for now) |
 | `builder.broken` | You pulled them apart! | TO RECORD (computer voice for now) |
 | `builder.cleared` | All clear! | TO RECORD (computer voice for now) |
 | `builder.complete` | All the bond spots are filled! That's a complete molecule. | TO RECORD (computer voice for now) |
@@ -116,8 +118,8 @@ to a 6-year-old.
 | `atom.C` | Carbon! It has four bond spots. | TO RECORD (computer voice for now) |
 | `recipe.water` | Water: one oxygen and two hydrogens. | TO RECORD (computer voice for now) |
 | `recipe.hydrogen` | Hydrogen gas: two hydrogens joined together. | TO RECORD (computer voice for now) |
-| `recipe.oxygen` | Oxygen gas: two oxygens. Join them, then push them together again to make a double bond! | TO RECORD (computer voice for now) |
-| `recipe.carbonDioxide` | Carbon dioxide: one carbon in the middle, with an oxygen on each side. Each oxygen needs a double bond! | TO RECORD (computer voice for now) |
+| `recipe.oxygen` | Oxygen gas: two oxygens. Join them, then tap the plus sign to join them again with a double bond! | TO RECORD (computer voice for now) |
+| `recipe.carbonDioxide` | Carbon dioxide: one carbon in the middle, with an oxygen on each side. Then tap each plus sign to make two double bonds! | TO RECORD (computer voice for now) |
 | `recipe.methane` | Methane: one carbon in the middle, with four hydrogens around it. | TO RECORD (computer voice for now) |
 | `mol.water` | You made water! One oxygen atom joined to two hydrogen atoms. | TO RECORD (computer voice for now) |
 | `mol.hydrogen` | You made hydrogen gas! Two hydrogen atoms joined together. | TO RECORD (computer voice for now) |

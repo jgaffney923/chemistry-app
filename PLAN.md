@@ -125,11 +125,12 @@ It starts with chemistry and later grows into other sciences as new rooms of a "
 - **Recognizing molecules:** a molecule is complete when every nub is used. It is then identified by its atom counts from `molecules.json`.
   - Named molecules: water (H2O), hydrogen gas (H2), oxygen gas (O2), carbon dioxide (CO2), methane (CH4); later others.
   - A complete molecule not in the list still gets celebrated ("All the bond spots are filled! That's a complete molecule."). It is never called wrong, and never given an invented name: not every combination that fits the bonding rules is a real, stable molecule.
+- Completion feedback is instant (card check, sparkles, sound), and the molecule flies into its card after about 2 seconds while the voice finishes. (Waiting for the whole sentence felt like the game had hesitated.)
 - When a named molecule is built, celebrate, narrate its everyday name first ("You made WATER!"), then reveal the formula as a small secondary label.
 - Incomplete combos never "fail." Open bonds simply wiggle/glow to invite completion.
 - Data-driven via `molecules.json` (atom types, valence, molecules, names, narration IDs).
 - **Recipe cards** across the top show each target molecule in its real shape (faded until made, then checked). Tapping one says its recipe.
-- **Pull apart / push together:** pulling an atom far from a partner breaks the bond; pushing joined atoms together adds a bond (double bond) if both have a free spot. Dropping an atom back on the tray removes it; the broom clears the board.
+- **Pull apart / double bonds:** pulling an atom far from a partner breaks the bond. When two joined atoms both still have a free spot, a yellow **+** appears on their bond: tap it for a double bond (pushing them until they touch works too). The first + ever comes with a spoken explanation and a pointing hand. (Owner testing found push-only double bonds too hard.) Dropping an atom back on the tray removes it; the broom clears the board.
 - **First visit is guided** (teach before free play): build water step by step, then free play.
 
 ### 6.4 Parent corner
