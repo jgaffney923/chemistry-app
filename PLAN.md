@@ -203,7 +203,7 @@ Learned from building M1-M4:
 - **Content in JSON.** Every spoken line goes in `narration.json` (stand-in voice until recorded).
 - **One idea per module, 3-10 minutes to play**, replayable.
 
-### 10.1 Science House (home screen that scales) — needed before the 4th game
+### 10.1 Science House (home screen that scales) — built as M6
 - The 3-button menu becomes a picture of a house with rooms. Each room holds related games:
   - **Kitchen:** Sorter, Kitchen Lab, Can It Be Undone?, Sink or Float, Unmix
   - **Lab:** Molecule Builder, Heat Slider, Air Builder, Color-Change Potions, Crystal Garden, Element Hunt
@@ -211,6 +211,7 @@ Learned from building M1-M4:
 - Tap a room to zoom in, and tap a game to play it.
 - **No locks.** Everything is open. A soft glow suggests "try this next" in a sensible order.
 - Each room shows its progress (stars, stickers, checks).
+- As built: rooms and their games come from `src/data/rooms.json`; each game's button, start, and progress live in `src/home/games.js`. A game's home button returns to the room it was opened from. On the house, the suggested room bobs gently with a ✨ (an outline glow was invisible on the cream walls); inside a room, the suggested game has a pulsing ring. A one-time welcome waits for the start greeting to finish.
 
 ### Tier 1: builds directly on what kids just learned
 

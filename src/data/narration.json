@@ -1,6 +1,11 @@
 {
   "boot.welcome": { "text": "Hi! Let's play with chemistry!", "recorded": true },
 
+  "house.intro": { "text": "Welcome to the Science House! Tap a room to explore.", "recorded": true, "placeholder": true },
+  "room.kitchen": { "text": "The kitchen! Sort, heat, cool, and mix things up.", "recorded": true, "placeholder": true },
+  "room.lab": { "text": "The lab! Build molecules out of atoms.", "recorded": true, "placeholder": true },
+  "room.back": { "text": "Back to the Science House!", "recorded": true, "placeholder": true },
+
   "menu.soon": { "text": "That one is coming soon!", "recorded": true, "placeholder": true },
 
   "state.solid": { "text": "Solid! A solid keeps its own shape.", "recorded": true, "placeholder": true },

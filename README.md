@@ -3,7 +3,8 @@
 A touch-first chemistry game for kids 6-8. It runs offline on an iPad as a home-screen web app. See [PLAN.md](PLAN.md) for the design and milestones.
 
 - Engine: Phaser **3.90.0**, vendored at `vendor/phaser.min.js` (no CDN, no build step).
-- Current milestone: **M4** (all three games playable: State Sorter, Kitchen Lab, Molecule Builder). Next: M5, testing with the kids.
+- Current milestone: **M6** (Science House home screen; three games: State Sorter, Kitchen Lab, Molecule Builder). Next: M5, testing with the kids.
+- Adding a game to the home screen: give it an entry in `src/home/games.js` and list it in a room in `src/data/rooms.json`.
 
 ## Run it on the PC
 Open the folder in VS Code and use **Live Server** on `index.html`, or run `npx serve .`.

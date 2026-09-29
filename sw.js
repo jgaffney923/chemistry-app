@@ -2,7 +2,7 @@
 // Run `node tools/update-sw.mjs` before each deploy: it rewrites the file list
 // below and bumps CACHE_VERSION so iPads pick up the new files.
 
-const CACHE_VERSION = 12;
+const CACHE_VERSION = 13;
 const CACHE_NAME = `chemistry-v${CACHE_VERSION}`;
 
 // PRECACHE-START
@@ -61,6 +61,7 @@ const PRECACHE = [
   'assets/audio/narration/hint.sugarDissolves.m4a',
   'assets/audio/narration/hint.toast.m4a',
   'assets/audio/narration/hint.toastStays.m4a',
+  'assets/audio/narration/house.intro.m4a',
   'assets/audio/narration/intro.done.m4a',
   'assets/audio/narration/intro.gas.m4a',
   'assets/audio/narration/intro.gas.try.m4a',
@@ -146,6 +147,9 @@ const PRECACHE = [
   'assets/audio/narration/recipe.methane.m4a',
   'assets/audio/narration/recipe.oxygen.m4a',
   'assets/audio/narration/recipe.water.m4a',
+  'assets/audio/narration/room.back.m4a',
+  'assets/audio/narration/room.kitchen.m4a',
+  'assets/audio/narration/room.lab.m4a',
   'assets/audio/narration/sorter.done.m4a',
   'assets/audio/narration/sorter.hint.m4a',
   'assets/audio/narration/sorter.intro.m4a',
@@ -167,6 +171,8 @@ const PRECACHE = [
   'src/data/lab.json',
   'src/data/molecules.json',
   'src/data/narration.json',
+  'src/data/rooms.json',
+  'src/home/games.js',
   'src/intro/props.js',
   'src/lab/Beaker.js',
   'src/lab/Magnifier.js',

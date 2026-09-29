@@ -1,6 +1,6 @@
 # Narration script
 
-**2 of 146 lines recorded.** Lines marked "computer voice for now"
+**2 of 150 lines recorded.** Lines marked "computer voice for now"
 play a stand-in voice until you record them.
 
 How to add a recording (details in README.md):
@@ -15,6 +15,10 @@ to a 6-year-old.
 | File name (id) | Say this | Status |
 |---|---|---|
 | `boot.welcome` | Hi! Let's play with chemistry! | done |
+| `house.intro` | Welcome to the Science House! Tap a room to explore. | TO RECORD (computer voice for now) |
+| `room.kitchen` | The kitchen! Sort, heat, cool, and mix things up. | TO RECORD (computer voice for now) |
+| `room.lab` | The lab! Build molecules out of atoms. | TO RECORD (computer voice for now) |
+| `room.back` | Back to the Science House! | TO RECORD (computer voice for now) |
 | `menu.soon` | That one is coming soon! | TO RECORD (computer voice for now) |
 | `state.solid` | Solid! A solid keeps its own shape. | TO RECORD (computer voice for now) |
 | `state.liquid` | Liquid! A liquid pours, and takes the shape of its cup. | TO RECORD (computer voice for now) |

@@ -40,6 +40,13 @@ export function unlockAudio(scene) {
 let current = null;
 let finishCurrent = null;
 let usedSpeech = false;
+let speaking = Promise.resolve();
+
+// Resolves once whatever is being said right now has finished (or at once if
+// nothing is). For lines that shouldn't cut off the one before them.
+export function whenQuiet() {
+  return speaking;
+}
 
 // Speaks a line. The promise resolves when it ends or is interrupted,
 // so callers can wait before moving on.
@@ -47,7 +54,7 @@ export function say(scene, id) {
   stopNarration();
   if (muted || !lines[id]) return Promise.resolve();
 
-  return new Promise((resolve) => {
+  speaking = new Promise((resolve) => {
     let done = false;
     const finish = () => {
       if (done) return;
@@ -82,6 +89,7 @@ export function say(scene, id) {
       finish();
     }
   });
+  return speaking;
 }
 
 export function stopNarration() {
