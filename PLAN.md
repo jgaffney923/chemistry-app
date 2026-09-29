@@ -215,7 +215,7 @@ Learned from building M1-M4:
 
 ### Tier 1: builds directly on what kids just learned
 
-#### 10.2 Heat Slider ("Particle Zoom")
+#### 10.2 Heat Slider ("Particle Zoom") — built as M8
 - **Kids do:** move a big thermometer slider. One thing (ice, chocolate, butter) is shown two ways side by side: the real-world view and a zoomed-in particle view.
   - Cold: particles jiggle in a tight grid (solid).
   - Warmer: they slide past each other (liquid).
@@ -223,6 +223,7 @@ Learned from building M1-M4:
 - **Teaches:** temperature is how fast particles move; melting and boiling are particles breaking free; different materials change at different temperatures (ice melts first, then chocolate and butter; water boils much later).
 - **Builds on:** the bins' particle pictures, Sorter Level 2, the magnifier.
 - **Size:** small to medium.
+- **As built:** the thermometer has picture-and-word marks (Freezer, Room, Hot day, Boiling) and no numbers. Its scale stands for about -20 to 110 °C, with melting and boiling points in the real order (ice 0 °C, butter about 33 °C, chocolate about 35 °C, water boils at 100 °C; see `src/data/heat.json`). Each melting or boiling point found pins a small picture of the material to the thermometer, so the different temperatures are visible side by side. 8 changes to find; lives in the Lab room.
 
 #### 10.3 Can It Be Undone? (reversible and irreversible changes) — built as M7
 - **Kids do:** watch a short before-and-after change, then sort it into ↺ "can undo" or ✗ "can't undo". For "can undo", a reverse button plays it backward (water freezes back into ice).

@@ -12,6 +12,7 @@ const DEFAULTS = {
   builderIntroSeen: false,
   molecules: [],
   tips: [], // one-time explanations already given, by name
+  heatFound: [], // Heat Slider changes seen, e.g. "water.melt"
 };
 
 let data = load();
@@ -111,6 +112,22 @@ export function markTipShown(name) {
   if (tipShown(name)) return;
   data.tips = [...data.tips, name];
   persist();
+}
+
+export function heatFound(id) {
+  return data.heatFound.includes(id);
+}
+
+export function heatFoundCount() {
+  return data.heatFound.length;
+}
+
+// Returns true if this change is new.
+export function addHeatFound(id) {
+  if (heatFound(id)) return false;
+  data.heatFound = [...data.heatFound, id];
+  persist();
+  return true;
 }
 
 export function isSoundOn() {

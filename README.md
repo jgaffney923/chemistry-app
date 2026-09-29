@@ -3,7 +3,7 @@
 A touch-first chemistry game for kids 6-8. It runs offline on an iPad as a home-screen web app. See [PLAN.md](PLAN.md) for the design and milestones.
 
 - Engine: Phaser **3.90.0**, vendored at `vendor/phaser.min.js` (no CDN, no build step).
-- Current milestone: **M7** (Science House with four games: State Sorter, Kitchen Lab, Can It Be Undone?, Molecule Builder). Next: M5, testing with the kids, or M8 Heat Slider.
+- Current milestone: **M8** (Science House with five games: State Sorter, Kitchen Lab, Can It Be Undone? in the Kitchen; Heat Slider and Molecule Builder in the Lab). Next: M9 Unmix!
 - Adding a game to the home screen: give it an entry in `src/home/games.js` and list it in a room in `src/data/rooms.json`.
 
 ## Run it on the PC

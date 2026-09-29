@@ -1,6 +1,6 @@
 # Narration script
 
-**2 of 178 lines recorded.** Lines marked "computer voice for now"
+**2 of 201 lines recorded.** Lines marked "computer voice for now"
 play a stand-in voice until you record them.
 
 How to add a recording (details in README.md):
@@ -74,6 +74,29 @@ to a 6-year-old.
 | `chg.brownApple.result` | We cooled it in the fridge, but it stayed brown! The air changed it into something new, so it can't be undone. | TO RECORD (computer voice for now) |
 | `chg.rustNail.do` | Watch! We leave a nail out where it's wet, for a long time. | TO RECORD (computer voice for now) |
 | `chg.rustNail.result` | We dried it in the sun, but the rust stayed! Rust is something new, so it can't be undone. | TO RECORD (computer voice for now) |
+| `heat.intro` | This thermometer shows how hot or cold it is. Drag it up to warm the ice, and watch the tiny particles up close. The warmer it gets, the faster they move! | TO RECORD (computer voice for now) |
+| `heat.pick.water` | Ice! Let's warm it up. | TO RECORD (computer voice for now) |
+| `heat.pick.chocolate` | Chocolate! Let's see when it melts. | TO RECORD (computer voice for now) |
+| `heat.pick.butter` | Butter! Let's see when it melts. | TO RECORD (computer voice for now) |
+| `heat.water.melt` | The ice melted into water! Its particles started sliding past each other. | TO RECORD (computer voice for now) |
+| `heat.water.freeze` | The water froze into ice! Its particles slowed down and locked into place. | TO RECORD (computer voice for now) |
+| `heat.water.boil` | The water boiled! Its particles are moving so fast they fly apart. That's steam, a gas. | TO RECORD (computer voice for now) |
+| `heat.water.condense` | The steam cooled back into water! Its particles slowed down and came back together. | TO RECORD (computer voice for now) |
+| `heat.chocolate.melt` | The chocolate melted! Its particles wiggle so fast they slide past each other. | TO RECORD (computer voice for now) |
+| `heat.chocolate.freeze` | The chocolate got hard again! Its particles slowed down and locked into place. | TO RECORD (computer voice for now) |
+| `heat.butter.melt` | The butter melted! Its particles wiggle so fast they slide past each other. | TO RECORD (computer voice for now) |
+| `heat.butter.freeze` | The butter turned solid again! Its particles slowed down and locked into place. | TO RECORD (computer voice for now) |
+| `heat.compare.chocolate` | Look at the little pictures on the thermometer! Chocolate needs more warmth to melt than ice does. | TO RECORD (computer voice for now) |
+| `heat.compare.butter` | Look at the little pictures on the thermometer! Butter needs more warmth to melt than ice does. | TO RECORD (computer voice for now) |
+| `heat.hint.water.melt` | Pick the ice, then drag the thermometer up! | TO RECORD (computer voice for now) |
+| `heat.hint.water.boil` | Keep warming the water, all the way up to boiling! | TO RECORD (computer voice for now) |
+| `heat.hint.water.freeze` | Melt the ice into water, then drag the thermometer back down! | TO RECORD (computer voice for now) |
+| `heat.hint.water.condense` | Boil the water into steam, then cool it back down! | TO RECORD (computer voice for now) |
+| `heat.hint.chocolate.melt` | Try the chocolate! Drag the thermometer up. | TO RECORD (computer voice for now) |
+| `heat.hint.chocolate.freeze` | Melt the chocolate, then cool it back down! | TO RECORD (computer voice for now) |
+| `heat.hint.butter.melt` | Try the butter! Drag the thermometer up. | TO RECORD (computer voice for now) |
+| `heat.hint.butter.freeze` | Melt the butter, then cool it back down! | TO RECORD (computer voice for now) |
+| `heat.allFound` | You found every change! Now you know how heat makes particles move. | TO RECORD (computer voice for now) |
 | `lab.intro` | Welcome to the kitchen lab! Let's try something. Put the ice cube on the hot plate! | TO RECORD (computer voice for now) |
 | `lab.free` | You made a discovery, and you got a sticker! There are lots more to find. Try anything you like! | TO RECORD (computer voice for now) |
 | `lab.stickers` | Your discovery stickers! Can you find them all? | TO RECORD (computer voice for now) |

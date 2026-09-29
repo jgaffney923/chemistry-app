@@ -16,6 +16,7 @@
 - **M6 Science House** built (2026-09-28): the home screen is now a house with a Kitchen room (Sorter, Kitchen Lab) and a Lab room (Molecule Builder). Built before M5 at the owner's request, since it doesn't depend on kid feedback.
 - **M7 Can It Be Undone?** built (2026-09-29) in the Kitchen room: watch a change, guess can-undo / can't-undo, then the game tests it by trying to reverse it. 10 changes, 9 new drawings. Built before M5 at the owner's request ("lets continue").
 - **M5 kid test** done (2026-09-29): the owner played it with their kids, and they liked it. Their feedback: label the Lab's bottles and boxes so kids can read them (done: name tags under every shelf item).
+- **M8 Heat Slider** built (2026-09-29) in the Lab room: drag a thermometer, see water/chocolate/butter as-is and up close as particles; markers pinned where each melts or boils; 8 changes to find.
 - **Roadmap (2026-09-28):** PLAN.md section 10 now lists 15 more modules in three tiers, a scalable "Science House" home screen, and milestones M6-M16. Owner asked for the expansion before M5; the order is to be revisited after kid testing. Section 11 adds rooms for other sciences (Workshop/physics, Garden/life science, Sky & Weather/earth and space) with their own accuracy guardrails, to come after chemistry Tier 1.
 
 ## Tested
@@ -24,7 +25,7 @@ On the real iPad: installs from GitHub Pages and plays; the owner's recorded voi
 
 ## Next steps (owner's choice)
 1. M5: play it with the kids and note where they get stuck or bored.
-2. Or keep building: M8 Heat Slider is next in PLAN.md section 10.
+2. Or keep building: M9 Unmix! is next in PLAN.md section 10.
 3. Owner records narration whenever convenient; stand-in voice until then.
 
 ## Quick look without GitHub

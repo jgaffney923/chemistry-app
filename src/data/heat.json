@@ -1,0 +1,39 @@
+{
+  "_scale": "Thermometer position t runs 0 (bottom) to 1 (top). It stands for about -20 °C to 110 °C (°C = -20 + 130 t). No numbers are shown; the melting and boiling points below keep the real order: ice 0 °C, butter about 33 °C, chocolate about 35 °C, water boils at 100 °C.",
+
+  "marks": [
+    { "t": 0.04, "emoji": "❄️", "label": "Freezer" },
+    { "t": 0.31, "emoji": "🏠", "label": "Room" },
+    { "t": 0.46, "emoji": "☀️", "label": "Hot day" },
+    { "t": 0.92, "emoji": "🔥", "label": "Boiling" }
+  ],
+
+  "start": 0.03,
+
+  "materials": {
+    "water": { "label": "Water", "icon": "ice", "color": "0x3b8ed8", "melt": 0.154, "boil": 0.923, "art": { "solid": "ice", "liquid": "water", "gas": "steam" } },
+    "chocolate": { "label": "Chocolate", "icon": "chocolate", "color": "0x7b4a2d", "melt": 0.423, "art": { "solid": "chocolate", "liquid": "meltedChocolate" } },
+    "butter": { "label": "Butter", "icon": "butter", "color": "0xf2c14e", "melt": 0.408, "art": { "solid": "butter", "liquid": "meltedButter" } }
+  },
+
+  "changes": [
+    { "id": "water.melt", "material": "water" },
+    { "id": "water.boil", "material": "water" },
+    { "id": "water.freeze", "material": "water" },
+    { "id": "water.condense", "material": "water" },
+    { "id": "chocolate.melt", "material": "chocolate" },
+    { "id": "chocolate.freeze", "material": "chocolate" },
+    { "id": "butter.melt", "material": "butter" },
+    { "id": "butter.freeze", "material": "butter" }
+  ],
+
+  "items": [
+    { "id": "ice", "emoji": "🧊" },
+    { "id": "water", "emoji": "💧" },
+    { "id": "steam", "emoji": "♨️" },
+    { "id": "chocolate", "emoji": "🍫" },
+    { "id": "meltedChocolate", "emoji": "🟤" },
+    { "id": "butter", "emoji": "🧈" },
+    { "id": "meltedButter", "emoji": "🟡" }
+  ]
+}

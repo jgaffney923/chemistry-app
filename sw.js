@@ -2,7 +2,7 @@
 // Run `node tools/update-sw.mjs` before each deploy: it rewrites the file list
 // below and bumps CACHE_VERSION so iPads pick up the new files.
 
-const CACHE_VERSION = 15;
+const CACHE_VERSION = 16;
 const CACHE_NAME = `chemistry-v${CACHE_VERSION}`;
 
 // PRECACHE-START
@@ -66,6 +66,29 @@ const PRECACHE = [
   'assets/audio/narration/disc.sugarDissolves.m4a',
   'assets/audio/narration/disc.toast.m4a',
   'assets/audio/narration/disc.toastStays.m4a',
+  'assets/audio/narration/heat.allFound.m4a',
+  'assets/audio/narration/heat.butter.freeze.m4a',
+  'assets/audio/narration/heat.butter.melt.m4a',
+  'assets/audio/narration/heat.chocolate.freeze.m4a',
+  'assets/audio/narration/heat.chocolate.melt.m4a',
+  'assets/audio/narration/heat.compare.butter.m4a',
+  'assets/audio/narration/heat.compare.chocolate.m4a',
+  'assets/audio/narration/heat.hint.butter.freeze.m4a',
+  'assets/audio/narration/heat.hint.butter.melt.m4a',
+  'assets/audio/narration/heat.hint.chocolate.freeze.m4a',
+  'assets/audio/narration/heat.hint.chocolate.melt.m4a',
+  'assets/audio/narration/heat.hint.water.boil.m4a',
+  'assets/audio/narration/heat.hint.water.condense.m4a',
+  'assets/audio/narration/heat.hint.water.freeze.m4a',
+  'assets/audio/narration/heat.hint.water.melt.m4a',
+  'assets/audio/narration/heat.intro.m4a',
+  'assets/audio/narration/heat.pick.butter.m4a',
+  'assets/audio/narration/heat.pick.chocolate.m4a',
+  'assets/audio/narration/heat.pick.water.m4a',
+  'assets/audio/narration/heat.water.boil.m4a',
+  'assets/audio/narration/heat.water.condense.m4a',
+  'assets/audio/narration/heat.water.freeze.m4a',
+  'assets/audio/narration/heat.water.melt.m4a',
   'assets/audio/narration/hint.boilWater.m4a',
   'assets/audio/narration/hint.fizz.m4a',
   'assets/audio/narration/hint.freezeWater.m4a',
@@ -196,11 +219,14 @@ const PRECACHE = [
   'src/builder/Atom.js',
   'src/builder/shapes.js',
   'src/data/changes.json',
+  'src/data/heat.json',
   'src/data/items.json',
   'src/data/lab.json',
   'src/data/molecules.json',
   'src/data/narration.json',
   'src/data/rooms.json',
+  'src/heat/ParticleView.js',
+  'src/heat/Thermometer.js',
   'src/home/games.js',
   'src/intro/props.js',
   'src/lab/Beaker.js',
@@ -212,6 +238,7 @@ const PRECACHE = [
   'src/main.js',
   'src/scenes/BootScene.js',
   'src/scenes/BuilderScene.js',
+  'src/scenes/HeatScene.js',
   'src/scenes/LabScene.js',
   'src/scenes/MenuScene.js',
   'src/scenes/SorterIntroScene.js',

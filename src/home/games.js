@@ -1,7 +1,7 @@
 import { makeWater } from '../art/atoms.js';
 import { addItemArt } from '../art/items.js';
 import { addEmoji } from '../ui/emoji.js';
-import { getStars, isSorterIntroSeen, stickerCount, moleculeCount } from '../systems/save.js';
+import { getStars, isSorterIntroSeen, stickerCount, moleculeCount, heatFoundCount } from '../systems/save.js';
 
 // Every game the Science House can open: its button picture, how to start it,
 // and how far the kid has got (label for the badge, fraction 0..1 for "try next").
@@ -57,6 +57,21 @@ export const GAMES = {
       const stars = getStars('undo');
       // Two rounds counts as having explored it.
       return { label: stars ? `⭐ ${stars}` : '', fraction: Math.min(stars / 6, 1) };
+    },
+  },
+
+  heat: {
+    color: 0xe8453c,
+    icon(scene) {
+      return [addEmoji(scene, -40, 0, '🌡️', 190), addEmoji(scene, 70, -60, '🔥', 80), addEmoji(scene, 70, 60, '❄️', 80)];
+    },
+    start(scene) {
+      scene.scene.start('Heat', {});
+    },
+    progress(scene) {
+      const found = heatFoundCount();
+      const total = scene.cache.json.get('heat').changes.length;
+      return { label: found ? `🌡️ ${found} / ${total}` : '', fraction: found / total };
     },
   },
 
