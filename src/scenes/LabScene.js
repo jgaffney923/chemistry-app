@@ -12,7 +12,7 @@ import { say, sfx, stopNarration } from '../systems/audio.js';
 import { addSticker, hasSticker, stickerCount, isLabIntroSeen, markLabIntroSeen } from '../systems/save.js';
 
 const SHELF = { x: 40, y: 250, w: 520, h: 1250 };
-const SHELF_R = 88;
+const SHELF_R = 80;
 const PLACED_SIZE = 200;
 const HOME = { spoon: { x: 1870, y: 640 }, magnifier: { x: 1840, y: 1010 } };
 
@@ -76,9 +76,10 @@ export default class LabScene extends Phaser.Scene {
     this.lab.shelf.forEach((id, i) => {
       const slot = { x: x + 135 + (i % 2) * 250, y: y + 110 + Math.floor(i / 2) * 206 };
       const item = this.add.container(slot.x, slot.y);
-      item.add([this.add.circle(0, 0, SHELF_R, 0xfdf6e3).setStrokeStyle(6, 0x000000, 0.1), addItemArt(this, this.itemsById[id], 0, 0, 140)]);
-      item.setInteractive(new Phaser.Geom.Circle(0, 0, SHELF_R + 12), Phaser.Geom.Circle.Contains);
+      item.add([this.add.circle(0, 0, SHELF_R, 0xfdf6e3).setStrokeStyle(6, 0x000000, 0.1), addItemArt(this, this.itemsById[id], 0, 0, 128)]);
+      item.setInteractive(new Phaser.Geom.Circle(0, 0, SHELF_R + 20), Phaser.Geom.Circle.Contains);
       this.shelfItems[id] = item;
+      this.addNameTag(slot.x, slot.y + SHELF_R + 12, this.itemsById[id].label);
       makeDraggable(this, item, {
         onPickUp: () => this.guideStep('picked', id),
         onTap: () => say(this, `item.${id}.name`),
@@ -89,6 +90,14 @@ export default class LabScene extends Phaser.Scene {
         },
       });
     });
+  }
+
+  // A little printed name under each shelf item, for kids who are starting to read.
+  // It belongs to the shelf, so it stays put while the item is dragged away.
+  addNameTag(x, y, text) {
+    const label = addLabel(this, x, y, text, 34, '#2b2350');
+    this.add.rectangle(x, y, label.width + 28, 48, 0xffffff).setStrokeStyle(4, 0x2b2350, 0.6);
+    this.children.bringToTop(label);
   }
 
   // Something let go at (x, y). Returns true if it was used.
