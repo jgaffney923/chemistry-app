@@ -3,6 +3,8 @@
 ## 1. Goal
 A touch-first game for kids ages 6-8 that teaches early chemistry concepts through play. It runs as a Progressive Web App on an iPad (Safari, "Add to Home Screen"), works fully offline, and is tested first with the owner's own kids.
 
+It starts with chemistry and later grows into other sciences as new rooms of a "Science House" (sections 10 and 11).
+
 **Design principle:** the play IS the chemistry. No quizzes bolted onto a game. Kids learn by doing (sorting, heating, mixing, building), and the game responds with visible, accurate cause and effect.
 
 ## 2. Constraints (non-negotiable)
@@ -154,7 +156,7 @@ A touch-first game for kids ages 6-8 that teaches early chemistry concepts throu
 | M13 | Water Cycle (10.8) | Kid drives evaporate, condense, rain, flow back; clouds shown as droplets |
 | M14 | Crystal Garden (10.7) | Crystals grow over visits or fast-forward; salt cubes, sugar crystals, six-sided snowflakes |
 | M15 | Element Hunt (10.10) | House scene with at least 10 objects and their element cards |
-| M16+ | Tier 3 ideas (10.11 onward) | Chosen after kid testing of the above |
+| M16+ | Tier 3 ideas (10.11 onward) and new rooms (section 11) | Chosen after kid testing of the above; one module at a time |
 
 Every module from M7 on ends with a short kid-test with the owner's children before the next starts.
 
@@ -202,9 +204,9 @@ Learned from building M1-M4:
 
 ### 10.1 Science House (home screen that scales) — needed before the 4th game
 - The 3-button menu becomes a picture of a house with rooms. Each room holds related games:
-  - **Kitchen:** Sorter, Kitchen Lab, Can It Be Undone?, Sink or Float
-  - **Lab:** Molecule Builder, Air Builder, Color-Change Potions, Element Hunt
-  - **Garden:** Water Cycle, Crystal Garden, Unmix
+  - **Kitchen:** Sorter, Kitchen Lab, Can It Be Undone?, Sink or Float, Unmix
+  - **Lab:** Molecule Builder, Heat Slider, Air Builder, Color-Change Potions, Crystal Garden, Element Hunt
+  - **Sky & Weather:** Water Cycle (more rooms for other sciences come later; see section 11)
 - Tap a room to zoom in, and tap a game to play it.
 - **No locks.** Everything is open. A soft glow suggests "try this next" in a sensible order.
 - Each room shows its progress (stars, stickers, checks).
@@ -322,12 +324,121 @@ Learned from building M1-M4:
   - optional captions for spoken lines
   - layouts that work for left- and right-handed kids
 - **Offline size budget:** about 6 MB now. Keep each module under about 5 MB and the whole app under about 40 MB. If it grows past that, cache per room.
-- **Grown-ups page:** a simple list in the parent corner of the ideas the child has explored. Still not a dashboard (see section 11).
+- **Grown-ups page:** a simple list in the parent corner of the ideas the child has explored. Still not a dashboard (see section 12).
 
 ### Suggested build order after M5
 Science House (10.1) → Can It Be Undone? (10.3) → Heat Slider (10.2) → Unmix (10.4) → Sink or Float (10.5) → Air Builder (10.9) → Color-Change Potions (10.6) → Water Cycle (10.8) → Crystal Garden (10.7) → Element Hunt (10.10) → Tier 3.
 
 Cheap wins that reuse existing engines come first. Each one also sets up the next: particles, then mixtures, then density, then gases, then acids.
 
-## 11. Out of scope (for now)
+## 11. Beyond chemistry: more rooms (after chemistry Tier 1)
+
+School science for ages 6-8 mixes matter, forces, living things, weather, and the sky, and kids don't separate them either. After the chemistry Tier 1 modules prove the Science House and the module pattern, the house grows new rooms for other sciences. Chemistry stays the core.
+
+**Rules for adding a room:**
+- Each room starts with **3-4 candidate modules**. Build one, kid-test it, then decide on the next. Depth beats breadth.
+- Each room gets **its own accuracy guardrails** (below), because every science has myths that simple explanations easily repeat.
+- Everything from section 10's principles applies: teach before testing, hints, something to collect, no fail states, reuse the toolkit.
+- **The next room is chosen from kid-testing:** whatever the kids ask about or light up at.
+- When the first non-chemistry room ships, the app is **renamed** (e.g. "Science Play"): title, manifest name, icon, and this plan's title.
+
+### 11.1 Workshop (physics: forces, magnets, light, sound)
+
+#### Magnet Hunt
+- **Kids do:** sweep a magnet over a table of things and see what jumps to it:
+  - **Sticks:** iron nail, paper clip, steel screw
+  - **Doesn't stick:** aluminum foil, copper wire, a gold ring, wood, plastic, a coin (depends on the coin, so leave coins out)
+
+  Then play with two magnets: they pull together one way and push apart the other.
+- **Teaches:** magnets pull on some metals (ones with iron in them), not all metals; magnetism works through thin paper; magnets have two ends (poles).
+- **Builds on:** the Sorter (sticks or doesn't), drag, the sticker book. Unmix already has a magnet tool.
+
+#### Ramps and Rolling
+- **Kids do:** set a ramp's height and surface (carpet, wood, ice), then let a ball or toy car go and see how far it gets. Guess first, then watch.
+- **Teaches:** pushes and pulls make things move; steeper ramps give more speed; rough surfaces slow things down (friction).
+- **Builds on:** Sink or Float's guess-then-see flow.
+
+#### Light and Shadows
+- **Kids do:** move a flashlight around a toy and watch its shadow grow, shrink, and swing. Test window glass, wax paper, and wood to see which let light through.
+- **Teaches:** light travels in straight lines, and a shadow is where light is blocked. Some materials let light through, some let a little through, and some block it.
+
+#### Sound Makers
+- **Kids do:** pluck rubber bands (thick ones sound low, thin ones high), tap a drum with rice on top and watch the rice jump, and try a tin-can phone.
+- **Teaches:** sound is things shaking back and forth (vibrations); bigger shakes are louder; sound needs something to travel through.
+
+### 11.2 Garden (life science: plants, animals, living things)
+
+#### Seed to Plant
+- **Kids do:** plant a seed and give it water, light, and soil. It grows a little each visit, or with fast-forward. Without light it grows pale and floppy; without water it wilts. Give them back and it recovers.
+- **Teaches:** plants need water, light, and air to grow. They make their own food from light, air, and water, and the air part is carbon dioxide (the molecule from the Builder!).
+- **Builds on:** the Crystal Garden's grow-over-visits timer, the Lab stations.
+
+#### Life Cycles
+- **Kids do:** put picture cards in order and watch each stage animate:
+  - butterfly: egg, caterpillar, chrysalis, butterfly
+  - frog: egg, tadpole, froglet, frog
+  - chicken: egg, chick, hen
+  - bean plant: seed, sprout, plant, flower, new seeds
+- **Teaches:** living things grow and change in a cycle, and make new living things.
+
+#### Living or Not?
+- **Kids do:** sort things into living, once living, and never living:
+  - **Living:** a dog, a tree, a mushroom, a seed
+  - **Once living:** a wooden spoon, a fallen leaf
+  - **Never living:** a rock, a cloud, a robot, fire (tricky: it "grows" and "eats", but it isn't alive)
+- **Teaches:** living things need food and water, grow, and make more of themselves.
+- **Builds on:** the Sorter engine, with three bins.
+
+#### Homes for Animals (habitats)
+- **Kids do:** help animals find where they live (ocean, desert, forest, snowy Arctic) by what they need: food, water, shelter, the right temperature.
+- **Teaches:** living things live where their needs are met.
+
+### 11.3 Sky & Weather (earth and space science)
+
+#### Water Cycle
+Moved here from 10.8. It's the bridge room: it's chemistry (states of matter) and weather at once.
+
+#### Weather Maker
+- **Kids do:** turn temperature up or down and add clouds and wind to make sun, rain, snow, or a storm. Then dress a character for the weather.
+- **Teaches:** weather is what the air is doing (temperature, clouds, wind, rain or snow), and it changes.
+
+#### Rocks, Sand, and Soil
+- **Kids do:** break big rocks into pebbles, then sand, by rubbing, rushing water, and freezing ice (fast-forward). Mix sand with bits of dead leaves to make soil. Bonus: a fossil dig.
+- **Teaches:** rocks slowly break down into sand and soil; soil is broken rock plus bits of things that were once living.
+- **Builds on:** Unmix (sieving sand from pebbles), the magnifier.
+
+#### Day, Night, and the Moon
+- **Kids do:** spin the Earth to move day and night around it, then move the Moon around the Earth and watch its shape in our sky change.
+- **Teaches:** day and night happen because Earth spins; the Moon's shape changes because we see different amounts of its sunlit half.
+
+### 11.4 Accuracy guardrails for the new rooms
+The chemistry guardrails in section 9 still apply. In addition:
+
+**Workshop (physics)**
+- Not all metals stick to magnets: aluminum, copper, and gold don't. Many coins and some stainless steel spoons don't either, so leave them out rather than risk a wrong answer.
+- Heavier things don't fall faster on their own. A feather falls slowly because of the air, not because it's light.
+- Sound needs something to travel through: there's no sound in space.
+- Light travels in straight lines; shadows are where light is blocked.
+
+**Garden (life science)**
+- Plants make their own food from light, air, and water. Soil gives them water and some nutrients, not their food.
+- Seeds are alive, just resting. Fire is not alive.
+- Butterflies make a chrysalis (moths make cocoons).
+- Tadpoles breathe underwater with gills; grown frogs breathe air.
+
+**Sky & Weather (earth and space)**
+- Day and night come from Earth spinning, not from the Sun moving around the Earth.
+- Moon phases come from how much of the Moon's sunlit half we can see, **not** from Earth's shadow.
+- If seasons are ever added: they come from Earth's tilt, not from Earth getting closer to the Sun.
+- Clouds and fog are tiny liquid droplets (as in section 9).
+
+### 11.5 How the house grows
+- **Kitchen (chemistry):** Sorter, Kitchen Lab, Can It Be Undone?, Sink or Float, Unmix
+- **Lab (chemistry):** Molecule Builder, Heat Slider, Air Builder, Color-Change Potions, Crystal Garden, Element Hunt
+- **Sky & Weather:** Water Cycle first; the rest later
+- **Workshop** and **Garden:** added when the kids are ready for them
+
+Build order: chemistry Tier 1 (section 10) first. Then whichever new room the kid-tests point to, one module at a time, alternating with the remaining chemistry modules so chemistry stays the deepest part of the app.
+
+## 12. Out of scope (for now)
 App Store distribution, accounts or cloud sync, multiplayer, in-app purchases, ads, parent dashboard (beyond the parent corner in 6.4), localization.
