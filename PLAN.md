@@ -122,7 +122,7 @@ A touch-first game for kids ages 6-8 that teaches early chemistry concepts throu
 - **Double bonds:** when two atoms are already joined and both still have a free nub, pushing them together again forms a second bond (drawn as a double line). Needed for O2 (O=O) and CO2 (O=C=O). Triple bonds (N2) come with N, later.
 - **Recognizing molecules:** a molecule is complete when every nub is used. It is then identified by its atom counts from `molecules.json`.
   - Named molecules: water (H2O), hydrogen gas (H2), oxygen gas (O2), carbon dioxide (CO2), methane (CH4); later others.
-  - A complete molecule not in the list still gets celebrated ("You made a real molecule!"). Never imply a valid build is wrong.
+  - A complete molecule not in the list still gets celebrated ("All the bond spots are filled! That's a complete molecule."). It is never called wrong, and never given an invented name: not every combination that fits the bonding rules is a real, stable molecule.
 - When a named molecule is built, celebrate, narrate its everyday name first ("You made WATER!"), then reveal the formula as a small secondary label.
 - Incomplete combos never "fail." Open bonds simply wiggle/glow to invite completion.
 - Data-driven via `molecules.json` (atom types, valence, molecules, names, narration IDs).
@@ -144,6 +144,19 @@ A touch-first game for kids ages 6-8 that teaches early chemistry concepts throu
 | M3 | Kitchen Lab | All changes in 6.2 working (physical and chemical), magnifier, discovery stickers saved |
 | M4 | Molecule Builder | H2, H2O, O2, CO2, CH4 buildable; double bonds; valence rules enforced; unnamed complete molecules celebrated |
 | M5 | Kid-test pass | Play with real kids, log issues, fix top 5 |
+| M6 | Science House home screen (10.1) | Rooms map replaces the 3-button menu; all existing games reachable; progress badges; "try this next" glow |
+| M7 | Can It Be Undone? (10.3) | Change sorter with undo/can't-undo bins; guided first round; reversible changes can be played backward |
+| M8 | Heat Slider (10.2) | Slider drives particle view and real-world view together for water, chocolate, butter; correct melting order |
+| M9 | Unmix (10.4) | Five separating tools working; evaporation brings back the salt; stickers |
+| M10 | Sink or Float + Layers (10.5) | Guess-then-drop tank; three-layer liquid tower; objects settle between layers correctly |
+| M11 | Air Builder (10.9) | Nitrogen atom and triple bond; N2 recipe; fill the balloon with the real air mix |
+| M12 | Color-Change Potions (10.6) | Cabbage-juice indicator with correct acid/neutral/base colors; mixing back toward purple |
+| M13 | Water Cycle (10.8) | Kid drives evaporate, condense, rain, flow back; clouds shown as droplets |
+| M14 | Crystal Garden (10.7) | Crystals grow over visits or fast-forward; salt cubes, sugar crystals, six-sided snowflakes |
+| M15 | Element Hunt (10.10) | House scene with at least 10 objects and their element cards |
+| M16+ | Tier 3 ideas (10.11 onward) | Chosen after kid testing of the above |
+
+Every module from M7 on ends with a short kid-test with the owner's children before the next starts.
 
 Ship after **every** milestone so it can be tested on the real iPad. Each milestone that adds narration also updates `narration-script.md`.
 
@@ -164,6 +177,157 @@ Ship after **every** milestone so it can be tested on the real iPad. Each milest
 - Air is a gas (a mix, mostly nitrogen and oxygen); a balloon of air is "gas."
 - Only use safe, familiar kitchen materials. No "try this at home" instructions involving real chemicals, heat, or anything hazardous.
 - Formulas are always secondary to everyday names.
+- Heat comes from a hot plate, the sun, or warm water. Never show burning or open flames as something to do.
+- **Floating:** say "heavy for its size" (or "lighter than the same amount of water"). Never "heavy things sink": a big log floats.
+- **Clouds, fog and the "steam" you can see** are tiny drops of liquid water. Water vapor itself is an invisible gas.
+- **Acids and bases:** use correct indicator colors (red cabbage: acid pink or red, neutral purple, base blue or green). Never suggest tasting things or testing household cleaners.
+- **Temperatures:** if things change at different temperatures, keep the real order (ice melts before chocolate or butter; water boils much later). No numbers needed; if numbers appear, they must be correct.
+- **Rust** is iron joining with oxygen, and it needs water too. It's a new material, so it can't be undone.
+- **Elements:** an element is one kind of atom. Pencil "lead" is carbon (graphite), not lead. Table salt is sodium and chlorine joined together (don't call it a molecule).
+- **Living things:** yeast really is alive (a tiny fungus), unlike atoms, which never are.
 
-## 10. Out of scope (for now)
+## 10. Expansion roadmap (after M5)
+
+The first three games cover states of matter, changes, and molecules. This roadmap grows the app into a full "science house" of short, replayable modules for ages 6-8. Order and scope get revisited after each kid-test.
+
+### Principles for every new module
+Learned from building M1-M4:
+- **Teach before testing.** A short guided first visit where the kid does it once with a pointing hand, then free play or rounds.
+- **Always a way forward:** a 💡 hint button, spoken help, gentle bounce-backs. Never a fail state or lost progress.
+- **Something to collect** (stars, stickers, cards, checks), shown on the home screen.
+- **Explain at the moment of cause and effect:** narration fires as the change happens, not before.
+- **Reuse the toolkit:** drag and snap, bins, the hot plate and freezer, beaker, magnifier, gas dots and particle pictures, atom balls, sticker book, stand-in voice pipeline.
+- **Content in JSON.** Every spoken line goes in `narration.json` (stand-in voice until recorded).
+- **One idea per module, 3-10 minutes to play**, replayable.
+
+### 10.1 Science House (home screen that scales) — needed before the 4th game
+- The 3-button menu becomes a picture of a house with rooms. Each room holds related games:
+  - **Kitchen:** Sorter, Kitchen Lab, Can It Be Undone?, Sink or Float
+  - **Lab:** Molecule Builder, Air Builder, Color-Change Potions, Element Hunt
+  - **Garden:** Water Cycle, Crystal Garden, Unmix
+- Tap a room to zoom in, and tap a game to play it.
+- **No locks.** Everything is open. A soft glow suggests "try this next" in a sensible order.
+- Each room shows its progress (stars, stickers, checks).
+
+### Tier 1: builds directly on what kids just learned
+
+#### 10.2 Heat Slider ("Particle Zoom")
+- **Kids do:** move a big thermometer slider. One thing (ice, chocolate, butter) is shown two ways side by side: the real-world view and a zoomed-in particle view.
+  - Cold: particles jiggle in a tight grid (solid).
+  - Warmer: they slide past each other (liquid).
+  - Hot: they fly apart (gas, water only).
+- **Teaches:** temperature is how fast particles move; melting and boiling are particles breaking free; different materials change at different temperatures (ice melts first, then chocolate and butter; water boils much later).
+- **Builds on:** the bins' particle pictures, Sorter Level 2, the magnifier.
+- **Size:** small to medium.
+
+#### 10.3 Can It Be Undone? (reversible and irreversible changes)
+- **Kids do:** watch a short before-and-after change, then sort it into ↺ "can undo" or ✗ "can't undo". For "can undo", a reverse button plays it backward (water freezes back into ice).
+  - **Can undo:** ice melting, chocolate melting, water freezing, sugar dissolving (dry the water and the sugar comes back).
+  - **Can't undo:** bread toasting, egg cooking, cake baking, an apple slice turning brown, a nail rusting.
+- **Teaches:** the difference between changes that can be reversed and ones that make a new material. An optional second level introduces the words "physical change" and "chemical change".
+- **Builds on:** the Sorter engine (bins, rounds, stars, warm-up); Lab toast and chocolate.
+- **Size:** small (mostly new art and data).
+
+#### 10.4 Unmix! (separating mixtures)
+- **Kids do:** get a messy mixture and pick the right tool:
+  - sieve: pebbles out of sand
+  - magnet: iron filings out of sand
+  - filter paper: sand out of water
+  - sunny windowsill (fast-forward): salt water dries, and salt crystals are left behind
+  - skim the top: floating cork bits
+- **Teaches:** in a mixture, the parts are still themselves, so they can be separated using what makes them different (size, magnetism, floating, dissolving). The evaporation step proves the Lab's claim: the salt was in the water all along.
+- **Builds on:** the Lab beaker, magnifier, stations.
+- **Size:** medium.
+
+#### 10.5 Sink or Float + Liquid Layers
+- **Part 1:** guess 👍 float or 👎 sink, then drop the object in a water tank and watch. Objects: cork, rock, coin, apple, grape, ice, plastic duck, metal spoon, and an orange with its peel (floats) and without it (sinks: the peel is full of tiny air pockets). Guessing wrong is fine; the tank shows the answer.
+- **Part 2:** pour honey, water, and oil into a tall glass. They stack in layers. Drop objects that settle at different layers.
+- **Teaches:** whether something floats depends on how heavy it is for its size; liquids can stack in layers for the same reason.
+- **Builds on:** the Sorter's guess-and-reveal flow, the Lab's pouring.
+- **Size:** medium.
+
+### Tier 2: new chemistry ideas
+
+#### 10.6 Color-Change Potions (red cabbage indicator)
+- **Kids do:** add kitchen liquids to cups of purple cabbage juice and watch the color change:
+  - lemon juice or vinegar: pink or red
+  - plain water: stays purple
+  - baking soda water: blue or green
+
+  Then mix a pink cup into a green one and watch it head back toward purple.
+- **Teaches:** some things are acids and some are bases; an indicator shows which by its color; acids and bases can cancel each other out. The words "acid" and "base" are introduced with pictures.
+- **Builds on:** the Lab pouring and beaker, sticker book.
+- **Watch out:** no tasting, no household cleaners, colors must be correct (section 9).
+- **Size:** medium.
+
+#### 10.7 Crystal Garden
+- **Kids do:** dissolve lots of salt or sugar in warm water, hang a string, and check back. Crystals grow a little each time the app is opened, or with a fast-forward sun button. The magnifier shows their shapes:
+  - salt: little cubes
+  - sugar: chunky rock-candy crystals
+  - a frosty window: snowflakes always have six sides
+- **Teaches:** when the water leaves, dissolved things come back out as crystals, and crystals have regular shapes because their particles line up in patterns.
+- **Builds on:** Lab dissolving, the magnifier, the particle grid. A gentle reason to come back tomorrow.
+- **Size:** medium.
+
+#### 10.8 Water Cycle
+- **Kids do:** run the cycle step by step:
+  1. Warm the sea with the sun: water rises as invisible gas dots.
+  2. Cool the air high up: the dots gather into tiny droplets that make a cloud.
+  3. The droplets join into rain.
+  4. Rivers carry it back to the sea.
+- **Teaches:** evaporation, condensation, and rain; the same water goes round and round; clouds are liquid droplets, not gas.
+- **Builds on:** the heat and cool buttons, gas dots.
+- **Size:** small to medium.
+
+#### 10.9 Air Builder (Molecule Builder, level 2)
+- **Kids do:** get a nitrogen atom (blue, three bond spots) and learn the triple bond (N≡N).
+  - New recipes: nitrogen gas, plus ammonia (NH₃: "used to make plant food").
+  - Then "fill the balloon with real air": about 8 nitrogen molecules for every 2 oxygen.
+- **Teaches:** air is a mixture of gases, mostly nitrogen; atoms can share three bonds.
+- **Builds on:** the Builder (triple bonds already supported).
+- **Size:** small.
+
+#### 10.10 Element Hunt (what are things made of?)
+- **Kids do:** explore a picture of a house, tap objects, and collect element cards:
+  - party balloon: helium
+  - pencil middle: carbon (graphite)
+  - soda can: aluminum
+  - frying pan: iron
+  - ring: gold
+  - wire inside a cable: copper
+  - table salt: sodium and chlorine
+  - water: hydrogen and oxygen
+  - air: nitrogen and oxygen
+  - fun fact: a diamond is carbon too
+- **Teaches:** an element is one kind of atom, and everything around us is made of elements, alone or joined together.
+- **Builds on:** atom art (a color per element), the sticker book.
+- **Size:** medium (art-heavy).
+
+### Tier 3: longer-term ideas (chosen after kid testing)
+- **10.11 Bubble Lab:** gases you can make.
+  - Baking soda and vinegar in a bottle blow up a balloon (carbon dioxide).
+  - Yeast, sugar, and warm water slowly blow one up (yeast is alive, and it makes carbon dioxide).
+  - Opening a fizzy drink lets dissolved gas escape.
+- **10.12 Soap and Oil:** a Lab add-on. Dish soap breaks oil into tiny droplets that can mix with water, which is how soap washes grease away.
+- **10.13 Kitchen Recipes:** make pancakes step by step. Mixing can be undone; bubbles from baking powder make them rise; heat sets them for good.
+- **10.14 Rust Race:** nails in dry air, in water, and in damp air (fast-forward). Only the one with both water and air rusts fast.
+- **10.15 My Science Journal:** one book collecting everything from every module (stars, stickers, molecules, crystals, element cards), each with its spoken explanation. Optionally a friendly scientist guide character (a person, not an atom) as the app's one voice.
+- **10.16 Explorer Mode (ages 8+):** a parent-corner switch that shows formulas larger, adds counting challenges ("build a molecule with exactly 3 atoms"), and introduces science words (evaporate, dissolve, density, acid, base) with pictures.
+
+### Cross-cutting improvements
+- **Owner narration** in batches per module; stand-in voice until then.
+- **Real sound effects** to replace the generated beeps.
+- **Accessibility:**
+  - atoms also show their letter (color-blind safe)
+  - optional captions for spoken lines
+  - layouts that work for left- and right-handed kids
+- **Offline size budget:** about 6 MB now. Keep each module under about 5 MB and the whole app under about 40 MB. If it grows past that, cache per room.
+- **Grown-ups page:** a simple list in the parent corner of the ideas the child has explored. Still not a dashboard (see section 11).
+
+### Suggested build order after M5
+Science House (10.1) → Can It Be Undone? (10.3) → Heat Slider (10.2) → Unmix (10.4) → Sink or Float (10.5) → Air Builder (10.9) → Color-Change Potions (10.6) → Water Cycle (10.8) → Crystal Garden (10.7) → Element Hunt (10.10) → Tier 3.
+
+Cheap wins that reuse existing engines come first. Each one also sets up the next: particles, then mixtures, then density, then gases, then acids.
+
+## 11. Out of scope (for now)
 App Store distribution, accounts or cloud sync, multiplayer, in-app purchases, ads, parent dashboard (beyond the parent corner in 6.4), localization.

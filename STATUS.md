@@ -13,6 +13,7 @@
 - **M3 follow-ups (2026-09-28):** Lab 💡 hint button; vinegar/baking soda alone now nudge toward each other (owner reported "a bottle that doesn't do anything").
 - **M4 Molecule Builder** built (2026-09-28): H/O/C atoms with wiggling yellow bond-spot nubs, join by dropping near, pull apart to break, push together for double bonds, 5 recipe cards (water, hydrogen, oxygen, carbon dioxide, methane) that snap into real shapes, unnamed complete molecules praised without a made-up name, guided first build (water). Code in `src/builder/` and `src/scenes/BuilderScene.js`, data in `src/data/molecules.json`. Tested in Edge only.
 - **M5 kid test:** not started. All three games are now playable.
+- **Roadmap (2026-09-28):** PLAN.md section 10 now lists 15 more modules in three tiers, a scalable "Science House" home screen, and milestones M6-M16. Owner asked for the expansion before M5; the order is to be revisited after kid testing.
 
 ## Tested
 Only in Edge on the PC, with automated Playwright runs (full rounds, warm-up, Level 2 unlock and chains, parent corner, offline reload, all 15 Lab discoveries + magnifier views).
