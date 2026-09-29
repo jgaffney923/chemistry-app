@@ -37,20 +37,20 @@
   "beakerAccepts": ["ice", "sugar", "salt", "sand", "oil", "bakingSoda", "vinegar"],
 
   "stickers": [
-    { "id": "meltIce", "icon": "water" },
-    { "id": "freezeWater", "icon": "ice" },
-    { "id": "boilWater", "icon": "steam" },
-    { "id": "meltChocolate", "icon": "meltedChocolate" },
-    { "id": "hardenChocolate", "icon": "chocolate" },
-    { "id": "meltButter", "icon": "meltedButter" },
-    { "id": "hardenButter", "icon": "butter" },
-    { "id": "toast", "icon": "toast" },
-    { "id": "toastStays", "icon": "toast" },
-    { "id": "iceFloats", "icon": "ice" },
-    { "id": "sugarDissolves", "icon": "sugar" },
-    { "id": "saltDissolves", "icon": "salt" },
-    { "id": "sandSinks", "icon": "sand" },
-    { "id": "oilFloats", "icon": "oil" },
-    { "id": "fizz", "icon": "bakingSoda" }
+    { "id": "meltIce", "icon": "water", "hint": ["ice", "hot"] },
+    { "id": "freezeWater", "icon": "ice", "hint": ["water", "cold"] },
+    { "id": "boilWater", "icon": "steam", "hint": ["water", "hot"] },
+    { "id": "meltChocolate", "icon": "meltedChocolate", "hint": ["chocolate", "hot"] },
+    { "id": "hardenChocolate", "icon": "chocolate", "hint": ["chocolate", "hot", "cold"] },
+    { "id": "meltButter", "icon": "meltedButter", "hint": ["butter", "hot"] },
+    { "id": "hardenButter", "icon": "butter", "hint": ["butter", "hot", "cold"] },
+    { "id": "toast", "icon": "toast", "hint": ["bread", "hot"] },
+    { "id": "toastStays", "icon": "toast", "hint": ["bread", "hot", "cold"] },
+    { "id": "iceFloats", "icon": "ice", "hint": ["ice", "beaker"] },
+    { "id": "sugarDissolves", "icon": "sugar", "hint": ["sugar", "beaker", "spoon"] },
+    { "id": "saltDissolves", "icon": "salt", "hint": ["salt", "beaker", "spoon"] },
+    { "id": "sandSinks", "icon": "sand", "hint": ["sand", "beaker", "spoon"] },
+    { "id": "oilFloats", "icon": "oil", "hint": ["oil", "beaker"] },
+    { "id": "fizz", "icon": "bakingSoda", "hint": ["bakingSoda", "vinegar", "beaker"] }
   ]
 }

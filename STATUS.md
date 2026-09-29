@@ -7,10 +7,12 @@
   - a 💡 button in the Sorter that replays the warm-up.
 - **M2 (Sorter polish)** partly done:
   - done: all Sorter items drawn in code (`src/art/items.js`), Level 2 heating/cooling chains (unlock at 6 stars, 🔥/❄️ buttons, level picker).
-  - voice: owner recorded 2 of 103 lines; the other 101 use a stand-in computer voice (Zira, marked `"placeholder": true` in narration.json) until recorded. Owner asked for this on 2026-09-28 so every line has a voice for now.
+  - voice: owner recorded 2 of 144 lines; the other 142 use a stand-in computer voice (Zira, marked `"placeholder": true` in narration.json) until recorded. Owner asked for this on 2026-09-28 so every line has a voice for now.
   - not done: owner's remaining recordings, real sound effects (current ones are generated beeps), UI icons are still emoji.
 - **M3 Kitchen Lab** built (2026-09-28): shelf of 11 items, hot plate, freezer, beaker, spoon, magnifying glass, 15 discovery stickers + sticker book, guided first visit. Code in `src/lab/` and `src/scenes/LabScene.js`, data in `src/data/lab.json`. Tested in Edge only.
-- **M4 Molecule Builder, M5 kid test:** not started.
+- **M3 follow-ups (2026-09-28):** Lab 💡 hint button; vinegar/baking soda alone now nudge toward each other (owner reported "a bottle that doesn't do anything").
+- **M4 Molecule Builder** built (2026-09-28): H/O/C atoms with wiggling yellow bond-spot nubs, join by dropping near, pull apart to break, push together for double bonds, 5 recipe cards (water, hydrogen, oxygen, carbon dioxide, methane) that snap into real shapes, unnamed complete molecules praised without a made-up name, guided first build (water). Code in `src/builder/` and `src/scenes/BuilderScene.js`, data in `src/data/molecules.json`. Tested in Edge only.
+- **M5 kid test:** not started. All three games are now playable.
 
 ## Tested
 Only in Edge on the PC, with automated Playwright runs (full rounds, warm-up, Level 2 unlock and chains, parent corner, offline reload, all 15 Lab discoveries + magnifier views).

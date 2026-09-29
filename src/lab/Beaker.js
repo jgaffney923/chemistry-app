@@ -80,10 +80,12 @@ export class Beaker extends Phaser.GameObjects.Container {
       case 'bakingSoda':
         if (!this.state.bakingSoda) this.dropGrains('bakingSoda');
         this.state.bakingSoda = true;
+        if (!this.state.vinegar) line = 'lab.bakingSodaAlone';
         break;
       case 'vinegar':
         this.pour(0xf1e6c4);
         this.state.vinegar = true;
+        if (!this.state.bakingSoda) line = 'lab.vinegarAlone';
         break;
       default:
         return { stickers, line: 'lab.notInBeaker', rejected: true };

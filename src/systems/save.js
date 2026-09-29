@@ -9,6 +9,8 @@ const DEFAULTS = {
   sorterIntroSeen: false,
   labIntroSeen: false,
   stickers: [],
+  builderIntroSeen: false,
+  molecules: [],
 };
 
 let data = load();
@@ -75,6 +77,29 @@ export function addSticker(id) {
   data.stickers = [...data.stickers, id];
   persist();
   return true;
+}
+
+export function isBuilderIntroSeen() {
+  return data.builderIntroSeen;
+}
+
+export function markBuilderIntroSeen() {
+  data.builderIntroSeen = true;
+  persist();
+}
+
+export function hasMolecule(id) {
+  return data.molecules.includes(id);
+}
+
+export function moleculeCount() {
+  return data.molecules.length;
+}
+
+export function addMolecule(id) {
+  if (hasMolecule(id)) return;
+  data.molecules = [...data.molecules, id];
+  persist();
 }
 
 export function isSoundOn() {

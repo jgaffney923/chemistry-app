@@ -9,7 +9,7 @@ import { addEmoji, addLabel } from '../ui/emoji.js';
 import { burst, changeEffect } from '../ui/effects.js';
 import { makeDraggable, returnTo } from '../systems/drag.js';
 import { say, sfx, stopNarration } from '../systems/audio.js';
-import { addSticker, stickerCount, isLabIntroSeen, markLabIntroSeen } from '../systems/save.js';
+import { addSticker, hasSticker, stickerCount, isLabIntroSeen, markLabIntroSeen } from '../systems/save.js';
 
 const SHELF = { x: 40, y: 250, w: 520, h: 1250 };
 const SHELF_R = 88;
@@ -19,7 +19,8 @@ const HOME = { spoon: { x: 1870, y: 640 }, magnifier: { x: 1840, y: 1010 } };
 // Kitchen Lab: a free-play sandbox. Drag things from the shelf onto the hot plate,
 // into the freezer, or into the beaker; stir with the spoon; look closely with the
 // magnifying glass. Every new change found earns a discovery sticker.
-// The first visit is guided: melt the ice on the hot plate.
+// The first visit is guided: melt the ice on the hot plate. After that, the 💡
+// button hints at the next sticker not yet found.
 export default class LabScene extends Phaser.Scene {
   constructor() {
     super('Lab');
@@ -35,6 +36,7 @@ export default class LabScene extends Phaser.Scene {
       () => openStickerBook(this, this.lab.stickers, this.itemsById));
     this.stickerLabel = addLabel(this, W - 270, 130, '', 64, '#ffd84d').setOrigin(1, 0.5);
     this.updateStickerLabel();
+    makeRoundButton(this, 350, 130, 90, 0xffffff, addEmoji(this, 0, 0, '💡', 90), () => this.hint());
 
     this.buildShelf();
     this.stations = [new Station(this, 880, 600, 'heat'), new Station(this, 880, 1170, 'cool')];
@@ -59,7 +61,9 @@ export default class LabScene extends Phaser.Scene {
       onLook: (type) => say(this, `lab.magnify.${type}`),
     });
 
-    this.guide = null;
+    this.hand = null;
+    this.handTimers = [];
+    this.guide = false;
     if (!isLabIntroSeen()) this.startGuide();
   }
 
@@ -292,23 +296,52 @@ export default class LabScene extends Phaser.Scene {
     this.stickerLabel.setText(n ? `${n} / ${this.lab.stickers.length}` : '');
   }
 
+  // --- Hints: the next sticker not yet found, with a hand pointing at what to use.
+
+  hint() {
+    const next = this.lab.stickers.find((st) => !hasSticker(st.id));
+    if (!next) {
+      say(this, 'lab.allFound');
+      return;
+    }
+    say(this, `hint.${next.id}`);
+    this.pointAtEach(next.hint.map((name) => this.hintTarget(name)));
+  }
+
+  hintTarget(name) {
+    if (name === 'hot') return { x: this.stations[0].x, y: this.stations[0].y - 80 };
+    if (name === 'cold') return this.stations[1];
+    if (name === 'beaker') return this.beaker;
+    if (name === 'spoon') return this.spoon;
+    return this.shelfItems[name];
+  }
+
+  // Points at each target in turn, then goes away.
+  pointAtEach(targets) {
+    this.clearHand();
+    targets.forEach((target, i) => {
+      this.handTimers.push(this.time.delayedCall(i * 1800, () => this.pointAt(target)));
+    });
+    this.handTimers.push(this.time.delayedCall(targets.length * 1800 + 600, () => this.clearHand()));
+  }
+
   // --- First visit: point at the ice, then at the hot plate.
 
   startGuide() {
-    this.guide = { hand: null };
+    this.guide = true;
     this.pointAt(this.shelfItems.ice);
     say(this, 'lab.intro');
   }
 
   guideStep(event, id) {
     if (!this.guide || id !== 'ice') return;
-    if (event === 'picked') this.pointAt(this.stations[0], -80);
+    if (event === 'picked') this.pointAt({ x: this.stations[0].x, y: this.stations[0].y - 80 });
     if (event === 'placed') this.clearHand();
   }
 
   finishGuide(told) {
     this.clearHand();
-    this.guide = null;
+    this.guide = false;
     markLabIntroSeen();
     told.then(() => {
       if (!this.sys.isActive()) return;
@@ -317,17 +350,24 @@ export default class LabScene extends Phaser.Scene {
     });
   }
 
-  pointAt(target, dy = 0) {
-    this.clearHand();
-    const hand = addEmoji(this, target.x + 150, target.y + dy, '👈', 120).setDepth(3000);
+  pointAt(target) {
+    this.removeHand();
+    const hand = addEmoji(this, target.x + 150, target.y, '👈', 120).setDepth(3000);
     this.tweens.add({ targets: hand, x: hand.x + 40, duration: 450, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
-    this.guide.hand = hand;
+    this.hand = hand;
   }
 
+  removeHand() {
+    if (!this.hand) return;
+    this.tweens.killTweensOf(this.hand);
+    this.hand.destroy();
+    this.hand = null;
+  }
+
+  // Removes the hand and cancels any hint still stepping through its targets.
   clearHand() {
-    if (!this.guide?.hand) return;
-    this.tweens.killTweensOf(this.guide.hand);
-    this.guide.hand.destroy();
-    this.guide.hand = null;
+    this.handTimers.forEach((t) => t.remove());
+    this.handTimers = [];
+    this.removeHand();
   }
 }

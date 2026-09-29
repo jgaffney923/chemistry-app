@@ -1,0 +1,17 @@
+{
+  "atoms": {
+    "H": { "element": "hydrogen", "valence": 1, "radius": 70 },
+    "O": { "element": "oxygen", "valence": 2, "radius": 95 },
+    "C": { "element": "carbon", "valence": 4, "radius": 100 }
+  },
+
+  "tray": ["H", "O", "C"],
+
+  "molecules": [
+    { "id": "water", "formula": { "H": 2, "O": 1 }, "label": "H₂O", "layout": "bent", "center": "O" },
+    { "id": "hydrogen", "formula": { "H": 2 }, "label": "H₂", "layout": "line" },
+    { "id": "oxygen", "formula": { "O": 2 }, "label": "O₂", "layout": "line" },
+    { "id": "carbonDioxide", "formula": { "C": 1, "O": 2 }, "label": "CO₂", "layout": "line", "center": "C" },
+    { "id": "methane", "formula": { "C": 1, "H": 4 }, "label": "CH₄", "layout": "cross", "center": "C" }
+  ]
+}

@@ -1,6 +1,6 @@
 # Narration script
 
-**2 of 103 lines recorded.** Lines marked "computer voice for now"
+**2 of 144 lines recorded.** Lines marked "computer voice for now"
 play a stand-in voice until you record them.
 
 How to add a recording (details in README.md):
@@ -60,6 +60,24 @@ to a 6-year-old.
 | `lab.magnify.grains` | Those pieces haven't dissolved yet. Stir them! | TO RECORD (computer voice for now) |
 | `lab.magnify.sand` | The sand grains just sit at the bottom. They don't mix into the water. | TO RECORD (computer voice for now) |
 | `lab.magnify.oil` | The oil stays in its own layer, on top of the water. | TO RECORD (computer voice for now) |
+| `lab.vinegarAlone` | The vinegar mixed right into the water. I wonder what happens if you add baking soda too! | TO RECORD (computer voice for now) |
+| `lab.bakingSodaAlone` | The baking soda sank to the bottom. I wonder what happens if you add vinegar too! | TO RECORD (computer voice for now) |
+| `lab.allFound` | You found every discovery! You're a real scientist! | TO RECORD (computer voice for now) |
+| `hint.meltIce` | Try putting the ice cube on the hot plate! | TO RECORD (computer voice for now) |
+| `hint.freezeWater` | What happens to water in the freezer? Try it! | TO RECORD (computer voice for now) |
+| `hint.boilWater` | Try heating some water on the hot plate! | TO RECORD (computer voice for now) |
+| `hint.meltChocolate` | Try warming up the chocolate on the hot plate! | TO RECORD (computer voice for now) |
+| `hint.hardenChocolate` | Melt some chocolate, then put it in the freezer! | TO RECORD (computer voice for now) |
+| `hint.meltButter` | Try warming up the butter on the hot plate! | TO RECORD (computer voice for now) |
+| `hint.hardenButter` | Melt some butter, then cool it down in the freezer! | TO RECORD (computer voice for now) |
+| `hint.toast` | What happens to bread on the hot plate? Try it! | TO RECORD (computer voice for now) |
+| `hint.toastStays` | Make some toast, then try to turn it back into bread in the freezer! | TO RECORD (computer voice for now) |
+| `hint.iceFloats` | Drop an ice cube into the beaker of water! | TO RECORD (computer voice for now) |
+| `hint.sugarDissolves` | Put sugar in the water, then stir it with the spoon! | TO RECORD (computer voice for now) |
+| `hint.saltDissolves` | Put salt in the water, then stir it with the spoon! | TO RECORD (computer voice for now) |
+| `hint.sandSinks` | Put sand in the water, and give it a stir with the spoon! | TO RECORD (computer voice for now) |
+| `hint.oilFloats` | Pour some oil into the beaker of water! | TO RECORD (computer voice for now) |
+| `hint.fizz` | Put baking soda and vinegar in the beaker together! | TO RECORD (computer voice for now) |
 | `disc.meltIce` | The ice melted into water! Heat turns solid ice into liquid water. | TO RECORD (computer voice for now) |
 | `disc.freezeWater` | The water froze into ice! Cold turns liquid water into solid ice. | TO RECORD (computer voice for now) |
 | `disc.boilWater` | The water got so hot it boiled into steam! Steam is water as a gas, and it floats away. | TO RECORD (computer voice for now) |
@@ -83,6 +101,29 @@ to a 6-year-old.
 | `item.vinegar.name` | Vinegar! | TO RECORD (computer voice for now) |
 | `item.bread.name` | A slice of bread! | TO RECORD (computer voice for now) |
 | `item.toast.name` | Toast! | TO RECORD (computer voice for now) |
+| `builder.intro` | Atoms are tiny building blocks. They join together to make molecules. Let's make water! Drag an oxygen atom onto the table. | TO RECORD (computer voice for now) |
+| `builder.addH` | Now bring a hydrogen atom right next to the oxygen, so they join! | TO RECORD (computer voice for now) |
+| `builder.addH2` | The oxygen has one more bond spot. Add another hydrogen! | TO RECORD (computer voice for now) |
+| `builder.free` | Now try the other molecules at the top, or build anything you like! Pull atoms apart to break a bond, and push joined atoms together to make a double bond. | TO RECORD (computer voice for now) |
+| `builder.full` | That atom's bond spots are all full! | TO RECORD (computer voice for now) |
+| `builder.double` | A double bond! Those two atoms are joined twice. | TO RECORD (computer voice for now) |
+| `builder.broken` | You pulled them apart! | TO RECORD (computer voice for now) |
+| `builder.cleared` | All clear! | TO RECORD (computer voice for now) |
+| `builder.complete` | All the bond spots are filled! That's a complete molecule. | TO RECORD (computer voice for now) |
+| `builder.allMade` | You made every molecule on the list! Amazing! | TO RECORD (computer voice for now) |
+| `atom.H` | Hydrogen! It has one bond spot. | TO RECORD (computer voice for now) |
+| `atom.O` | Oxygen! It has two bond spots. | TO RECORD (computer voice for now) |
+| `atom.C` | Carbon! It has four bond spots. | TO RECORD (computer voice for now) |
+| `recipe.water` | Water: one oxygen and two hydrogens. | TO RECORD (computer voice for now) |
+| `recipe.hydrogen` | Hydrogen gas: two hydrogens joined together. | TO RECORD (computer voice for now) |
+| `recipe.oxygen` | Oxygen gas: two oxygens. Join them, then push them together again to make a double bond! | TO RECORD (computer voice for now) |
+| `recipe.carbonDioxide` | Carbon dioxide: one carbon in the middle, with an oxygen on each side. Each oxygen needs a double bond! | TO RECORD (computer voice for now) |
+| `recipe.methane` | Methane: one carbon in the middle, with four hydrogens around it. | TO RECORD (computer voice for now) |
+| `mol.water` | You made water! One oxygen atom joined to two hydrogen atoms. | TO RECORD (computer voice for now) |
+| `mol.hydrogen` | You made hydrogen gas! Two hydrogen atoms joined together. | TO RECORD (computer voice for now) |
+| `mol.oxygen` | You made oxygen gas! It's part of the air we breathe in. Two oxygen atoms, joined by a double bond. | TO RECORD (computer voice for now) |
+| `mol.carbonDioxide` | You made carbon dioxide! We breathe it out, and plants use it to grow. It's the gas in the baking soda fizz! | TO RECORD (computer voice for now) |
+| `mol.methane` | You made methane! It's the gas some stoves burn for cooking. One carbon with four hydrogens. | TO RECORD (computer voice for now) |
 | `item.ice.name` | An ice cube! | TO RECORD (computer voice for now) |
 | `item.ice.fact` | Ice is a solid. It keeps its shape! | TO RECORD (computer voice for now) |
 | `item.rock.name` | A rock! | TO RECORD (computer voice for now) |

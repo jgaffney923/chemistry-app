@@ -6,7 +6,7 @@ import { addEmoji, addLabel } from '../ui/emoji.js';
 import { addItemArt } from '../art/items.js';
 import { addParentCorner } from '../ui/parentCorner.js';
 import { say } from '../systems/audio.js';
-import { getStars, isSorterIntroSeen, stickerCount } from '../systems/save.js';
+import { getStars, isSorterIntroSeen, stickerCount, moleculeCount } from '../systems/save.js';
 
 const RADIUS = 260;
 
@@ -29,7 +29,7 @@ export default class MenuScene extends Phaser.Scene {
         onTap: () => this.scene.start(isSorterIntroSeen() ? 'Sorter' : 'SorterIntro', {}),
       },
       { x: W / 2, color: 0x1fb5c9, icon: () => addEmoji(this, 0, 0, '🧪', 230), ready: true, onTap: () => this.scene.start('Lab', {}) },
-      { x: W / 2 + 640, color: 0xa77cf2, icon: () => makeWater(this, 0, 30, 85), ready: false },
+      { x: W / 2 + 640, color: 0xa77cf2, icon: () => makeWater(this, 0, 30, 85), ready: true, onTap: () => this.scene.start('Builder', {}) },
     ];
 
     games.forEach((game, i) => {
@@ -50,6 +50,11 @@ export default class MenuScene extends Phaser.Scene {
     if (stickers > 0) {
       const total = this.cache.json.get('lab').stickers.length;
       addLabel(this, games[1].x, y + RADIUS + 90, `🏅 ${stickers} / ${total}`, 80, '#ffd84d');
+    }
+    const made = moleculeCount();
+    if (made > 0) {
+      const total = this.cache.json.get('molecules').molecules.length;
+      addLabel(this, games[2].x, y + RADIUS + 90, `✅ ${made} / ${total}`, 80, '#ffd84d');
     }
 
     addParentCorner(this, () => this.scene.restart());

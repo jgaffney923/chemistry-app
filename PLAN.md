@@ -109,6 +109,7 @@ A touch-first game for kids ages 6-8 that teaches early chemistry concepts throu
 - **Chemical changes (make something new):**
   - Baking soda + vinegar -> fizzing bubbles. The bubbles are carbon dioxide gas (a molecule the kid later builds in Molecule Builder).
   - Bread + heater -> toast. The freezer does not turn toast back into bread. This contrast with chocolate teaches "some changes can't be undone."
+- A 💡 button hints at the next undiscovered sticker (spoken hint + a hand pointing at what to use). Vinegar or baking soda added alone nudges toward the other.
 - Goal-free play plus optional "discovery stickers" collected for each new change found (15 in all, saved locally; a sticker book shows found ones, tap to hear the explanation again). No fail states.
 - **First visit is guided** (teach before free play): a pointing hand walks the kid through melting the ice on the hot plate, then "try anything you like".
 - Each discovery is narrated as it happens, so the explanation arrives at the moment of cause and effect.
@@ -125,6 +126,9 @@ A touch-first game for kids ages 6-8 that teaches early chemistry concepts throu
 - When a named molecule is built, celebrate, narrate its everyday name first ("You made WATER!"), then reveal the formula as a small secondary label.
 - Incomplete combos never "fail." Open bonds simply wiggle/glow to invite completion.
 - Data-driven via `molecules.json` (atom types, valence, molecules, names, narration IDs).
+- **Recipe cards** across the top show each target molecule in its real shape (faded until made, then checked). Tapping one says its recipe.
+- **Pull apart / push together:** pulling an atom far from a partner breaks the bond; pushing joined atoms together adds a bond (double bond) if both have a free spot. Dropping an atom back on the tray removes it; the broom clears the board.
+- **First visit is guided** (teach before free play): build water step by step, then free play.
 
 ### 6.4 Parent corner
 - Hidden behind a long-press (about 3 seconds) on a small corner icon on the menu. Kids won't find it by accident.
