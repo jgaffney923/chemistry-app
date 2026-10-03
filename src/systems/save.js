@@ -13,6 +13,7 @@ const DEFAULTS = {
   molecules: [],
   tips: [], // one-time explanations already given, by name
   heatFound: [], // Heat Slider changes seen, e.g. "water.melt"
+  unmixFound: [],
 };
 
 let data = load();
@@ -132,6 +133,21 @@ export function addHeatFound(id) {
 
 export function isSoundOn() {
   return data.sound;
+}
+
+export function hasUnmixSticker(id) {
+  return data.unmixFound.includes(id);
+}
+
+export function unmixStickerCount() {
+  return data.unmixFound.length;
+}
+
+export function addUnmixSticker(id) {
+  if (hasUnmixSticker(id)) return false;
+  data.unmixFound = [...data.unmixFound, id];
+  persist();
+  return true;
 }
 
 export function setSoundOn(on) {

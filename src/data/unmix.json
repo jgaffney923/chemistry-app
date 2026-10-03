@@ -1,0 +1,30 @@
+{
+  "tools": [
+    { "id": "sieve", "label": "Sieve", "color": "0x4f7cff" },
+    { "id": "magnet", "label": "Magnet", "color": "0xe8453c" },
+    { "id": "filter", "label": "Filter", "color": "0x1fb5c9" },
+    { "id": "evaporate", "label": "Windowsill", "color": "0xf2b01e" },
+    { "id": "skim", "label": "Skimmer", "color": "0x3ccf6e" }
+  ],
+  "mixtures": [
+    { "id": "filter", "label": "Sand + water", "short": "Sand", "parts": ["water", "sand"], "tool": "filter", "left": "Water", "right": "Sand", "icon": "sand" },
+    { "id": "evaporate", "label": "Salt + water", "short": "Salt", "parts": ["water", "salt"], "tool": "evaporate", "left": "Salt", "right": "", "icon": "salt" },
+    { "id": "sieve", "label": "Pebbles + sand", "short": "Pebbles", "parts": ["sand", "pebbles"], "tool": "sieve", "left": "Sand", "right": "Pebbles", "icon": "rock" },
+    { "id": "magnet", "label": "Iron + sand", "short": "Iron", "parts": ["sand", "iron"], "tool": "magnet", "left": "Sand", "right": "Iron", "icon": "iron" },
+    { "id": "skim", "label": "Cork + water", "short": "Cork", "parts": ["water", "cork"], "tool": "skim", "left": "Water", "right": "Cork", "icon": "cork" }
+  ],
+  "stickers": [
+    { "id": "filter", "icon": "sand" },
+    { "id": "evaporate", "icon": "salt" },
+    { "id": "sieve", "icon": "rock" },
+    { "id": "magnet", "icon": "iron" },
+    { "id": "skim", "icon": "cork" }
+  ],
+  "items": [
+    { "id": "sand", "emoji": "🏖️" },
+    { "id": "salt", "emoji": "🧂" },
+    { "id": "rock", "emoji": "🪨" },
+    { "id": "iron", "emoji": "🔩" },
+    { "id": "cork", "emoji": "🪵" }
+  ]
+}

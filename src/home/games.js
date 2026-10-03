@@ -1,12 +1,29 @@
 import { makeWater } from '../art/atoms.js';
 import { addItemArt } from '../art/items.js';
 import { addEmoji } from '../ui/emoji.js';
-import { getStars, isSorterIntroSeen, stickerCount, moleculeCount, heatFoundCount } from '../systems/save.js';
+import { toolArt, grainArt } from '../unmix/art.js';
+import { getStars, isSorterIntroSeen, stickerCount, moleculeCount, heatFoundCount, unmixStickerCount } from '../systems/save.js';
 
 // Every game the Science House can open: its button picture, how to start it,
 // and how far the kid has got (label for the badge, fraction 0..1 for "try next").
 // Scenes are always started with data: with none, Phaser reuses the last run's.
 export const GAMES = {
+  unmix: {
+    color: 0x269879,
+    icon(scene) {
+      return [toolArt(scene, 'sieve', 0, -45, 1.6),
+        grainArt(scene, 'sand', -60, 70, 2), grainArt(scene, 'sand', 0, 110, 2), grainArt(scene, 'sand', 60, 70, 2)];
+    },
+    start(scene) {
+      scene.scene.start('Unmix', {});
+    },
+    progress(scene) {
+      const found = unmixStickerCount();
+      const total = scene.cache.json.get('unmix').stickers.length;
+      return { label: found ? `🏅 ${found} / ${total}` : '', fraction: found / total };
+    },
+  },
+
   sorter: {
     color: 0x4f7cff,
     icon(scene) {

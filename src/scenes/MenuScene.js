@@ -158,16 +158,22 @@ export default class MenuScene extends Phaser.Scene {
     }));
 
     const next = suggestedGame(this, this.home.suggestedOrder);
-    const y = H / 2 - 20;
+    const rows = Math.ceil(room.games.length / 3);
+    const columns = Math.ceil(room.games.length / rows);
+    const radius = rows > 1 ? 210 : 260;
+    const badgeOffset = rows > 1 ? 290 : 350;
     const spacing = 640;
     room.games.forEach((id, i) => {
       const game = GAMES[id];
-      const x = W / 2 + (i - (room.games.length - 1) / 2) * spacing;
-      if (id === next) this.layer.add(this.glow(this.add.circle(x, y, 300).setStrokeStyle(18, GLOW)));
-      const button = makeRoundButton(this, x, y, 260, game.color, game.icon(this), () => game.start(this));
+      const row = Math.floor(i / columns);
+      const rowCount = Math.min(columns, room.games.length - row * columns);
+      const x = W / 2 + (i % columns - (rowCount - 1) / 2) * spacing;
+      const y = H / 2 - 20 + (row - (rows - 1) / 2) * 580;
+      if (id === next) this.layer.add(this.glow(this.add.circle(x, y, radius + 40).setStrokeStyle(18, GLOW)));
+      const button = makeRoundButton(this, x, y, radius, game.color, game.icon(this), () => game.start(this));
       button.setScale(0);
       this.tweens.add({ targets: button, scale: 1, duration: 400, delay: i * 120, ease: 'Back.easeOut' });
-      this.layer.add([button, addLabel(this, x, y + 350, game.progress(this).label, 80, '#ffd84d')]);
+      this.layer.add([button, addLabel(this, x, y + badgeOffset, game.progress(this).label, rows > 1 ? 64 : 80, '#ffd84d')]);
       this.gameButtons[id] = button;
     });
   }

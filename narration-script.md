@@ -1,6 +1,6 @@
 # Narration script
 
-**2 of 201 lines recorded.** Lines marked "computer voice for now"
+**2 of 233 lines recorded.** Lines marked "computer voice for now"
 play a stand-in voice until you record them.
 
 How to add a recording (details in README.md):
@@ -15,6 +15,38 @@ to a 6-year-old.
 | File name (id) | Say this | Status |
 |---|---|---|
 | `boot.welcome` | Hi! Let's play with chemistry! | done |
+| `unmix.intro` | Let's unmix! These are sand and water. Drag the paper filter to the mixture, or tap it. Watch where the sand and water go! | TO RECORD |
+| `unmix.welcome` | Pick a mixture and try a separating tool! | TO RECORD |
+| `unmix.stickers` | Your separating discoveries! Tap a sticker to hear what happened. | TO RECORD |
+| `unmix.allFound` | You found all five ways to separate these mixtures! Pick one to try again. | TO RECORD |
+| `unmix.zoom` | The salt water is clear, but the salt is still there! These dots show its tiny dissolved parts, too small to see with a real magnifying glass. | TO RECORD |
+| `unmix.crystals` | The water left, and the salt stayed behind as crystals! | TO RECORD |
+| `unmix.filterSalt` | The water and dissolved salt both pass through this paper filter. The salt is still in the water! Try letting the water evaporate. | TO RECORD |
+| `unmix.pick.filter` | Sand and water! Can you separate the sand from the water? | TO RECORD |
+| `unmix.pick.evaporate` | Salt dissolved in water! Can you get the salt back? | TO RECORD |
+| `unmix.pick.sieve` | Pebbles mixed with sand! Can you separate the big pieces from the small grains? | TO RECORD |
+| `unmix.pick.magnet` | Little iron pieces mixed with sand! What could lift just the iron? | TO RECORD |
+| `unmix.pick.skim` | Cork bits floating on water! Can you lift them off the top? | TO RECORD |
+| `unmix.hint.filter` | Try the paper filter. Water can pass through, but the sand grains stay behind. | TO RECORD |
+| `unmix.hint.evaporate` | Try the sunny windowsill. We'll speed up time while the water evaporates. | TO RECORD |
+| `unmix.hint.sieve` | Try the sieve. Its holes let the small sand grains through, but hold the pebbles. | TO RECORD |
+| `unmix.hint.magnet` | Try the magnet. It pulls on iron, but not on sand. | TO RECORD |
+| `unmix.hint.skim` | Try the skimmer. Lift the cork bits from the top of the water. | TO RECORD |
+| `unmix.try.sieve` | This sieve separates big pieces from small grains. For this experiment, let's try a different tool, or tap the light bulb. | TO RECORD |
+| `unmix.try.magnet` | The magnet pulls on iron. There's no iron in this mixture. Try another tool, or tap the light bulb. | TO RECORD |
+| `unmix.try.filter` | This paper filter catches small solid grains while water flows through. Let's try another tool for this mixture. | TO RECORD |
+| `unmix.try.evaporate` | The windowsill can let water evaporate, but it won't separate this mixture into the two parts we're collecting. Try another tool. | TO RECORD |
+| `unmix.try.skim` | The skimmer lifts floating bits off water. It won't separate this mixture. Try another tool, or tap the light bulb. | TO RECORD |
+| `unmix.action.filter` | The water passes through the paper. The sand grains stay in the filter! | TO RECORD |
+| `unmix.action.evaporate` | Time is speeding up on the sunny windowsill. Water evaporates as invisible gas. The dots show where that gas goes! | TO RECORD |
+| `unmix.action.sieve` | Shake the sieve! Small sand grains fall through the holes. Big pebbles stay in the sieve! | TO RECORD |
+| `unmix.action.magnet` | The magnet pulls the iron away from the sand! | TO RECORD |
+| `unmix.action.skim` | The skimmer lifts the floating cork bits off the water! | TO RECORD |
+| `unmix.disc.filter` | You separated sand and water! The paper filter caught the sand, and the water passed through. They're still sand and water. | TO RECORD |
+| `unmix.disc.evaporate` | You got the salt back! The water evaporated, leaving salt crystals behind. The salt was in the clear water all along. | TO RECORD |
+| `unmix.disc.sieve` | You separated pebbles and sand! The sieve separates things by size. Sand fits through the holes, but pebbles don't. | TO RECORD |
+| `unmix.disc.magnet` | You separated iron and sand! The magnet pulls on iron, but not on sand. Not all metals stick to magnets. | TO RECORD |
+| `unmix.disc.skim` | You separated cork and water! Cork floats, so the skimmer can lift it off the top. | TO RECORD |
 | `house.intro` | Welcome to the Science House! Tap a room to explore. | TO RECORD (computer voice for now) |
 | `room.kitchen` | The kitchen! Sort, heat, cool, and mix things up. | TO RECORD (computer voice for now) |
 | `room.lab` | The lab! Build molecules out of atoms. | TO RECORD (computer voice for now) |

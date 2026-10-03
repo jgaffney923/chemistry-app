@@ -244,6 +244,7 @@ Learned from building M1-M4:
 - **Teaches:** in a mixture, the parts are still themselves, so they can be separated using what makes them different (size, magnetism, floating, dissolving). The evaporation step proves the Lab's claim: the salt was in the water all along.
 - **Builds on:** the Lab beaker, magnifier, stations.
 - **Size:** medium.
+- **As built (M9):** five mixtures in the Kitchen, with tap-or-drag separating tools, animated collection of the separated parts, five saved discovery stickers and a replayable sticker book. The first experiment guides filtering sand from water. Filtering salt water leaves the salt dissolved and earns no sticker; accelerated evaporation leaves salt crystals. A pretend magnifier shows dissolved parts (narration explains they are too small for a real magnifying glass). Content lives in `src/data/unmix.json`. Installed-iPad kid testing and stand-in audio conversion are pending before moving to M10.
 
 #### 10.5 Sink or Float + Liquid Layers
 - **Part 1:** guess 👍 float or 👎 sink, then drop the object in a water tank and watch. Objects: cork, rock, coin, apple, grape, ice, plastic duck, metal spoon, and an orange with its peel (floats) and without it (sinks: the peel is full of tiny air pockets). Guessing wrong is fine; the tank shows the answer.
@@ -322,6 +323,7 @@ Learned from building M1-M4:
 
 ### Cross-cutting improvements
 - **Owner narration** in batches per module; stand-in voice until then.
+- **Azure neural narration (future task, deferred 2026-10-03):** create a Free (F0) Speech resource, compare five sample lines in suitable prebuilt voices, then generate bundled MP3 narration after voice approval. Preserve owner recordings unless explicitly replaced. Adapt the player for MP3 file paths; keep credentials only in the developer's local environment, never in the repository or kids' app. Generation uses Azure; playback stays offline. No Azure integration is included in M9.
 - **Real sound effects** to replace the generated beeps.
 - **Accessibility:**
   - atoms also show their letter (color-blind safe)

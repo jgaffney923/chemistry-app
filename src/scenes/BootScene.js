@@ -15,6 +15,7 @@ export default class BootScene extends Phaser.Scene {
     this.load.json('rooms', 'src/data/rooms.json');
     this.load.json('changes', 'src/data/changes.json');
     this.load.json('heat', 'src/data/heat.json');
+    this.load.json('unmix', 'src/data/unmix.json');
     this.load.once('filecomplete-json-narration', () => preloadNarration(this));
     // Real pictures, for items that have one. Others are drawn in code.
     this.load.once('filecomplete-json-items', () => {

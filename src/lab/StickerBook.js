@@ -10,7 +10,9 @@ const R = 100;
 
 // Full-screen sticker book: found stickers show their picture (tap to hear the
 // discovery again); missing ones are a grey "?".
-export function openStickerBook(scene, stickers, itemsById) {
+export function openStickerBook(scene, stickers, itemsById, options = {}) {
+  const ownsSticker = options.hasSticker || hasSticker;
+  const narrationPrefix = options.narrationPrefix || 'disc';
   const layer = scene.add.container(0, 0).setDepth(5000);
   layer.add(scene.add.rectangle(W / 2, H / 2, W, H, 0x000000, 0.6).setInteractive());
   layer.add(scene.add.rectangle(W / 2, H / 2 + 20, 1500, 1060, 0xfdf6e3).setStrokeStyle(10, 0xe0c890));
@@ -19,7 +21,7 @@ export function openStickerBook(scene, stickers, itemsById) {
   stickers.forEach((sticker, i) => {
     const x = W / 2 + ((i % COLS) - (COLS - 1) / 2) * 270;
     const y = H / 2 + 20 + (Math.floor(i / COLS) - (rows - 1) / 2) * 300;
-    const found = hasSticker(sticker.id);
+    const found = ownsSticker(sticker.id);
     const slot = scene.add.container(x, y);
     if (found) {
       slot.add([
@@ -28,7 +30,7 @@ export function openStickerBook(scene, stickers, itemsById) {
       ]);
       slot.setInteractive(new Phaser.Geom.Circle(0, 0, R), Phaser.Geom.Circle.Contains);
       slot.on('pointerup', () => {
-        say(scene, `disc.${sticker.id}`);
+        say(scene, `${narrationPrefix}.${sticker.id}`);
         scene.tweens.add({ targets: slot, scale: 1.1, duration: 120, yoyo: true });
       });
     } else {
@@ -42,6 +44,6 @@ export function openStickerBook(scene, stickers, itemsById) {
 
   const close = makeRoundButton(scene, W / 2 + 720, H / 2 - 490, 80, 0x4f7cff, addLabel(scene, 0, 0, '✕', 80), () => layer.destroy());
   layer.add(close);
-  say(scene, 'lab.stickers');
+  say(scene, options.intro || 'lab.stickers');
   return layer;
 }
