@@ -2,6 +2,7 @@ import { makeWater } from '../art/atoms.js';
 import { addItemArt } from '../art/items.js';
 import { addEmoji } from '../ui/emoji.js';
 import { toolArt, grainArt } from '../unmix/art.js';
+import { floatArt } from '../float/art.js';
 import { getStars, isSorterIntroSeen, stickerCount, moleculeCount, heatFoundCount, unmixStickerCount } from '../systems/save.js';
 
 // Every game the Science House can open: its button picture, how to start it,
@@ -21,6 +22,23 @@ export const GAMES = {
       const found = unmixStickerCount();
       const total = scene.cache.json.get('unmix').stickers.length;
       return { label: found ? `🏅 ${found} / ${total}` : '', fraction: found / total };
+    },
+  },
+
+  float: {
+    color: 0x2f8fd6,
+    icon(scene) {
+      // A little tank: a duck floating on top, a rock on the bottom.
+      const water = scene.add.rectangle(0, 40, 300, 180, 0x7cc8f0, 0.6);
+      return [floatArt(scene, 'rock', 55, 95, 70), floatArt(scene, 'duck', -50, -68, 120), water];
+    },
+    start(scene) {
+      scene.scene.start('Float', {});
+    },
+    progress() {
+      const stars = getStars('float');
+      // A tank round and a liquid tower counts as having explored it.
+      return { label: stars ? `⭐ ${stars}` : '', fraction: Math.min(stars / 6, 1) };
     },
   },
 

@@ -1,6 +1,6 @@
 # Narration script
 
-**2 of 233 lines recorded.** Lines marked "computer voice for now"
+**2 of 283 lines recorded.** Lines marked "computer voice for now"
 play a stand-in voice until you record them.
 
 How to add a recording (details in README.md):
@@ -47,6 +47,56 @@ to a 6-year-old.
 | `unmix.disc.sieve` | You separated pebbles and sand! The sieve separates things by size. Sand fits through the holes, but pebbles don't. | TO RECORD |
 | `unmix.disc.magnet` | You separated iron and sand! The magnet pulls on iron, but not on sand. Not all metals stick to magnets. | TO RECORD |
 | `unmix.disc.skim` | You separated cork and water! Cork floats, so the skimmer can lift it off the top. | TO RECORD |
+| `float.intro` | Will it float or sink? First, make a guess: tap Float or Sink. Then drop it in the water and watch! | TO RECORD |
+| `float.welcome` | Float or sink? Let's find out! | TO RECORD |
+| `float.guessFirst` | Make a guess first! Float or sink? | TO RECORD |
+| `float.guess.float` | You think it will float. Drop it in the water! | TO RECORD |
+| `float.guess.sink` | You think it will sink. Drop it in the water! | TO RECORD |
+| `float.hint.guess` | Will it stay at the top of the water, or go down to the bottom? Tap Float or Sink. | TO RECORD |
+| `float.hint.drop` | Drag it into the water, or tap it to drop it in. | TO RECORD |
+| `float.right` | You guessed it! | TO RECORD |
+| `float.surprise` | Surprise! | TO RECORD |
+| `float.done` | You tested six things! Floating depends on how heavy something is for its size. A big log floats, but a little coin sinks! | TO RECORD |
+| `float.ask.cork` | A cork! Will it float or sink? | TO RECORD |
+| `float.ask.apple` | An apple! Will it float or sink? | TO RECORD |
+| `float.ask.ice` | An ice cube! Will it float or sink? | TO RECORD |
+| `float.ask.duck` | A plastic duck! Will it float or sink? | TO RECORD |
+| `float.ask.log` | A big, heavy log! Will it float or sink? | TO RECORD |
+| `float.ask.rock` | A rock! Will it float or sink? | TO RECORD |
+| `float.ask.coin` | A little coin! Will it float or sink? | TO RECORD |
+| `float.ask.grape` | A grape! Will it float or sink? | TO RECORD |
+| `float.ask.spoon` | A metal spoon! Will it float or sink? | TO RECORD |
+| `float.ask.orange` | An orange! Will it float or sink? | TO RECORD |
+| `float.ask.peeledOrange` | Now we peel the orange. Will it float or sink without its peel? | TO RECORD |
+| `float.fact.cork` | It floats! Cork is full of tiny air pockets, so it's very light for its size. | TO RECORD |
+| `float.fact.apple` | It floats! An apple has lots of air inside, so it's lighter than the same amount of water. | TO RECORD |
+| `float.fact.ice` | It floats! Ice is a little lighter than the same amount of water, so most of it stays under the water. | TO RECORD |
+| `float.fact.duck` | It floats! The plastic duck is hollow and full of air, so it's light for its size. | TO RECORD |
+| `float.fact.log` | It floats! A log is big and heavy, but it's light for its size: lighter than the same amount of water. | TO RECORD |
+| `float.fact.rock` | It sinks! A rock is heavy for its size: heavier than the same amount of water. | TO RECORD |
+| `float.fact.coin` | It sinks! A coin is small, but it's heavy for its size. | TO RECORD |
+| `float.fact.grape` | It sinks! A grape is a little heavier than the same amount of water. | TO RECORD |
+| `float.fact.spoon` | It sinks! A metal spoon is heavy for its size. | TO RECORD |
+| `float.fact.orange` | It floats! The orange peel is full of tiny air pockets. | TO RECORD |
+| `float.fact.peeledOrange` | It sinks! Without the peel and its air pockets, the orange is heavier than the same amount of water. | TO RECORD |
+| `layers.intro` | Let's make a liquid tower! Pour honey, water, and oil into the tall glass, in any order you like. Drag a bottle to the glass, or tap it. | TO RECORD |
+| `layers.welcome` | Pour the three liquids into the glass and watch where they go! | TO RECORD |
+| `layers.hint.pour` | Drag a bottle onto the glass, or tap it to pour. | TO RECORD |
+| `layers.hint.drop` | Drag something into the glass, or tap it, and watch where it stops. | TO RECORD |
+| `layers.poured` | That bottle is already in the glass. | TO RECORD |
+| `layers.honey.first` | The honey pours down to the bottom of the glass. | TO RECORD |
+| `layers.honey.under` | The honey sinks right down to the bottom! Honey is heavier for its size than water and oil. | TO RECORD |
+| `layers.water.first` | The water fills the bottom of the glass. | TO RECORD |
+| `layers.water.onHoney` | The water stays on top of the honey. Water is lighter for its size than honey. | TO RECORD |
+| `layers.water.underOil` | The water sinks below the oil! Water is heavier for its size than oil. | TO RECORD |
+| `layers.water.middle` | The water slips down below the oil, but stays on top of the honey! | TO RECORD |
+| `layers.oil.first` | The oil fills the bottom of the glass. | TO RECORD |
+| `layers.oil.top` | The oil floats on top! Oil is lighter for its size than water and honey. | TO RECORD |
+| `layers.full` | Three layers! Each liquid floats on the ones that are heavier for their size. Now drop things in and see where they stop! | TO RECORD |
+| `layers.drop.cork` | The cork floats on the oil, right at the top! It's lighter for its size than all three liquids. | TO RECORD |
+| `layers.drop.grape` | The grape sinks through the oil and the water, but it stops on the honey! It's heavier for its size than water, but lighter than honey. | TO RECORD |
+| `layers.drop.coin` | The coin sinks all the way to the bottom! It's heavier for its size than all three liquids. | TO RECORD |
+| `layers.done` | You built a liquid tower, and found three places where things stop! | TO RECORD |
 | `house.intro` | Welcome to the Science House! Tap a room to explore. | TO RECORD (computer voice for now) |
 | `room.kitchen` | The kitchen! Sort, heat, cool, and mix things up. | TO RECORD (computer voice for now) |
 | `room.lab` | The lab! Build molecules out of atoms. | TO RECORD (computer voice for now) |

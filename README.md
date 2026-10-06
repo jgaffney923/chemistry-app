@@ -3,7 +3,7 @@
 A touch-first chemistry game for kids 6-8. It runs offline on an iPad as a home-screen web app. See [PLAN.md](PLAN.md) for the design and milestones.
 
 - Engine: Phaser **3.90.0**, vendored at `vendor/phaser.min.js` (no CDN, no build step).
-- Current milestone: **M9** (Science House with six games: State Sorter, Kitchen Lab, Can It Be Undone?, and Unmix! in the Kitchen; Heat Slider and Molecule Builder in the Lab). Next: kid-test M9, then M10 Sink or Float.
+- Current milestone: **M10** (Science House with seven games: State Sorter, Kitchen Lab, Can It Be Undone?, Unmix!, and Sink or Float in the Kitchen; Heat Slider and Molecule Builder in the Lab). Next: kid-test M9 and M10, then M11 Air Builder.
 - Adding a game to the home screen: give it an entry in `src/home/games.js` and list it in a room in `src/data/rooms.json`.
 
 ## Run it on the PC
@@ -30,6 +30,7 @@ Service workers only run over HTTPS, so test on the iPad from the GitHub Pages U
 6. **Heat Slider check:** warm and cool water, switch to chocolate and butter, and try the hint button. Watch whether the child can discover both directions without help.
 7. **Interaction check:** leave and reopen the app, then tap before expecting audio. Try two fingers on controls and confirm dragging still works. Portrait currently shows a rotation prompt; playable portrait layouts are pending.
 8. **Unmix check:** try all five mixtures by tapping or dragging tools. Filtering salt water should not earn a sticker; the magnifier shows dissolved parts while the ordinary water stays clear. The windowsill should leave salt crystals. Check five stickers survive closing/reopening, and tap them in the book to hear their explanations.
+9. **Sink or Float check:** guess Float or Sink by tapping, then drag the thing into the tank (or tap it). Dragging before guessing should bounce back and ask for a guess. Every round ends with the orange, then the peeled orange. Then tap the bottle button (top right) for the Liquid Tower: pour the three bottles in different orders, and check honey always ends at the bottom and oil on top. Then drop the cork (stops on the oil), grape (stops on the honey), and coin (bottom).
 
 Notes:
 - The home-screen app keeps its own storage, separate from Safari tabs. Progress from a Safari tab won't appear in the installed app.
@@ -52,8 +53,8 @@ Until you record a line, it plays a stand-in computer voice (Microsoft Zira), ma
 lines to the game. Recording a line for real replaces its stand-in. Any line with no
 file at all falls back to the iPad's built-in voice.
 
-The 32 new Unmix lines currently use the built-in voice: stand-in conversion is
-pending because ffmpeg was unavailable during M9 development. Once ffmpeg is on
+The 82 new Unmix and Sink or Float lines currently use the built-in voice: the
+stand-in tool needs Windows (for the Zira voice) and ffmpeg. Once ffmpeg is on
 PATH (or `FFMPEG` points to it), run `node tools/make-placeholder-voices.mjs`,
 regenerate the narration checklist, and deploy. Check the built-in voice offline
 on the actual iPad until those files are generated.

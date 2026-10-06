@@ -252,6 +252,7 @@ Learned from building M1-M4:
 - **Teaches:** whether something floats depends on how heavy it is for its size; liquids can stack in layers for the same reason.
 - **Builds on:** the Sorter's guess-and-reveal flow, the Lab's pouring.
 - **Size:** medium.
+- **As built (M10):** "Sink or Float" in the Kitchen, two scenes. **Tank** (`FloatScene`): tap the Float or Sink button (a mini tank with a ball at the top or on the bottom; 👍/👎 was dropped so a guess doesn't look like right or wrong), then drag the thing into the tank or tap it. Floaters bob up and sit as deep as they really would (ice mostly under, cork mostly above); sinkers settle on the bottom and stay, so the tank collects floaters at the top and sinkers below. A round is 2 floaters and 2 sinkers drawn at random from cork, apple, ice, plastic duck, big log, rock, coin, grape, and metal spoon, and always ends with the orange: it floats, comes back out, is peeled, and sinks. The log and coin are there for the guardrail: "heavy for its size", not "heavy things sink". **Liquid Tower** (`LayersScene`): pour honey, water, and oil in any order; each new liquid lands on top, then sinks through anything lighter for its size, so the tower always ends honey / water / oil. Then a cork floats on the oil, a grape stops on the honey, and a coin sinks to the bottom. Each finished tank round or tower earns 3 stars. Both parts have a guided first visit and a 💡 hint. Data in `src/data/float.json`, art in `src/float/art.js`.
 
 ### Tier 2: new chemistry ideas
 

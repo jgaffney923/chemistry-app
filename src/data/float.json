@@ -1,0 +1,30 @@
+{
+  "starsPerRound": 3,
+  "floatersPerRound": 2,
+  "sinkersPerRound": 2,
+
+  "_items": "height: how tall it's drawn in the tank. under: for floaters, how much of it sits below the water (0..1). The orange pair always ends a round.",
+  "items": [
+    { "id": "cork", "floats": true, "height": 120, "under": 0.3 },
+    { "id": "apple", "floats": true, "height": 180, "under": 0.8 },
+    { "id": "ice", "floats": true, "height": 160, "under": 0.9 },
+    { "id": "duck", "floats": true, "height": 170, "under": 0.35 },
+    { "id": "log", "floats": true, "height": 150, "under": 0.6 },
+    { "id": "rock", "floats": false, "height": 140 },
+    { "id": "coin", "floats": false, "height": 80 },
+    { "id": "grape", "floats": false, "height": 100 },
+    { "id": "spoon", "floats": false, "height": 90 },
+    { "id": "orange", "floats": true, "height": 170, "under": 0.85, "finale": true },
+    { "id": "peeledOrange", "floats": false, "height": 150, "finale": true, "peeledFrom": "orange" }
+  ],
+
+  "_liquids": "Bottom to top: honey is heaviest for its size, oil the lightest.",
+  "liquids": ["honey", "water", "oil"],
+
+  "_drops": "Where each thing stops in the liquid tower: 'top' floats on the oil, 'honey' rests on the honey, 'bottom' sinks all the way.",
+  "drops": [
+    { "id": "cork", "label": "Cork", "rests": "top", "height": 110 },
+    { "id": "grape", "label": "Grape", "rests": "honey", "height": 95 },
+    { "id": "coin", "label": "Coin", "rests": "bottom", "height": 75 }
+  ]
+}
