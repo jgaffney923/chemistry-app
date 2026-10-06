@@ -4,12 +4,14 @@ import { makeAtom } from '../art/atoms.js';
 export const BOND_GAP = 64;
 
 // The real shape of each named molecule, as unit offsets from its center.
-// Water is bent (about 104.5 degrees), carbon dioxide is straight, and methane
-// is drawn as a flat cross (really it's a 3D tetrahedron).
+// Water is bent (about 104.5 degrees), carbon dioxide is straight, methane is
+// drawn as a flat cross (really it's a 3D tetrahedron), and ammonia as a
+// three-legged tripod (really a low pyramid, seen here from above).
 const ANGLES = {
   line: [180, 0],
   bent: [90 + 104.5 / 2, 90 - 104.5 / 2],
   cross: [0, 90, 180, 270],
+  tripod: [90, 210, 330],
 };
 
 // Returns { atoms: [{ symbol, ux, uy }], bonds: [[i, j, order]] } in bond-length units.

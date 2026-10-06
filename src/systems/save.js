@@ -14,6 +14,7 @@ const DEFAULTS = {
   tips: [], // one-time explanations already given, by name
   heatFound: [], // Heat Slider changes seen, e.g. "water.melt"
   unmixFound: [],
+  airFilled: 0, // balloons filled with real air in Air Builder
 };
 
 let data = load();
@@ -148,6 +149,15 @@ export function addUnmixSticker(id) {
   data.unmixFound = [...data.unmixFound, id];
   persist();
   return true;
+}
+
+export function airFilledCount() {
+  return data.airFilled;
+}
+
+export function addAirFilled() {
+  data.airFilled += 1;
+  persist();
 }
 
 export function setSoundOn(on) {

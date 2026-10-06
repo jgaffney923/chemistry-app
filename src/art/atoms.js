@@ -12,7 +12,7 @@ export function makeAtom(scene, x, y, element, radius) {
   g.fillStyle(0xffffff, 0.35);
   g.fillCircle(-radius * 0.35, -radius * 0.4, radius * 0.28);
 
-  const face = element === 'carbon' ? 0xffffff : 0x222222;
+  const face = element === 'carbon' || element === 'nitrogen' ? 0xffffff : 0x222222;
   g.fillStyle(face, 1);
   g.fillCircle(-radius * 0.3, -radius * 0.05, radius * 0.1);
   g.fillCircle(radius * 0.3, -radius * 0.05, radius * 0.1);

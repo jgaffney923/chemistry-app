@@ -2,7 +2,7 @@
 // Run `node tools/update-sw.mjs` before each deploy: it rewrites the file list
 // below and bumps CACHE_VERSION so iPads pick up the new files.
 
-const CACHE_VERSION = 21;
+const CACHE_VERSION = 22;
 const CACHE_NAME = `chemistry-v${CACHE_VERSION}`;
 
 // PRECACHE-START
@@ -217,6 +217,7 @@ const PRECACHE = [
   'src/art/atoms.js',
   'src/art/items.js',
   'src/builder/Atom.js',
+  'src/builder/Balloon.js',
   'src/builder/shapes.js',
   'src/data/changes.json',
   'src/data/float.json',

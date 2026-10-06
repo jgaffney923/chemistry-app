@@ -1,9 +1,10 @@
 import { makeWater } from '../art/atoms.js';
+import { drawMolecule } from '../builder/shapes.js';
 import { addItemArt } from '../art/items.js';
 import { addEmoji } from '../ui/emoji.js';
 import { toolArt, grainArt } from '../unmix/art.js';
 import { floatArt } from '../float/art.js';
-import { getStars, isSorterIntroSeen, stickerCount, moleculeCount, heatFoundCount, unmixStickerCount } from '../systems/save.js';
+import { getStars, isSorterIntroSeen, stickerCount, hasMolecule, heatFoundCount, unmixStickerCount, airFilledCount } from '../systems/save.js';
 
 // Every game the Science House can open: its button picture, how to start it,
 // and how far the kid has got (label for the badge, fraction 0..1 for "try next").
@@ -119,12 +120,35 @@ export const GAMES = {
       scene.scene.start('Builder', {});
     },
     progress(scene) {
-      const made = moleculeCount();
-      const total = scene.cache.json.get('molecules').molecules.length;
-      return { label: made ? `✅ ${made} / ${total}` : '', fraction: made / total };
+      return cardProgress(scene, 'builder');
+    },
+  },
+
+  air: {
+    color: 0x9ad7f5,
+    icon(scene) {
+      const { atoms, molecules } = scene.cache.json.get('molecules');
+      return drawMolecule(scene, molecules.find((m) => m.id === 'nitrogen'), atoms, 0, 0, 0.7);
+    },
+    start(scene) {
+      scene.scene.start('Builder', { level: 'air' });
+    },
+    progress(scene) {
+      // Each recipe card counts, and so does filling one balloon with air.
+      const cards = cardProgress(scene, 'air');
+      const filled = airFilledCount();
+      const label = [cards.label, filled ? `🎈 ${filled}` : ''].filter(Boolean).join('  ');
+      return { label, fraction: (cards.fraction * cards.total + Math.min(filled, 1)) / (cards.total + 1) };
     },
   },
 };
+
+// How many of a Builder game's recipe cards have been made.
+function cardProgress(scene, level) {
+  const { cards } = scene.cache.json.get('molecules').levels[level];
+  const made = cards.filter((id) => hasMolecule(id)).length;
+  return { label: made ? `✅ ${made} / ${cards.length}` : '', fraction: made / cards.length, total: cards.length };
+}
 
 // The game to gently suggest: the first one not started yet, otherwise the
 // least-finished one. None once everything is done.

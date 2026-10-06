@@ -1,6 +1,6 @@
 # Narration script
 
-**2 of 283 lines recorded.** Lines marked "computer voice for now"
+**2 of 298 lines recorded.** Lines marked "computer voice for now"
 play a stand-in voice until you record them.
 
 How to add a recording (details in README.md):
@@ -96,6 +96,21 @@ to a 6-year-old.
 | `layers.drop.cork` | The cork floats on the oil, right at the top! It's lighter for its size than all three liquids. | TO RECORD |
 | `layers.drop.grape` | The grape sinks through the oil and the water, but it stops on the honey! It's heavier for its size than water, but lighter than honey. | TO RECORD |
 | `layers.drop.coin` | The coin sinks all the way to the bottom! It's heavier for its size than all three liquids. | TO RECORD |
+| `air.intro` | Let's build air! Air is a mix of gases, and most of it is nitrogen. Drag a nitrogen atom onto the table. | TO RECORD |
+| `air.welcome` | Build nitrogen and oxygen to fill the balloon with real air! | TO RECORD |
+| `air.addN` | Nitrogen has three bond spots. Bring another nitrogen atom right next to it, so they join! | TO RECORD |
+| `air.plus` | They're joined! But each nitrogen still has two free bond spots. Tap the plus sign to join them again. | TO RECORD |
+| `air.plusAgain` | A double bond! Each nitrogen still has one free spot. Tap the plus sign one more time! | TO RECORD |
+| `air.free` | Into the balloon it goes! Real air has about four nitrogen molecules for every one oxygen molecule. Build more nitrogen, and some oxygen, to fill the balloon! | TO RECORD |
+| `air.balloon` | This balloon is for real air: four nitrogen molecules and one oxygen molecule. Build them, and they'll float in! | TO RECORD |
+| `air.enough.nitrogen` | The balloon already has enough nitrogen! Now it needs oxygen. | TO RECORD |
+| `air.enough.oxygen` | The balloon already has enough oxygen! Real air has much more nitrogen than oxygen. Build nitrogen! | TO RECORD |
+| `air.full` | You filled the balloon with real air! It's mostly nitrogen, with some oxygen, and a tiny bit of other gases. When you breathe in, your body uses the oxygen. | TO RECORD |
+| `atom.N` | Nitrogen! It has three bond spots. | TO RECORD |
+| `recipe.nitrogen` | Nitrogen gas: two nitrogens. Join them, then tap the plus sign twice to make a triple bond! | TO RECORD |
+| `recipe.ammonia` | Ammonia: one nitrogen in the middle, with three hydrogens around it. | TO RECORD |
+| `mol.nitrogen` | You made nitrogen gas! Two nitrogen atoms joined by a triple bond. Most of the air around you is nitrogen. | TO RECORD |
+| `mol.ammonia` | You made ammonia! One nitrogen with three hydrogens. Factories use it to make plant food for farms. | TO RECORD |
 | `layers.done` | You built a liquid tower, and found three places where things stop! | TO RECORD |
 | `house.intro` | Welcome to the Science House! Tap a room to explore. | TO RECORD (computer voice for now) |
 | `room.kitchen` | The kitchen! Sort, heat, cool, and mix things up. | TO RECORD (computer voice for now) |

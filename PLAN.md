@@ -294,6 +294,7 @@ Learned from building M1-M4:
 - **Teaches:** air is a mixture of gases, mostly nitrogen; atoms can share three bonds.
 - **Builds on:** the Builder (triple bonds already supported).
 - **Size:** small.
+- **As built (M11):** a second Builder game, "Air Builder", in the Lab room (`BuilderScene` with level `air`; levels, trays, and cards in `src/data/molecules.json`). Tray: nitrogen (blue, three bond spots), oxygen, hydrogen. Cards: nitrogen gas, oxygen gas, ammonia (drawn as a flat three-legged tripod; really a low pyramid). Every molecule is recognized in both Builder games (water built here is still named). A balloon takes finished nitrogen and oxygen until it holds **4 nitrogen and 1 oxygen**, the same ratio as the plan's 8 to 2 (real air is about 78% nitrogen and 21% oxygen) but half as many triple bonds to build; extras are turned away with a spoken reason. A full balloon floats off and a new one arrives; balloons filled are counted on the home screen. The first visit guides building nitrogen, including both + taps for the triple bond.
 
 #### 10.10 Element Hunt (what are things made of?)
 - **Kids do:** explore a picture of a house, tap objects, and collect element cards:

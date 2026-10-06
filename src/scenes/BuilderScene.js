@@ -1,5 +1,6 @@
 import { W, H } from '../layout.js';
 import { Atom, bondLength } from '../builder/Atom.js';
+import { Balloon } from '../builder/Balloon.js';
 import { moleculeShape, drawMolecule, drawBond } from '../builder/shapes.js';
 import { makeAtom } from '../art/atoms.js';
 import { makeRoundButton } from '../ui/button.js';
@@ -7,7 +8,7 @@ import { addEmoji, addLabel } from '../ui/emoji.js';
 import { burst } from '../ui/effects.js';
 import { makeDraggable } from '../systems/drag.js';
 import { say, sfx, stopNarration } from '../systems/audio.js';
-import { addMolecule, hasMolecule, isBuilderIntroSeen, markBuilderIntroSeen, tipShown, markTipShown } from '../systems/save.js';
+import { addMolecule, hasMolecule, isBuilderIntroSeen, markBuilderIntroSeen, tipShown, markTipShown, addAirFilled } from '../systems/save.js';
 
 const TRAY_TOP = 1290;
 const TRAY_Y = 1410;
@@ -15,6 +16,7 @@ const CARD_Y = 150;
 const JOIN_REACH = 150; // how close (beyond touching) a dropped atom must be to join
 const BREAK_STRETCH = 230; // how far past bond length a pull breaks the bond
 const MAX_ATOMS = 30;
+const BALLOON = { x: 1790, y: 560 };
 
 // Molecule Builder: drag atoms from the tray; drop one near another to join them.
 // Pull an atom away to break its bonds. Two joined atoms that both still have a
@@ -22,15 +24,25 @@ const MAX_ATOMS = 30;
 // double bond. When every bond spot in a molecule is used, it's complete: named
 // molecules snap into their real shape and fly into their recipe card.
 // The first visit is guided: build water.
+//
+// Air Builder (level "air") is the same game with nitrogen, its own recipe
+// cards, and a balloon: finished nitrogen and oxygen molecules float into it
+// until it holds the real mix of air. Its first visit is guided: build
+// nitrogen, with its triple bond.
 export default class BuilderScene extends Phaser.Scene {
   constructor() {
     super('Builder');
   }
 
-  create() {
-    const { atoms, tray, molecules } = this.cache.json.get('molecules');
-    this.atomInfo = atoms;
-    this.molecules = molecules;
+  create(data = {}) {
+    const cfg = this.cache.json.get('molecules');
+    this.level = cfg.levels[data.level] ? data.level : 'builder';
+    const { tray, cards } = cfg.levels[this.level];
+    this.air = this.level === 'air';
+    this.atomInfo = cfg.atoms;
+    this.allMolecules = cfg.molecules;
+    this.molecules = cards.map((id) => cfg.molecules.find((m) => m.id === id));
+    this.boardRight = this.air ? BALLOON.x - 300 : W - 120;
     this.atoms = new Set();
     this.announced = new Set();
     this.plusButtons = new Map();
@@ -46,12 +58,20 @@ export default class BuilderScene extends Phaser.Scene {
     makeRoundButton(this, W - 130, 130, 90, 0xffffff, addEmoji(this, 0, 0, '🧹', 90), () => this.clearBoard());
     this.buildCards();
     this.buildTray(tray);
+    this.balloon = null;
+    if (this.air) this.buildBalloon(cfg.balloon);
 
     this.hand = null;
-    this.guide = isBuilderIntroSeen() ? null : { step: 'placeO' };
-    if (this.guide) {
-      say(this, 'builder.intro');
-      this.pointAt(this.trayAtoms.O);
+    if (this.air) {
+      this.guide = tipShown('air') ? null : { step: 'placeN' };
+      say(this, this.guide ? 'air.intro' : 'air.welcome');
+      if (this.guide) this.pointAt(this.trayAtoms.N);
+    } else {
+      this.guide = isBuilderIntroSeen() ? null : { step: 'placeO' };
+      if (this.guide) {
+        say(this, 'builder.intro');
+        this.pointAt(this.trayAtoms.O);
+      }
     }
   }
 
@@ -182,6 +202,10 @@ export default class BuilderScene extends Phaser.Scene {
       this.guide.step = 'addH';
       say(this, 'builder.addH');
       this.pointAt(this.trayAtoms.H);
+    } else if (this.guide?.step === 'placeN' && symbol === 'N') {
+      this.guide.step = 'addN';
+      say(this, 'air.addN');
+      this.pointAt(this.trayAtoms.N);
     }
   }
 
@@ -193,6 +217,7 @@ export default class BuilderScene extends Phaser.Scene {
       this.removeAtom(atom);
       return;
     }
+    if (atom.x > this.boardRight) this.tweens.add({ targets: atom, x: this.boardRight, duration: 220, ease: 'Back.easeOut' });
 
     let changed = false;
     for (const [other, order] of [...atom.bonds]) {
@@ -249,7 +274,12 @@ export default class BuilderScene extends Phaser.Scene {
     this.setBond(a, b, order + 1);
     sfx(this, 'good');
     burst(this, (a.x + b.x) / 2, (a.y + b.y) / 2, [0xffe066, 0xffffff]);
-    say(this, order + 1 === 2 ? 'builder.double' : 'builder.triple');
+    if (this.guide?.step === 'plus' && order + 1 === 2) {
+      say(this, 'air.plusAgain');
+      this.pointAt({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }, 'below');
+    } else {
+      say(this, order + 1 === 2 ? 'builder.double' : 'builder.triple');
+    }
     return true;
   }
 
@@ -270,7 +300,7 @@ export default class BuilderScene extends Phaser.Scene {
     const len = bondLength(atom, anchor);
     this.tweens.add({
       targets: atom,
-      x: Phaser.Math.Clamp(anchor.x + Math.cos(angle) * len, 120, W - 120),
+      x: Phaser.Math.Clamp(anchor.x + Math.cos(angle) * len, 120, this.boardRight),
       y: Phaser.Math.Clamp(anchor.y + Math.sin(angle) * len, 330, TRAY_TOP - 90),
       duration: 220,
       ease: 'Back.easeOut',
@@ -298,7 +328,7 @@ export default class BuilderScene extends Phaser.Scene {
 
     const counts = {};
     for (const a of group) counts[a.symbol] = (counts[a.symbol] || 0) + 1;
-    const molecule = this.molecules.find((m) => sameFormula(m.formula, counts));
+    const molecule = this.allMolecules.find((m) => sameFormula(m.formula, counts));
     if (molecule) {
       this.celebrate(group, molecule);
       return;
@@ -320,7 +350,7 @@ export default class BuilderScene extends Phaser.Scene {
       a.disableInteractive();
     });
     const center = group.reduce((c, a) => ({ x: c.x + a.x / group.length, y: c.y + a.y / group.length }), { x: 0, y: 0 });
-    center.x = Phaser.Math.Clamp(center.x, 450, W - 450);
+    center.x = Phaser.Math.Clamp(center.x, 450, Math.min(W - 450, this.boardRight - 150));
     center.y = Phaser.Math.Clamp(center.y, 560, TRAY_TOP - 300);
 
     // Snap into the real shape.
@@ -339,34 +369,86 @@ export default class BuilderScene extends Phaser.Scene {
     const firstTime = !hasMolecule(molecule.id);
     addMolecule(molecule.id);
     const card = this.cards[molecule.id];
-    this.markCard(molecule.id, true);
-    this.tweens.add({ targets: card, scale: 1.15, duration: 150, yoyo: true, repeat: 1 });
+    if (card) {
+      this.markCard(molecule.id, true);
+      this.tweens.add({ targets: card, scale: 1.15, duration: 150, yoyo: true, repeat: 1 });
+    }
     const told = say(this, `mol.${molecule.id}`);
 
-    // After a short look, the molecule flies into its card (the voice keeps going).
+    // Air Builder: nitrogen and oxygen float into the balloon while it needs them.
+    const showInBalloon = this.balloon?.wants(molecule.id) ? this.balloon.take(molecule.id) : null;
+    const enough = this.balloon && !showInBalloon && molecule.id in this.balloon.recipe;
+    const target = showInBalloon ? this.balloon : card;
+    let arrived;
+    const landed = new Promise((resolve) => { arrived = resolve; });
+
+    // After a short look, the molecule flies into its card or the balloon (the
+    // voice keeps going). A molecule with no card here just fades away.
     this.time.delayedCall(2200, () => {
       label.destroy();
       // Skip any atoms the broom already cleared away.
       group.filter((a) => this.atoms.has(a)).forEach((a) => {
         this.atoms.delete(a);
         for (const other of [...a.bonds.keys()]) this.setBond(a, other, 0);
+        const to = target ? { x: target.x, y: target.y } : {};
         this.tweens.add({
-          targets: a, x: card.x, y: card.y, scale: 0.2, alpha: 0, duration: 600, ease: 'Quad.easeIn',
+          targets: a, ...to, scale: 0.2, alpha: 0, duration: 600, ease: 'Quad.easeIn',
           onComplete: () => a.destroy(),
         });
       });
+      this.time.delayedCall(600, () => {
+        showInBalloon?.();
+        arrived();
+      });
     });
 
-    told.then(() => {
+    Promise.all([told, landed]).then(() => {
       if (!this.sys.isActive()) return;
       if (this.guide) this.finishGuide();
+      else if (showInBalloon && this.balloon.isFull()) this.balloonFull();
+      else if (enough) say(this, `air.enough.${molecule.id}`);
       else if (firstTime && this.molecules.every((m) => hasMolecule(m.id))) say(this, 'builder.allMade');
+    });
+  }
+
+  // --- Air Builder's balloon
+
+  buildBalloon(recipe) {
+    this.balloon = new Balloon(this, BALLOON.x, BALLOON.y, recipe);
+    this.balloon.on('pointerup', () => {
+      if (!this.balloon.isFull()) say(this, 'air.balloon');
+    });
+  }
+
+  // Full of real air: celebrate, let it float away, and bring a new one.
+  balloonFull() {
+    const balloon = this.balloon;
+    addAirFilled();
+    sfx(this, 'star');
+    burst(this, balloon.x, balloon.y, [0xffd84d, 0xffffff, 0x8fd3ff]);
+    this.tweens.add({ targets: balloon, angle: { from: -4, to: 4 }, duration: 400, yoyo: true, repeat: 3 });
+    say(this, 'air.full').then(() => {
+      if (!this.sys.isActive() || this.balloon !== balloon) return;
+      this.tweens.add({
+        targets: balloon, y: -700, duration: 1800, ease: 'Sine.easeIn',
+        onComplete: () => {
+          balloon.reset();
+          balloon.setPosition(BALLOON.x, H + 500).setAngle(0);
+          this.tweens.add({ targets: balloon, y: BALLOON.y, duration: 900, ease: 'Back.easeOut' });
+        },
+      });
     });
   }
 
   // --- First visit: build water.
 
   guideJoined(a, b) {
+    if (this.guide?.step === 'addN' && a.symbol === 'N' && b.symbol === 'N') {
+      this.guide.step = 'plus';
+      say(this, 'air.plus');
+      this.pointAt({ x: (a.x + b.x) / 2, y: (a.y + b.y) / 2 }, 'below');
+      return;
+    }
     if (this.guide?.step !== 'addH') return;
     const pair = [a.symbol, b.symbol].sort().join('');
     if (pair === 'HO') {
@@ -378,8 +460,14 @@ export default class BuilderScene extends Phaser.Scene {
   finishGuide() {
     this.guide = null;
     this.clearHand();
-    markBuilderIntroSeen();
-    say(this, 'builder.free');
+    if (this.air) {
+      markTipShown('air');
+      markTipShown('plus'); // the guide already taught the + button
+      say(this, 'air.free');
+    } else {
+      markBuilderIntroSeen();
+      say(this, 'builder.free');
+    }
   }
 
   // Points from the right (tray atoms), or up from below (things between atoms).
