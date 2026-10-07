@@ -1,7 +1,7 @@
 ---
 id: 0001
 title: Air Builder only in the Lab, and in the suggested order
-status: review           # todo | in-progress | blocked | review | done
+status: done          # todo | in-progress | blocked | review | done
 priority: 1         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
