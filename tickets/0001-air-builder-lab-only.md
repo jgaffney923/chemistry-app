@@ -1,7 +1,7 @@
 ---
 id: 0001
 title: Air Builder only in the Lab, and in the suggested order
-status: todo        # todo | in-progress | blocked | review | done
+status: in-progress      # todo | in-progress | blocked | review | done
 priority: 1         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
@@ -27,3 +27,4 @@ Air Builder shows up only in the Lab room, and the home screen can suggest it li
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created from the starter ticket list
+- 2026-10-07 [claude] (opus): claimed; plan: edit rooms.json, check both room menus in headless Edge, then update-sw and version bump
