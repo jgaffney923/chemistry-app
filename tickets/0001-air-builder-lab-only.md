@@ -28,3 +28,4 @@ Air Builder shows up only in the Lab room, and the home screen can suggest it li
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created from the starter ticket list
 - 2026-10-07 [claude] (opus): claimed; plan: edit rooms.json, check both room menus in headless Edge, then update-sw and version bump
+- 2026-10-07 [claude] (opus): rooms.json: removed air from the Kitchen, added air after float in suggestedOrder; headless Edge check: both rooms show the right games, every game opens and its home button returns to its room, no console errors
