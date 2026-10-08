@@ -1,7 +1,7 @@
 ---
 id: 0007
 title: "Browser-check tool so agents can catch console errors"
-status: todo        # todo | in-progress | blocked | review | done
+status: in-progress # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
@@ -32,3 +32,4 @@ Add `tools/browser-check.mjs`: one command that serves the game, opens it in a r
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created at the owner's request, so agents can check for console errors themselves
+- 2026-10-07 [claude] (opus): claimed
