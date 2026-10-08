@@ -50,3 +50,4 @@ Serve the folder (`python -m http.server 8080` from this folder) and open `http:
 - Stars reward finishing, never go down.
 - Game units are 2048x1536; `MIN_TOUCH` = 200 units (~96 CSS px).
 - Always pass data to `scene.start()`; Phaser reuses the last run's data otherwise.
+Ticket runner test: this line was added by an agent working ticket 0006.
