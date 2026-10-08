@@ -1,7 +1,7 @@
 ---
 id: 0006
 title: "Pipeline test: one-line note in STATUS.md"
-status: todo        # todo | in-progress | blocked | review | done
+status: in-progress # todo | in-progress | blocked | review | done
 priority: 1         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: claude       # claude | copilot | any
@@ -22,3 +22,4 @@ A tiny ticket to test the ticket runner (Agent HQ's `run-tickets.ps1`) end to en
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created to test run-tickets.ps1 before the real tickets
+- 2026-10-07 [copilot] (GPT-5.5): claimed ticket 0006 and confirmed the branch was already ready for work
