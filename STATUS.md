@@ -50,3 +50,17 @@ Serve the folder (`python -m http.server 8080` from this folder) and open `http:
 - Stars reward finishing, never go down.
 - Game units are 2048x1536; `MIN_TOUCH` = 200 units (~96 CSS px).
 - Always pass data to `scene.start()`; Phaser reuses the last run's data otherwise.
+
+## Games at a glance
+Kids pick games by picture; the room menus show no game titles. The names below are the ones used in this file. Every game is listed in `src/home/games.js` and placed in a room by `src/data/rooms.json`.
+
+| Game | Id | Room | Source folder |
+|---|---|---|---|
+| State Sorter | `sorter` | Kitchen | `src/sorter/` (warm-up in `src/intro/`) |
+| Kitchen Lab | `lab` | Kitchen | `src/lab/` |
+| Can It Be Undone? | `undo` | Kitchen | none (`src/scenes/UndoScene.js`) |
+| Unmix! | `unmix` | Kitchen | `src/unmix/` |
+| Sink or Float | `float` | Kitchen | `src/float/` (includes the Liquid Tower) |
+| Heat Slider | `heat` | Lab | `src/heat/` |
+| Molecule Builder | `builder` | Lab | `src/builder/` |
+| Air Builder | `air` | Lab | `src/builder/` (a Builder level) |
