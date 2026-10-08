@@ -1,7 +1,7 @@
 ---
 id: 0007
 title: "Browser-check tool so agents can catch console errors"
-status: in-progress # todo | in-progress | blocked | review | done
+status: review      # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
@@ -25,11 +25,14 @@ Add `tools/browser-check.mjs`: one command that serves the game, opens it in a r
 ## Acceptance criteria
 - [ ] `node tools/browser-check.mjs` serves the game, runs the checks above, prints ok/FAIL per check, and exits non-zero on any failure
 - [ ] It passes on the current game
-- [ ] README and CLAUDE.md mention it; no new dependency in the repo
+- [x] README and CLAUDE.md mention it; no new dependency in the repo
 - [ ] App builds (or serves) and runs locally with no console errors, and existing features still work
-- [ ] Follows the design rules in this repo's CLAUDE.md
+- [x] Follows the design rules in this repo's CLAUDE.md
 
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created at the owner's request, so agents can check for console errors themselves
 - 2026-10-07 [claude] (opus): claimed
+- 2026-10-07 [claude] (opus): plan: copy the reading app's plumbing (static server, Playwright lookup, check() helper, ok/FAIL summary), and add console-error capture plus three general checks
+- 2026-10-07 [claude] (opus): added tools/browser-check.mjs. Checks: (1) taps the start button with a real mouse click, reaches the Science House, opens every room in rooms.json; (2) one check per id in src/home/games.js: starts it with that entry's own start() from the Menu, lets it run 2 s, and confirms a game scene (not Menu/Boot) is running; (3) loads with ?sw=1 and compares every PRECACHE entry against the cache by URL, listing any that are missing. Each check runs in a fresh browser context, and any pageerror or console error fails it. If the game list can't be read, that's reported as a FAIL, so zero game checks never passes silently. If Playwright is missing it prints the install command and exits with code 2. README (run section + dev tools list) and CLAUDE.md "Done means" rule updated
+- 2026-10-07 [claude] (opus): handing in for review, not yet run. Playwright isn't installed on this PC (nothing in the global npm folder), and this session couldn't run `node` at all, so criteria 1 (runs, prints ok/FAIL) and 2 (passes on the current game) are written but unverified, and the serve/console check in criterion 4 wasn't done either. No game file changed (only tools/, README, CLAUDE.md, this ticket), so no update-sw or APP_VERSION bump is needed. Owner: `npm install -g playwright`, `npx playwright install chromium`, then `node tools/browser-check.mjs`. One risk to watch: Playwright's own Chromium may not decode .m4a (AAC) narration, and Phaser would log a console error for each file. If those are the only failures, try `PW_CHANNEL=msedge` before changing the tool. No new spoken lines; no science content changed
