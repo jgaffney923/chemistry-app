@@ -1,7 +1,7 @@
 ---
 id: 0008
 title: "Demo: a games-at-a-glance table in STATUS.md"
-status: in-progress # todo | in-progress | blocked | review | done
+status: review      # todo | in-progress | blocked | review | done
 priority: 1         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: claude       # claude | copilot | any
@@ -17,11 +17,13 @@ A short table at the end of STATUS.md listing every game, so it's easy to see wh
 - Change nothing else. STATUS.md isn't loaded by the game, so **don't** run `node tools/update-sw.mjs` or bump `APP_VERSION`.
 
 ## Acceptance criteria
-- [ ] STATUS.md ends with the `## Games at a glance` table, with one row for every game in `src/home/games.js` and correct rooms and folders
-- [ ] No other file changed (apart from this ticket)
-- [ ] The log says a helper did the survey
+- [x] STATUS.md ends with the `## Games at a glance` table, with one row for every game in `src/home/games.js` and correct rooms and folders
+- [x] No other file changed (apart from this ticket)
+- [x] The log says a helper did the survey
 
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created as a demo of the office view, at the owner's request
 - 2026-10-07 [claude] (opus): claimed; plan: Explore helper surveys games, then I write the table in STATUS.md
+- 2026-10-07 [claude] (opus): an Explore helper did the survey (games.js, rooms.json, src folders). I checked its ids, rooms and folders against `src/home/games.js`, `src/data/rooms.json` and `src/` myself and they matched. Table added at the end of STATUS.md
+- 2026-10-07 [claude] (opus): ready for review. Done: 8-row table (every id in games.js; rooms and folders match rooms.json and src/). Checked: `git diff main --stat` shows only STATUS.md and this ticket. No game file changed, so I didn't run the browser check, update-sw or the APP_VERSION bump (the ticket says not to). Notes: kids see no game names as text (only icons), so the Game column uses STATUS.md's milestone names. Undo has no folder of its own, and Air shares `src/builder/`. The helper also spotted things I left alone, out of scope: the hidden Liquid Tower (LayersScene) can only be reached from inside Sink or Float, and the `room.kitchen` narration mentions heating, but Heat Slider is in the Lab
