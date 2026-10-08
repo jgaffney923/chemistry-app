@@ -1,7 +1,7 @@
 ---
 id: 0008
 title: "Demo: a games-at-a-glance table in STATUS.md"
-status: todo        # todo | in-progress | blocked | review | done
+status: in-progress # todo | in-progress | blocked | review | done
 priority: 1         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: claude       # claude | copilot | any
@@ -24,3 +24,4 @@ A short table at the end of STATUS.md listing every game, so it's easy to see wh
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created as a demo of the office view, at the owner's request
+- 2026-10-07 [claude] (opus): claimed; plan: Explore helper surveys games, then I write the table in STATUS.md
