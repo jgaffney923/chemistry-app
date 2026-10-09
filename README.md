@@ -13,6 +13,14 @@ Chrome/Edge devtools → device toolbar → iPad, landscape.
 On `localhost` the offline service worker is switched off, so edits show up on reload.
 To test offline mode locally, open the page with `?sw=1` on the end of the URL.
 
+### Automated browser check
+`node tools/browser-check.mjs` serves the game itself, opens it in a headless browser, and prints `ok` or `FAIL` for each check. It exits non-zero if anything fails. It checks that:
+- the game loads to the Science House and every room opens,
+- every game in `src/home/games.js` starts,
+- the service worker caches every file in its precache list.
+
+Any page error or console error fails the check it happened in. The tool needs Playwright, which is installed outside the app (no new dependency): run `npm install -g playwright` then `npx playwright install chromium` once. Set `PW_CHANNEL=msedge` to use the installed Edge instead, or `PW_BROWSER=webkit` for Safari's engine (after `npx playwright install webkit`).
+
 ## Deploy (GitHub Pages)
 1. `node tools/update-sw.mjs` (refreshes the offline file list and bumps `CACHE_VERSION`).
 2. Bump `APP_VERSION` in `src/version.js` (shown faintly in the corner so you can tell which build the iPad has).
@@ -67,6 +75,7 @@ plain background in `assets/img/`, then add `"image": "assets/img/<name>.png"` t
 that item in `src/data/items.json`. Any item without an image keeps its drawing.
 
 ## Dev tools (`tools/`, never loaded by the game)
+- `browser-check.mjs`: runs the game in a headless browser and reports errors (see above).
 - `update-sw.mjs`: offline file list + cache version.
 - `make-narration-script.mjs`: regenerates `narration-script.md`.
 - `make-icons.mjs`: redraws the placeholder app icons.
