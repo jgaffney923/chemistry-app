@@ -1,7 +1,7 @@
 ---
 id: 0007
 title: "Browser-check tool so agents can catch console errors"
-status: review      # todo | in-progress | blocked | review | done
+status: done        # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any

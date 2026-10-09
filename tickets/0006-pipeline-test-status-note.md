@@ -1,7 +1,7 @@
 ---
 id: 0006
 title: "Pipeline test: one-line note in STATUS.md"
-status: todo        # todo | in-progress | blocked | review | done
+status: done        # todo | in-progress | blocked | review | done
 priority: 1         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: claude       # claude | copilot | any
@@ -22,3 +22,4 @@ A tiny ticket to test the ticket runner (Agent HQ's `run-tickets.ps1`) end to en
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created to test run-tickets.ps1 before the real tickets
+- 2026-10-08 [claude] (opus-5.5): closed without merging at the owner's request (PR #6). It was only a pipeline test, and its STATUS.md line would have conflicted with ticket 0008's table.
