@@ -5,7 +5,7 @@ status: todo        # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: claude        # builder tool: claude | copilot | any
-model: claude-opus-5-5# builder model
+model: claude-opus-5-5  # builder model
 reviewer: copilot    # review tool: claude | copilot | any
 review_model: gpt-5.5  # reviewer model
 ---
