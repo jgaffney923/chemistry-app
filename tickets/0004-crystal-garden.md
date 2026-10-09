@@ -4,7 +4,10 @@ title: "New game: Crystal Garden"
 status: todo        # todo | in-progress | blocked | review | done
 priority: 3         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
-agent: any          # claude | copilot | any
+agent: claude        # builder tool: claude | copilot | any
+model: claude-opus-5-5  # builder model
+reviewer: copilot    # review tool: claude | copilot | any
+review_model: gpt-5.5  # reviewer model
 ---
 
 ## Goal
@@ -35,3 +38,4 @@ A new game in the **Lab** room where kids dissolve salt or sugar, hang a string,
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created from the starter ticket list
+- 2026-10-08 [claude] (claude-opus-5-5) coordinator: builder claude claude-opus-5-5, reviewer copilot gpt-5.5 (new game with save and timer logic; parallel with 0003)

@@ -8,4 +8,4 @@ A touch-first chemistry game for kids 6–8, played offline on an iPad. Before c
 
 ## Tickets
 
-When working a ticket, or when asked to "work the next ticket", follow `tickets/PROTOCOL.md`.
+When working or reviewing a ticket, or when asked to "work the next ticket" or "review the next ticket", follow `tickets/PROTOCOL.md`. Who builds and who reviews each ticket is set by the coordinator (`tickets/COORDINATOR.md`).

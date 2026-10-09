@@ -13,14 +13,17 @@ Keep tickets free of personal information: the repo may be public.
 
 ## Start work in VS Code
 
-- **Claude Code:** "Work ticket 0007", or "work the next ticket".
-- **Copilot:** pick the **coordinator** agent and say "work the next ticket", or tell normal Copilot chat "work ticket 0007".
+1. **Coordinate:** assign a builder and reviewer to every open ticket.
+   - Claude Code: "coordinate the tickets" (uses the `ticket-coordinator` agent)
+   - Copilot: pick the **coordinator** agent and say "coordinate"
+   Leave `agent` and `model` blank or `any` when you create a ticket and the coordinator fills them in, or fill them in yourself to choose. See [COORDINATOR.md](COORDINATOR.md) for how it splits the work.
+2. **Build:** "work the next ticket" in Claude Code, or the Copilot coordinator's **Build this ticket** button. The builder stops at `status: review` or `status: blocked`.
+3. **Review:** "review the next ticket" in Claude Code (`ticket-reviewer` agent), or the Copilot **reviewer** agent. The reviewer is the other tool from the builder. It sets `approved`, or `changes` with a numbered list that goes back to the builder.
 
-The agent works on a branch `ticket/<id>-<slug>` and stops at `status: review` (finished) or `status: blocked` (has a question for you in the Log).
+## Your part
 
-## Review loop
-
-1. Check the branch: read the ticket's Log, look at the diff, and try the app.
-2. If it's good, merge the branch into `main` (a pull request on GitHub works from your phone).
+1. When a ticket is `approved`, read the review line in its Log and try the app if it asks you to.
+2. Merge the branch into `main` (a pull request on GitHub works from your phone). The GitHub check must be green.
 3. On `main`, set the ticket's `status: done`.
-4. If it's blocked, answer the question in the Log on the ticket branch, set `status: in-progress`, and ask the agent to continue.
+
+If a ticket is `blocked`, its Log ends with a question for you.
