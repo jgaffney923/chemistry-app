@@ -1,0 +1,10 @@
+{
+  "steps": [
+    { "id": "warm", "token": "☀️", "line": "cycle.warm", "prompt": "cycle.do.warm" },
+    { "id": "cool", "token": "❄️", "line": "cycle.cool", "prompt": "cycle.do.cool" },
+    { "id": "rain", "token": "☁️", "line": "cycle.rain", "prompt": "cycle.do.rain" },
+    { "id": "river", "token": "💧", "line": "cycle.river", "prompt": "cycle.do.river" }
+  ],
+  "counts": { "vaporDots": 18, "cloudDrops": 30, "raindrops": 24 },
+  "upClose": { "color": "0x3b8ed8", "startTemp": 0.3 }
+}

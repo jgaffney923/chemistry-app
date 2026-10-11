@@ -1,8 +1,9 @@
 {
   "rooms": [
     { "id": "kitchen", "label": "Kitchen", "color": "0xe98a3f", "games": ["sorter", "lab", "undo", "unmix", "float"] },
-    { "id": "lab", "label": "Lab", "color": "0x7a5ce0", "games": ["heat", "builder", "air"] }
+    { "id": "lab", "label": "Lab", "color": "0x7a5ce0", "games": ["heat", "builder", "air"] },
+    { "id": "sky", "label": "Sky & Weather", "color": "0x2a6fb0", "games": ["cycle"] }
   ],
 
-  "suggestedOrder": ["sorter", "lab", "undo", "heat", "builder", "unmix", "float", "air"]
+  "suggestedOrder": ["sorter", "lab", "undo", "heat", "builder", "unmix", "float", "air", "cycle"]
 }

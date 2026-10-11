@@ -141,6 +141,20 @@ export const GAMES = {
       return { label, fraction: (cards.fraction * cards.total + Math.min(filled, 1)) / (cards.total + 1) };
     },
   },
+
+  cycle: {
+    color: 0x4fb3e8,
+    icon(scene) {
+      return [addEmoji(scene, 0, -40, '☁️', 170), addEmoji(scene, -70, 90, '💧', 80), addEmoji(scene, 90, 80, '☀️', 80)];
+    },
+    start(scene) {
+      scene.scene.start('Cycle', {});
+    },
+    progress() {
+      const stars = getStars('cycle');
+      return { label: stars ? `💧 ${stars}` : '', fraction: Math.min(stars / 3, 1) };
+    },
+  },
 };
 
 // How many of a Builder game's recipe cards have been made.
