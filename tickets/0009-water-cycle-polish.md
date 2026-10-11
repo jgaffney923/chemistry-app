@@ -1,7 +1,7 @@
 ---
 id: 0009
 title: "Water Cycle polish: tokens, visibility, river"
-status: review      # todo | in-progress | blocked | review | done
+status: done        # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: [0003]  # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
@@ -39,3 +39,4 @@ In Water Cycle, only the token for the current step reacts to touch, the water d
 - 2026-10-11 [claude] (sonnet-5-5): claimed. The shell blocked multi-command calls, so the claim commit was not made separately; everything is in one commit.
 - 2026-10-11 [claude] (sonnet-5-5): changes. (1) Tokens start with input off (makeToken) and the cloud token is created with input off in cool(); activate() turns on only the current step's token. (2) Vapor dots radius 12 to 20, faint (alpha 0.55) lilac with a darker purple outline, so they stay ghost-like; cloud drops radius 14 to 20, solid near-white with a dark-blue outline; cool() now sets the outline, radius 20 and full alpha when vapor becomes liquid; raindrops radius 10 to 16, darker blue with a white outline; rain() fade of cloud drops now 0.55 instead of 0.4 so they stay visible. (3) River token moved from (1290, 850) to (1480, 740) in the sky right of the peak: clear of the peak, snow cap and river start, 200 units wide (about 107 CSS px on the iPad), fully on screen, clear of the Up close circle; TARGET.river and pointAtToken unchanged and still sensible. River line 36 to 56 wide, darker (0x1f6fc8), idle alpha 0.35 to 0.7 (RIVER_IDLE_ALPHA in art.js, also used by reset()), 1 during/after the river step.
 - 2026-10-11 [claude] (sonnet-5-5): checks. Tester play on the iPad-size screen with touch: one full lap warm, cool, rain, river reached the star (counter 0 to 1) with no page errors; 8/8 checks passed, including cloud/cool/river tokens having input off during the animations and on only for their own step. I looked at screenshots of the vapor, cloud, rain, river token, flowing and end states. I did not test dragging a token mid-animation with a real finger, only the input flag. node tools/browser-check.mjs passed for every game with no console errors. update-sw run (CACHE_VERSION 31) and APP_VERSION 0.15.1 (water cycle polish). Science guardrails (PLAN.md section 9): vapor stays faint and see-through-looking, clearly different from solid liquid drops. No new spoken lines. STATUS.md unchanged. Left over: the river line's top end still slightly overlaps the bottom edge of the snow cap (as before, a little wider now); the owner can judge by eye on the iPad.
+- 2026-10-11 [agent-hq] (merge manager): merged with the owner's approval (PR #18)
