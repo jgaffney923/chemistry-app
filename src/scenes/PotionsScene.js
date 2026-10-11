@@ -42,7 +42,6 @@ export default class PotionsScene extends Phaser.Scene {
     this.events.once('shutdown', stopNarration);
     this.events.once('shutdown', () => this.clearHand());
     this.guide = !tipShown('potions');
-    this.busy = false;
     this.hand = null;
     this.handTimers = [];
     this.book = null;
@@ -125,7 +124,7 @@ export default class PotionsScene extends Phaser.Scene {
   }
 
   buildChart() {
-    this.add.rectangle(CHART_X, 760, 280, 800, 0xfdf6e3, 0.9).setStrokeStyle(8, 0xe0c890);
+    this.add.rectangle(CHART_X, 800, 280, 880, 0xfdf6e3, 0.9).setStrokeStyle(8, 0xe0c890);
     this.chart = CHART_ROWS.map(({ id, y }) => {
       const swatch = this.add.circle(CHART_X, y, 70, 0xb9b3a6).setStrokeStyle(8, 0x2b2350);
       const mark = addLabel(this, CHART_X, y, '?', 90, '#ffffff');
@@ -163,10 +162,10 @@ export default class PotionsScene extends Phaser.Scene {
   // --- Taps
 
   tapBottle(liquid) {
-    if (this.busy || this.book?.active) return;
+    if (this.book?.active) return;
     this.clearHand();
     this.speak(`potions.name.${liquid.id}`);
-    const cup = this.cups.find((entry) => entry.kind === 'juice');
+    const cup = this.cups.find((entry) => entry.kind === 'juice' && !entry.busy);
     if (cup) this.pourBottle(liquid, cup);
     else {
       this.speak('potions.needFresh');
@@ -175,7 +174,7 @@ export default class PotionsScene extends Phaser.Scene {
   }
 
   tapCup(cup) {
-    if (this.busy || this.book?.active || cup.kind === 'empty') return;
+    if (this.book?.active || cup.kind === 'empty') return;
     this.speak(`potions.cup.${cup.kind}`);
   }
 
@@ -185,12 +184,11 @@ export default class PotionsScene extends Phaser.Scene {
   }
 
   freshJuice() {
-    if (this.busy || this.book?.active) return;
+    if (this.book?.active) return;
     this.clearHand();
-    const cups = this.cups.filter((cup) => cup.kind !== 'juice' && cup.kind !== 'empty');
+    const cups = this.cups.filter((cup) => cup.kind !== 'juice' && cup.kind !== 'empty' && !cup.busy);
     cups.forEach((cup) => cup.refill());
     this.speak('potions.fresh');
-    this.holdBusy(cups.length ? 1200 : 300);
   }
 
   // --- Dropping
@@ -204,43 +202,51 @@ export default class PotionsScene extends Phaser.Scene {
 
   dropBottle(liquid, x, y) {
     const cup = this.cupAt(x, y);
-    if (!cup || this.busy || this.book?.active) return;
-    this.pourBottle(liquid, cup);
+    if (!cup || this.book?.active) return;
+    if (cup.busy) this.wiggle(cup);
+    else this.pourBottle(liquid, cup);
   }
 
   dropCup(source, x, y) {
     source.settleScale();
     const target = this.cupAt(x, y, source);
-    if (!target || this.busy || this.book?.active || source.kind === 'empty') {
+    if (!target || this.book?.active || source.kind === 'empty' || source.busy || target.busy) {
       source.setDepth(0);
       returnTo(this, source, source.home.x, source.home.y);
+      if (target?.busy) this.wiggle(target);
       return;
     }
     this.pourCup(source, target);
-  }
-
-  holdBusy(ms) {
-    this.busy = true;
-    this.time.delayedCall(ms, () => {
-      this.busy = false;
-    });
   }
 
   // --- Pouring
 
   pourBottle(liquid, cup) {
     this.clearHand();
-    const settle = this.applyPour(cup, {
+    this.applyPour(cup, {
       id: liquid.id, type: liquid.type, color: Number(liquid.color), pour: Number(liquid.pour),
     });
-    this.holdBusy(settle + 300);
+  }
+
+  // A friendly little shake for a cup that is still busy, so a tap never seems ignored.
+  wiggle(cup) {
+    if (cup.wiggling) return;
+    cup.wiggling = true;
+    this.tweens.add({
+      targets: cup, angle: { from: -6, to: 6 }, duration: 90, yoyo: true, repeat: 2,
+      onComplete: () => {
+        cup.setAngle(0);
+        cup.wiggling = false;
+      },
+    });
   }
 
   pourCup(source, target) {
     this.clearHand();
     const sign = source.x < target.x ? 1 : -1;
     const added = { id: null, type: typeOf(source.kind), color: source.color, pour: source.color };
-    this.busy = true;
+    source.busy = true;
+    target.busy = true;
     source.setEnabled(false);
     source.setDepth(1000);
     this.tweens.add({
@@ -248,10 +254,7 @@ export default class PotionsScene extends Phaser.Scene {
     });
     this.time.delayedCall(550, () => {
       source.empty();
-      const settle = this.applyPour(target, added);
-      this.time.delayedCall(settle + 300, () => {
-        this.busy = false;
-      });
+      this.applyPour(target, added);
     });
     this.time.delayedCall(1500, () => {
       this.tweens.add({ targets: source, x: source.home.x, y: source.home.y, angle: 0, duration: 450, ease: 'Sine.easeInOut' });
@@ -259,7 +262,8 @@ export default class PotionsScene extends Phaser.Scene {
     this.time.delayedCall(2750, () => {
       source.refill();
       source.setDepth(0);
-      this.time.delayedCall(1000, () => source.setEnabled(true));
+      source.busy = false;
+      source.setEnabled(true);
     });
   }
 
@@ -267,6 +271,8 @@ export default class PotionsScene extends Phaser.Scene {
   // Returns how long (ms) until the explanation starts.
   applyPour(cup, added) {
     const before = cup.kind;
+    cup.busy = true;
+    cup.setTag('');
     const result = combine(before, added.type, added.id === 'water');
     const color = colorAfter(this.palette, result, cup, added.color);
     cup.pour(added.pour);
@@ -275,6 +281,7 @@ export default class PotionsScene extends Phaser.Scene {
     cup.kind = result.kind;
     const settle = result.fizz ? 2400 : 1500;
     this.time.delayedCall(settle, () => {
+      cup.busy = false;
       cup.setTag(TAG_WORDS[result.kind] || '');
       this.explain(cup, before, result, added);
     });
@@ -353,7 +360,7 @@ export default class PotionsScene extends Phaser.Scene {
   }
 
   hint() {
-    if (this.busy || this.book?.active) return;
+    if (this.book?.active) return;
     const next = this.cfg.stickers.find((sticker) => !hasPotionSticker(sticker.id));
     if (!next) {
       this.speak('potions.allFound');
