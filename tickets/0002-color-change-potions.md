@@ -1,7 +1,7 @@
 ---
 id: 0002
 title: "New game: Color-Change Potions (M12)"
-status: todo        # todo | in-progress | blocked | review | done
+status: done        # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
@@ -189,17 +189,25 @@ The guide finishes on the first `mix`: `markTipShown('potions')`, then `potions.
 - .plan-check/plan.md says the Potions home button goes to Menu with {} and lands back in the Lab room. That works in the normal path because src/scenes/MenuScene.js stores the current room in this.registry under 'room'; the {} data is not what causes the room return. Direct starts, such as browser-check calling GAMES.potions.start from the house view, would return to the house. Suggested: Add a short note that MenuScene's registry room is what preserves the Lab-room return, matching the existing Unmix/Float pattern.
 
 ## Acceptance criteria
-- [ ] New `potions` game in the Lab room, with a home-screen button, icon, and progress badge
-- [ ] All three liquids give the correct indicator color; mixing acid into base moves toward purple (with fizz for vinegar + baking soda)
-- [ ] Guided first visit, 💡 hint button, and something to collect (stickers or similar) that survives closing and reopening
-- [ ] Every spoken line is in `narration.json`; `narration-script.md` regenerated
-- [ ] Checked against PLAN.md §9; guardrails named in the log
-- [ ] Works by touch (drag and tap) at iPad size; STATUS.md and the README's iPad test steps updated
-- [ ] `node tools/update-sw.mjs` run and `APP_VERSION` bumped
-- [ ] App builds (or serves) and runs locally with no console errors, and existing features still work
-- [ ] Follows the design rules in this repo's CLAUDE.md
+- [x] New `potions` game in the Lab room, with a home-screen button, icon, and progress badge
+- [x] All three liquids give the correct indicator color; mixing acid into base moves toward purple (with fizz for vinegar + baking soda)
+- [x] Guided first visit, 💡 hint button, and something to collect (stickers or similar) that survives closing and reopening
+- [x] Every spoken line is in `narration.json`; `narration-script.md` regenerated
+- [x] Checked against PLAN.md §9; guardrails named in the log
+- [x] Works by touch (drag and tap) at iPad size; STATUS.md and the README's iPad test steps updated (the Tester confirmed touch at 1180x820; the input-lock problem was fixed in round 1, not re-tested by touch)
+- [x] `node tools/update-sw.mjs` run and `APP_VERSION` bumped
+- [x] App builds (or serves) and runs locally with no console errors, and existing features still work
+- [x] Follows the design rules in this repo's CLAUDE.md
 
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created from the starter ticket list
 - 2026-10-11 [claude] (opus-5-5): design plan written by the Architect; waiting for the owner's OK
+- 2026-10-11 [claude] (sonnet-5-5): claimed; starting the build from the design plan
+- 2026-10-11 [claude] (sonnet-5-5): built the game as planned: `PotionsScene`, `src/potions/` (Cup, rules, art), `potions.json`, save functions, home/room/boot/main registration lines, 35 new `potions.*` narration lines, STATUS/README/PLAN notes. Release `0.14.0 (potions)`, cache version 25 (`update-sw.mjs` run after the last file change; `narration-script.md` regenerated). Small differences from the plan: the cup drag lift is handled in the scene (the shared drag helper would reset a cup's 0.5 scale to 1); bottle name tags are 30px, not 34, so "Baking soda water" fits the shelf; build step 1 and 2 were done together so `games.js` never imported a missing file.
+- 2026-10-11 [claude] (sonnet-5-5): checks run: `node tools/browser-check.mjs` passes, including `"potions" game starts`, the other eight games, and the service-worker cache list, with no console errors. NOT checked: the sandbox here blocked my own click-through script, so the pours, color changes, fizz, mixing, guided first visit, 💡 hint, stickers saving, and touch/drag at 1180x820 have only been read through, not seen running. The Tester should do the "For the Tester" list in the design plan first. The Lab menu layout (4 games in 2 rows) and the Potions button icon and badge were also not looked at.
+- 2026-10-11 [claude] (sonnet-5-5): PLAN.md §9 guardrails checked: red cabbage colors (acid pink/red, neutral purple, base blue-green); streams show the liquid's own color so the change comes from the indicator; mixing heads toward purple (violet), not to a made-up color; fizz only when acid meets base (lemon juice and vinegar both really fizz with baking soda, and no fizz once mixed); bubbles named carbon dioxide; cabbage drawn purple, not 🥬; no tasting, cleaners, or home-experiment wording (the intro says "we never taste"). New spoken lines: 35 `potions.*` lines use the iPad's device voice until the owner runs `node tools/make-placeholder-voices.mjs`. Possible merge conflicts with other tickets in `sw.js`, `version.js`, `narration-script.md`: re-run the tools.
+- 2026-10-11 [claude] (sonnet-5-5): left for the owner: the plan's two questions (the "we never taste" intro line and the "Neutral" word) were built as recommended.
+- 2026-10-11 [claude] (sonnet-5-5): fix round 1: replaced the scene-wide "busy" lock (taps, drops, fresh juice and 💡 were silently ignored for 3 to 4 s) with a per-cup busy flag that clears when that cup's color settles (about 1.5 s, or 2.4 s with fizz). Other cups, bottles and 💡 now always work. A drop on a still-busy cup bounces back and shakes that cup, so it never seems broken. The source cup is usable again as soon as it has refilled. Also: a cup's tag word clears when a pour starts and returns when the color settles (UX suggestion, one line), and the chart panel is 80 units taller so "Base" is off the edge. Left for the owner: the first-visit hand sitting over the 🏠 button, and the "Neutral" wording for mixed cups. Checked: `node --check` on the scene; `node tools/browser-check.mjs` passes (all games, service-worker list, no console errors); `node tools/update-sw.mjs` re-run (cache version 26, since a cached file changed); APP_VERSION unchanged. NOT checked: no click-through or touch run of the new timing (this session could only run the automated check), so the Tester should repeat quick taps after bottle and cup pours.
+- 2026-10-11 [claude] (sonnet-5-5): fix round 2: the pointing hand for bottles now stands 150 units to the right of the bottle and points left (👈, bobbing sideways), so it no longer lands on the 🏠 button; cups keep the hand above pointing down. This covers the first-visit guide and the 💡 hint (same function). Checked: `node --check` on the scene; `node tools/browser-check.mjs` passes (all games, service-worker list, no console errors); `node tools/update-sw.mjs` re-run (cache version 27); APP_VERSION unchanged. NOT checked: no touch or screenshot run of the hand on the real bottles, so the Tester should look at lemon, vinegar, water and baking soda. Left for the owner: the "Neutral" tag wording, sticker book circle size, and trying the guide with sound on the real iPad.
+- 2026-10-11 [agent-hq] (merge manager): merged with the owner's approval (PR #16)

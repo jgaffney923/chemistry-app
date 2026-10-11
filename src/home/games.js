@@ -4,6 +4,8 @@ import { addItemArt } from '../art/items.js';
 import { addEmoji } from '../ui/emoji.js';
 import { toolArt, grainArt } from '../unmix/art.js';
 import { floatArt } from '../float/art.js';
+import { cupArt } from '../potions/art.js';
+import { potionStickerCount } from '../systems/save.js';
 import { getStars, isSorterIntroSeen, stickerCount, hasMolecule, heatFoundCount, unmixStickerCount, airFilledCount } from '../systems/save.js';
 
 // Every game the Science House can open: its button picture, how to start it,
@@ -139,6 +141,26 @@ export const GAMES = {
       const filled = airFilledCount();
       const label = [cards.label, filled ? `🎈 ${filled}` : ''].filter(Boolean).join('  ');
       return { label, fraction: (cards.fraction * cards.total + Math.min(filled, 1)) / (cards.total + 1) };
+    },
+  },
+
+  potions: {
+    color: 0xf06292,
+    icon(scene) {
+      const cfg = scene.cache.json.get('potions');
+      return [
+        cupArt(scene, Number(cfg.types.acid.color), -110, 30, 150),
+        cupArt(scene, Number(cfg.juice), 0, -20, 170),
+        cupArt(scene, Number(cfg.types.base.color), 110, 30, 150),
+      ];
+    },
+    start(scene) {
+      scene.scene.start('Potions', {});
+    },
+    progress(scene) {
+      const found = potionStickerCount();
+      const total = scene.cache.json.get('potions').stickers.length;
+      return { label: found ? `🏅 ${found} / ${total}` : '', fraction: found / total };
     },
   },
 

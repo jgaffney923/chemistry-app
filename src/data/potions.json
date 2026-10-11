@@ -1,0 +1,30 @@
+{
+  "juice": "0x7b3fa0",
+  "mixVia": "0x3f6fd0",
+  "mixed": "0x6a4cc0",
+  "liquids": [
+    { "id": "lemon", "label": "Lemon juice", "type": "acid", "pour": "0xfff3a0", "color": "0xe0245e", "cap": "0x3c8d4a" },
+    { "id": "vinegar", "label": "Vinegar", "type": "acid", "pour": "0xf1e6c4", "color": "0xf0609a", "cap": "0xc0392b" },
+    { "id": "water", "label": "Water", "type": "neutral", "pour": "0xcfeaff", "color": "0x7b3fa0", "cap": "0x4f7cff" },
+    { "id": "bakingSoda", "label": "Baking soda water", "type": "base", "pour": "0xf4f4f4", "color": "0x2794b0", "cap": "0xf28c28" }
+  ],
+  "types": {
+    "acid": { "label": "Acid", "color": "0xf0609a" },
+    "neutral": { "label": "Neutral", "color": "0x7b3fa0" },
+    "base": { "label": "Base", "color": "0x2794b0" }
+  },
+  "stickers": [
+    { "id": "lemon", "icon": "potion-lemon", "color": "0xe0245e" },
+    { "id": "vinegar", "icon": "potion-vinegar", "color": "0xf0609a" },
+    { "id": "water", "icon": "potion-water", "color": "0x7b3fa0" },
+    { "id": "bakingSoda", "icon": "potion-bakingSoda", "color": "0x2794b0" },
+    { "id": "mix", "icon": "potion-mix", "color": "0x6a4cc0" }
+  ],
+  "items": [
+    { "id": "potion-lemon", "emoji": "🧪" },
+    { "id": "potion-vinegar", "emoji": "🧪" },
+    { "id": "potion-water", "emoji": "🧪" },
+    { "id": "potion-bakingSoda", "emoji": "🧪" },
+    { "id": "potion-mix", "emoji": "🧪" }
+  ]
+}

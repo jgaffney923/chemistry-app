@@ -1,6 +1,6 @@
 # Narration script
 
-**2 of 312 lines recorded.** Lines marked "computer voice for now"
+**2 of 347 lines recorded.** Lines marked "computer voice for now"
 play a stand-in voice until you record them.
 
 How to add a recording (details in README.md):
@@ -112,6 +112,41 @@ to a 6-year-old.
 | `mol.nitrogen` | You made nitrogen gas! Two nitrogen atoms joined by a triple bond. Most of the air around you is nitrogen. | TO RECORD |
 | `mol.ammonia` | You made ammonia! One nitrogen with three hydrogens. Factories use it to make plant food for farms. | TO RECORD |
 | `layers.done` | You built a liquid tower, and found three places where things stop! | TO RECORD |
+| `potions.intro` | These cups hold purple juice from red cabbage. It's a color-changer! In a lab we look, but we never taste. Drag the lemon juice into a cup and watch! | TO RECORD |
+| `potions.welcome` | Pour liquids into the purple cabbage juice and watch the colors change! | TO RECORD |
+| `potions.free` | You did it! Keep pouring and finding colors. Check your sticker book! | TO RECORD |
+| `potions.stickers` | Your potion stickers! Tap one to hear it again. | TO RECORD |
+| `potions.allFound` | You found every color change! Pour more to see them again. | TO RECORD |
+| `potions.fresh` | Fresh purple cabbage juice in every cup! | TO RECORD |
+| `potions.needFresh` | Every cup has changed color. Tap the cabbage for fresh purple juice! | TO RECORD |
+| `potions.guide.base` | Now try the baking soda water. Drag it into a cup! | TO RECORD |
+| `potions.guide.mix` | Now pour the pink cup into the blue-green cup. What will happen? | TO RECORD |
+| `potions.name.lemon` | Lemon juice. | TO RECORD |
+| `potions.name.vinegar` | Vinegar. | TO RECORD |
+| `potions.name.water` | Water. | TO RECORD |
+| `potions.name.bakingSoda` | Baking soda water. | TO RECORD |
+| `potions.cup.juice` | Purple cabbage juice. It shows us if something is an acid or a base. | TO RECORD |
+| `potions.cup.acid` | A pink cup. Pink means acid! | TO RECORD |
+| `potions.cup.neutral` | A purple cup. Purple means neutral: not an acid and not a base. | TO RECORD |
+| `potions.cup.base` | A blue-green cup. Blue-green means base! | TO RECORD |
+| `potions.cup.mixed` | The acid and the base cancelled each other out. It went back toward purple! | TO RECORD |
+| `potions.still.acid` | Still pink. It's still an acid! | TO RECORD |
+| `potions.still.neutral` | Still purple. It's still neutral! | TO RECORD |
+| `potions.still.base` | Still blue-green. It's still a base! | TO RECORD |
+| `potions.disc.lemon` | Lemon juice turned the cabbage juice pink! Lemon juice is an acid. Acids turn it pink or red. | TO RECORD |
+| `potions.disc.vinegar` | Vinegar turned it pink too! Vinegar is an acid. | TO RECORD |
+| `potions.disc.water` | It stays purple. Water is neutral: not an acid and not a base. | TO RECORD |
+| `potions.disc.bakingSoda` | Blue-green! Baking soda is a base. Bases turn cabbage juice blue or green. | TO RECORD |
+| `potions.disc.mix` | Fizz! The acid and the base cancel each other out, so the color heads back toward purple. The bubbles are a gas called carbon dioxide. | TO RECORD |
+| `potions.hint.lemon` | Drag the lemon juice into a cup of purple juice! | TO RECORD |
+| `potions.hint.vinegar` | Try the vinegar! Drag it into a cup. | TO RECORD |
+| `potions.hint.water` | Try plain water in a cup. What color will it make? | TO RECORD |
+| `potions.hint.bakingSoda` | Drag the baking soda water into a cup. | TO RECORD |
+| `potions.hint.mix` | Pour a pink cup into a blue-green cup, and watch the bubbles! | TO RECORD |
+| `potions.type.acid` | Acid! Acids turn cabbage juice pink or red. | TO RECORD |
+| `potions.type.neutral` | Neutral! Water is neutral. It leaves cabbage juice purple. | TO RECORD |
+| `potions.type.base` | Base! Bases turn cabbage juice blue or green. | TO RECORD |
+| `potions.type.unknown` | You can find this one by pouring something into a cup! | TO RECORD |
 | `room.sky` | Sky and weather! Let's find out where rain comes from. | TO RECORD |
 | `cycle.intro` | Let's follow some water on a trip! Tap the sun, or drag it over the sea. | TO RECORD |
 | `cycle.welcome` | Let's send the water round again! Start with the sun. | TO RECORD |
