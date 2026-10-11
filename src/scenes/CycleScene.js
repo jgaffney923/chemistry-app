@@ -258,6 +258,7 @@ export default class CycleScene extends Phaser.Scene {
     this.tokens.river?.destroy();
     delete this.tokens.river;
     addStars('cycle', 1);
+    if (this.guide) markTipShown('cycle');
     sfx(this, 'star');
     burst(this, 700, 1300, [0xffd84d, 0xffffff, 0x7cc8f0]);
     const fly = addEmoji(this, 700, 1300, '💧', 140).setDepth(950);
@@ -285,10 +286,7 @@ export default class CycleScene extends Phaser.Scene {
     this.stepIndex = 0;
     this.phase = 'ready';
     this.activate();
-    if (this.guide) {
-      this.guide = false;
-      markTipShown('cycle');
-    }
+    this.guide = false;
   }
 
   // --- Voice, help and the hand
