@@ -381,10 +381,16 @@ export default class PotionsScene extends Phaser.Scene {
 
   pointAt(target) {
     this.removeHand();
-    const lift = target instanceof Cup ? 280 : 170;
-    const y = target.y - lift;
-    this.hand = addEmoji(this, target.x, y, '👇', 100).setDepth(3000);
-    this.tweens.add({ targets: this.hand, y: y + 35, duration: 500, yoyo: true, repeat: -1 });
+    if (target instanceof Cup) {
+      const y = target.y - 280;
+      this.hand = addEmoji(this, target.x, y, '👇', 100).setDepth(3000);
+      this.tweens.add({ targets: this.hand, y: y + 35, duration: 500, yoyo: true, repeat: -1 });
+      return;
+    }
+    // Bottles sit near the top buttons, so the hand stands beside the bottle and points at it.
+    const x = target.x + 150;
+    this.hand = addEmoji(this, x, target.y, '👈', 100).setDepth(3000);
+    this.tweens.add({ targets: this.hand, x: x + 35, duration: 500, yoyo: true, repeat: -1 });
   }
 
   // Points at each target in turn, then goes away.
