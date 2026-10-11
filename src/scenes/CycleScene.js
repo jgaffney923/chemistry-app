@@ -123,7 +123,7 @@ export default class CycleScene extends Phaser.Scene {
     for (const [id, token] of Object.entries(this.tokens)) {
       const on = id === this.currentId();
       this.tweens.killTweensOf(token);
-      token.setScale(1).setAlpha(on ? 1 : 0.4);
+      token.setScale(1).setAlpha(on ? 1 : 0.4).setPosition(token.home.x, token.home.y);
       token.input.enabled = on;
       if (on) this.tweens.add({ targets: token, scale: 1.08, duration: 600, yoyo: true, repeat: -1, ease: 'Sine.easeInOut' });
     }
@@ -147,6 +147,7 @@ export default class CycleScene extends Phaser.Scene {
     const token = this.tokens[id];
     this.tweens.killTweensOf(token);
     token.setScale(1).setPosition(token.home.x, token.home.y);
+    token.input.enabled = false;
     const done = { warm: () => this.warm(), cool: () => this.cool(), rain: () => this.rain(), river: () => this.flow() }[id]();
     this.speak(this.cfg.steps[this.stepIndex].line);
     this.time.delayedCall(done, () => this.finishStep());
