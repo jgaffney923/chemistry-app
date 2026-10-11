@@ -15,6 +15,7 @@ const DEFAULTS = {
   heatFound: [], // Heat Slider changes seen, e.g. "water.melt"
   unmixFound: [],
   airFilled: 0, // balloons filled with real air in Air Builder
+  potionsFound: [], // Color-Change Potions stickers
 };
 
 let data = load();
@@ -158,6 +159,22 @@ export function airFilledCount() {
 export function addAirFilled() {
   data.airFilled += 1;
   persist();
+}
+
+export function hasPotionSticker(id) {
+  return data.potionsFound.includes(id);
+}
+
+export function potionStickerCount() {
+  return data.potionsFound.length;
+}
+
+// Returns true if this sticker is new.
+export function addPotionSticker(id) {
+  if (hasPotionSticker(id)) return false;
+  data.potionsFound = [...data.potionsFound, id];
+  persist();
+  return true;
 }
 
 export function setSoundOn(on) {

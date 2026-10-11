@@ -1,7 +1,7 @@
 ---
 id: 0002
 title: "New game: Color-Change Potions (M12)"
-status: in-progress # todo | in-progress | blocked | review | done
+status: review      # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
@@ -192,15 +192,19 @@ The guide finishes on the first `mix`: `markTipShown('potions')`, then `potions.
 - [ ] New `potions` game in the Lab room, with a home-screen button, icon, and progress badge
 - [ ] All three liquids give the correct indicator color; mixing acid into base moves toward purple (with fizz for vinegar + baking soda)
 - [ ] Guided first visit, 💡 hint button, and something to collect (stickers or similar) that survives closing and reopening
-- [ ] Every spoken line is in `narration.json`; `narration-script.md` regenerated
-- [ ] Checked against PLAN.md §9; guardrails named in the log
-- [ ] Works by touch (drag and tap) at iPad size; STATUS.md and the README's iPad test steps updated
-- [ ] `node tools/update-sw.mjs` run and `APP_VERSION` bumped
-- [ ] App builds (or serves) and runs locally with no console errors, and existing features still work
-- [ ] Follows the design rules in this repo's CLAUDE.md
+- [x] Every spoken line is in `narration.json`; `narration-script.md` regenerated
+- [x] Checked against PLAN.md §9; guardrails named in the log
+- [ ] Works by touch (drag and tap) at iPad size; STATUS.md and the README's iPad test steps updated (docs done; touch not run, see log)
+- [x] `node tools/update-sw.mjs` run and `APP_VERSION` bumped
+- [x] App builds (or serves) and runs locally with no console errors, and existing features still work
+- [x] Follows the design rules in this repo's CLAUDE.md
 
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created from the starter ticket list
 - 2026-10-11 [claude] (opus-5-5): design plan written by the Architect; waiting for the owner's OK
 - 2026-10-11 [claude] (sonnet-5-5): claimed; starting the build from the design plan
+- 2026-10-11 [claude] (sonnet-5-5): built the game as planned: `PotionsScene`, `src/potions/` (Cup, rules, art), `potions.json`, save functions, home/room/boot/main registration lines, 35 new `potions.*` narration lines, STATUS/README/PLAN notes. Release `0.14.0 (potions)`, cache version 25 (`update-sw.mjs` run after the last file change; `narration-script.md` regenerated). Small differences from the plan: the cup drag lift is handled in the scene (the shared drag helper would reset a cup's 0.5 scale to 1); bottle name tags are 30px, not 34, so "Baking soda water" fits the shelf; build step 1 and 2 were done together so `games.js` never imported a missing file.
+- 2026-10-11 [claude] (sonnet-5-5): checks run: `node tools/browser-check.mjs` passes, including `"potions" game starts`, the other eight games, and the service-worker cache list, with no console errors. NOT checked: the sandbox here blocked my own click-through script, so the pours, color changes, fizz, mixing, guided first visit, 💡 hint, stickers saving, and touch/drag at 1180x820 have only been read through, not seen running. The Tester should do the "For the Tester" list in the design plan first. The Lab menu layout (4 games in 2 rows) and the Potions button icon and badge were also not looked at.
+- 2026-10-11 [claude] (sonnet-5-5): PLAN.md §9 guardrails checked: red cabbage colors (acid pink/red, neutral purple, base blue-green); streams show the liquid's own color so the change comes from the indicator; mixing heads toward purple (violet), not to a made-up color; fizz only when acid meets base (lemon juice and vinegar both really fizz with baking soda, and no fizz once mixed); bubbles named carbon dioxide; cabbage drawn purple, not 🥬; no tasting, cleaners, or home-experiment wording (the intro says "we never taste"). New spoken lines: 35 `potions.*` lines use the iPad's device voice until the owner runs `node tools/make-placeholder-voices.mjs`. Possible merge conflicts with other tickets in `sw.js`, `version.js`, `narration-script.md`: re-run the tools.
+- 2026-10-11 [claude] (sonnet-5-5): left for the owner: the plan's two questions (the "we never taste" intro line and the "Neutral" word) were built as recommended.

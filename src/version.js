@@ -1,2 +1,2 @@
 // Shown faintly in a corner so a parent can see which build the iPad is running.
-export const APP_VERSION = '0.13.2 (air)';
+export const APP_VERSION = '0.14.0 (potions)';

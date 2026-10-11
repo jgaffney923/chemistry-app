@@ -266,6 +266,7 @@ Learned from building M1-M4:
 - **Teaches:** some things are acids and some are bases; an indicator shows which by its color; acids and bases can cancel each other out. The words "acid" and "base" are introduced with pictures.
 - **Builds on:** the Lab pouring and beaker, sticker book.
 - **Watch out:** no tasting, no household cleaners, colors must be correct (section 9).
+- **As built (M12):** four cups of purple juice; bottles of lemon juice, vinegar, water, and baking soda water are dragged or tapped in. Acid cups turn pink/red, water stays purple, baking soda water turns blue-green. A cup poured into another fizzes when acid meets base (lemon juice fizzes with baking soda too) and heads back toward purple. An Acid / Neutral / Base chart and five stickers record what was found; the intro says "In a lab we look, but we never taste."
 - **Size:** medium.
 
 #### 10.7 Crystal Garden
