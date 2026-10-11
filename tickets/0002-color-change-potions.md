@@ -1,7 +1,7 @@
 ---
 id: 0002
 title: "New game: Color-Change Potions (M12)"
-status: todo        # todo | in-progress | blocked | review | done
+status: in-progress # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
@@ -203,3 +203,4 @@ The guide finishes on the first `mix`: `markTipShown('potions')`, then `potions.
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created from the starter ticket list
 - 2026-10-11 [claude] (opus-5-5): design plan written by the Architect; waiting for the owner's OK
+- 2026-10-11 [claude] (sonnet-5-5): claimed; starting the build from the design plan
