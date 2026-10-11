@@ -1,6 +1,6 @@
 # Narration script
 
-**2 of 333 lines recorded.** Lines marked "computer voice for now"
+**2 of 347 lines recorded.** Lines marked "computer voice for now"
 play a stand-in voice until you record them.
 
 How to add a recording (details in README.md):
@@ -147,6 +147,20 @@ to a 6-year-old.
 | `potions.type.neutral` | Neutral! Water is neutral. It leaves cabbage juice purple. | TO RECORD |
 | `potions.type.base` | Base! Bases turn cabbage juice blue or green. | TO RECORD |
 | `potions.type.unknown` | You can find this one by pouring something into a cup! | TO RECORD |
+| `room.sky` | Sky and weather! Let's find out where rain comes from. | TO RECORD |
+| `cycle.intro` | Let's follow some water on a trip! Tap the sun, or drag it over the sea. | TO RECORD |
+| `cycle.welcome` | Let's send the water round again! Start with the sun. | TO RECORD |
+| `cycle.do.warm` | Tap the sun. | TO RECORD |
+| `cycle.do.cool` | Tap the snowflake to cool the air high up. | TO RECORD |
+| `cycle.do.rain` | Tap the cloud. | TO RECORD |
+| `cycle.do.river` | Drag the water down the river. | TO RECORD |
+| `cycle.warm` | The sun warms the sea. Some water turns into water vapor, an invisible gas, and floats up. The dots show where it goes. The salt stays in the sea! | TO RECORD |
+| `cycle.cool` | High up, the air is cold. The water vapor cools and turns back into tiny drops of liquid water. Lots of tiny drops make a cloud! | TO RECORD |
+| `cycle.rain` | The tiny drops bump together and join into bigger drops. When they're heavy, they fall as rain. Rain is fresh water, because the salt stayed in the sea. | TO RECORD |
+| `cycle.river` | Rain runs downhill into rivers, and the river carries the water back to the sea! | TO RECORD |
+| `cycle.lap` | The water went all the way round! The same water goes round and round. Here's a water drop for you! | TO RECORD |
+| `cycle.zoom.liquid` | Up close, liquid water's tiny particles stay close together and slide around. | TO RECORD |
+| `cycle.zoom.gas` | Up close, water vapor's tiny particles fly far apart. It's a gas! | TO RECORD |
 | `house.intro` | Welcome to the Science House! Tap a room to explore. | TO RECORD (computer voice for now) |
 | `room.kitchen` | The kitchen! Sort, heat, cool, and mix things up. | TO RECORD (computer voice for now) |
 | `room.lab` | The lab! Build molecules out of atoms. | TO RECORD (computer voice for now) |

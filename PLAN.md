@@ -444,7 +444,7 @@ The chemistry guardrails in section 9 still apply. In addition:
 ### 11.5 How the house grows
 - **Kitchen (chemistry):** Sorter, Kitchen Lab, Can It Be Undone?, Sink or Float, Unmix
 - **Lab (chemistry):** Molecule Builder, Heat Slider, Air Builder, Color-Change Potions, Crystal Garden, Element Hunt
-- **Sky & Weather:** Water Cycle first; the rest later
+- **Sky & Weather:** Water Cycle first; the rest later (started with Water Cycle, ticket 0003)
 - **Workshop** and **Garden:** added when the kids are ready for them
 
 Build order: chemistry Tier 1 (section 10) first. Then whichever new room the kid-tests point to, one module at a time, alternating with the remaining chemistry modules so chemistry stays the deepest part of the app.

@@ -109,12 +109,16 @@ export default class MenuScene extends Phaser.Scene {
   roomTile(room, x, y, w, h, glowing) {
     const color = Number(room.color);
     const tile = this.add.container(x, y);
+    const label = addLabel(this, 0, -0.01 * h, room.label, 72);
+    if (label.width > w - 40) label.setScale((w - 40) / label.width);
+    const progress = addLabel(this, 0, 0.07 * h, this.progressText(room, true), 48, '#ffd84d')
+      .setOrigin(0.5, 0).setAlign('center').setWordWrapWidth(w - 40);
     tile.add([
       this.add.rectangle(0, 0, w, h, color).setStrokeStyle(14, 0x2b2350),
       this.add.rectangle(0, -h / 2 + 70, w - 60, 20, 0xffffff, 0.25),
-      ...roomArt(this, room.id, 0, -60),
-      addLabel(this, 0, h / 2 - 130, room.label, 72),
-      addLabel(this, 0, h / 2 - 55, this.progressText(room), 52, '#ffd84d'),
+      ...roomArt(this, room.id, 0, -0.22 * h),
+      label,
+      progress,
     ]);
     if (glowing) {
       // On the house, "try this next" is a gentle bob and a twinkling star
@@ -140,8 +144,14 @@ export default class MenuScene extends Phaser.Scene {
     return tile;
   }
 
-  progressText(room) {
-    return room.games.map((id) => GAMES[id].progress(this).label).filter(Boolean).join('    ');
+  // `keepTogether` joins each game's label with non-breaking spaces, so a
+  // wrapped line only breaks between games.
+  progressText(room, keepTogether = false) {
+    return room.games
+      .map((id) => GAMES[id].progress(this).label)
+      .filter(Boolean)
+      .map((label) => (keepTogether ? label.replace(/ /g, ' ') : label))
+      .join(keepTogether ? ' ' : '    ');
   }
 
   // --- Inside a room
@@ -194,6 +204,7 @@ function roomArt(scene, id, x, y) {
     ];
   }
   if (id === 'lab') return [makeWater(scene, x, y + 20, 110)];
+  if (id === 'sky') return [addEmoji(scene, x, y, '☁️', 180), addEmoji(scene, x + 95, y - 85, '☀️', 100), addEmoji(scene, x - 80, y + 95, '💧', 80)];
   return [addEmoji(scene, x, y, '🔬', 200)];
 }
 
