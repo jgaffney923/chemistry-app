@@ -1,7 +1,7 @@
 ---
 id: 0003
 title: "New game: Water Cycle"
-status: review      # todo | in-progress | blocked | review | done
+status: done        # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
@@ -163,3 +163,4 @@ Shared files: registration lines only, no reordering:
 - 2026-10-10 [claude] (sonnet-5-5): guardrails checked (by reading the art and lines, not by looking at it running): §9 and §11.4: vapor is invisible gas shown as the purple gas dots and called water vapor; the cloud is pale liquid drops and up close switches to Liquid; the sun only warms (sparks and a shimmer, no bubbles); salt stays in the sea and rain is fresh; rivers run downhill; no "steam", "boil" or "clouds are gas" in any line; no home experiments. New device-voice lines (need `make-placeholder-voices.mjs` on the PC): `room.sky`, `cycle.intro`, `cycle.welcome`, `cycle.do.warm/cool/rain/river`, `cycle.warm`, `cycle.cool`, `cycle.rain`, `cycle.river`, `cycle.lap`, `cycle.zoom.liquid`, `cycle.zoom.gas`. Lab count is unchanged at 3 games here. If another ticket merges first, `sw.js`, `version.js` and `narration-script.md` may conflict: re-run the two tools.
 - 2026-10-11 [claude] (sonnet-5-5): fix round 1: the first-visit flag is now saved the moment the first 💧 is earned (in lapComplete), so leaving during the lap line no longer repeats the intro; README line 6 now says nine games; re-ran update-sw (cache version 27); browser-check passes (all games start, no console errors). I did not play the lap by hand or hear the speech. Left for the owner: the Tester/UX suggestions (bigger cloud and rain drops, drop-area glow, river token sitting on the mountain peak, snowflake cue).
 - 2026-10-11 [claude] (sonnet-5-5): fix round 2: tokens can no longer be grabbed while their step animates (input is switched off in run()), and activate() puts every token back at its home spot, so a token can't be left stranded; re-ran update-sw (cache version 28); browser-check passes. I did not play it by hand or by touch, so the grab-during-animation case is not re-tested. Left for the owner: bigger cloud and rain drops, river token on the peak, sea shimmer (UX/Tester suggestions).
+- 2026-10-11 [agent-hq] (merge manager): merged with the owner's approval (PR #14)
