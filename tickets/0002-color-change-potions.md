@@ -1,7 +1,7 @@
 ---
 id: 0002
 title: "New game: Color-Change Potions (M12)"
-status: review      # todo | in-progress | blocked | review | done
+status: done        # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
@@ -210,3 +210,4 @@ The guide finishes on the first `mix`: `markTipShown('potions')`, then `potions.
 - 2026-10-11 [claude] (sonnet-5-5): left for the owner: the plan's two questions (the "we never taste" intro line and the "Neutral" word) were built as recommended.
 - 2026-10-11 [claude] (sonnet-5-5): fix round 1: replaced the scene-wide "busy" lock (taps, drops, fresh juice and 💡 were silently ignored for 3 to 4 s) with a per-cup busy flag that clears when that cup's color settles (about 1.5 s, or 2.4 s with fizz). Other cups, bottles and 💡 now always work. A drop on a still-busy cup bounces back and shakes that cup, so it never seems broken. The source cup is usable again as soon as it has refilled. Also: a cup's tag word clears when a pour starts and returns when the color settles (UX suggestion, one line), and the chart panel is 80 units taller so "Base" is off the edge. Left for the owner: the first-visit hand sitting over the 🏠 button, and the "Neutral" wording for mixed cups. Checked: `node --check` on the scene; `node tools/browser-check.mjs` passes (all games, service-worker list, no console errors); `node tools/update-sw.mjs` re-run (cache version 26, since a cached file changed); APP_VERSION unchanged. NOT checked: no click-through or touch run of the new timing (this session could only run the automated check), so the Tester should repeat quick taps after bottle and cup pours.
 - 2026-10-11 [claude] (sonnet-5-5): fix round 2: the pointing hand for bottles now stands 150 units to the right of the bottle and points left (👈, bobbing sideways), so it no longer lands on the 🏠 button; cups keep the hand above pointing down. This covers the first-visit guide and the 💡 hint (same function). Checked: `node --check` on the scene; `node tools/browser-check.mjs` passes (all games, service-worker list, no console errors); `node tools/update-sw.mjs` re-run (cache version 27); APP_VERSION unchanged. NOT checked: no touch or screenshot run of the hand on the real bottles, so the Tester should look at lemon, vinegar, water and baking soda. Left for the owner: the "Neutral" tag wording, sticker book circle size, and trying the guide with sound on the real iPad.
+- 2026-10-11 [agent-hq] (merge manager): merged with the owner's approval (PR #16)
