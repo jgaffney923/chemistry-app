@@ -102,6 +102,21 @@
 
   "layers.done": { "text": "You built a liquid tower, and found three places where things stop!", "recorded": false },
 
+  "room.sky": { "text": "Sky and weather! Let's find out where rain comes from.", "recorded": false },
+  "cycle.intro": { "text": "Let's follow some water on a trip! Tap the sun, or drag it over the sea.", "recorded": false },
+  "cycle.welcome": { "text": "Let's send the water round again! Start with the sun.", "recorded": false },
+  "cycle.do.warm": { "text": "Tap the sun.", "recorded": false },
+  "cycle.do.cool": { "text": "Tap the snowflake to cool the air high up.", "recorded": false },
+  "cycle.do.rain": { "text": "Tap the cloud.", "recorded": false },
+  "cycle.do.river": { "text": "Drag the water down the river.", "recorded": false },
+  "cycle.warm": { "text": "The sun warms the sea. Some water turns into water vapor, an invisible gas, and floats up. The dots show where it goes. The salt stays in the sea!", "recorded": false },
+  "cycle.cool": { "text": "High up, the air is cold. The water vapor cools and turns back into tiny drops of liquid water. Lots of tiny drops make a cloud!", "recorded": false },
+  "cycle.rain": { "text": "The tiny drops bump together and join into bigger drops. When they're heavy, they fall as rain. Rain is fresh water, because the salt stayed in the sea.", "recorded": false },
+  "cycle.river": { "text": "Rain runs downhill into rivers, and the river carries the water back to the sea!", "recorded": false },
+  "cycle.lap": { "text": "The water went all the way round! The same water goes round and round. Here's a water drop for you!", "recorded": false },
+  "cycle.zoom.liquid": { "text": "Up close, liquid water's tiny particles stay close together and slide around.", "recorded": false },
+  "cycle.zoom.gas": { "text": "Up close, water vapor's tiny particles fly far apart. It's a gas!", "recorded": false },
+
   "house.intro": { "text": "Welcome to the Science House! Tap a room to explore.", "recorded": true, "placeholder": true },
   "room.kitchen": { "text": "The kitchen! Sort, heat, cool, and mix things up.", "recorded": true, "placeholder": true },
   "room.lab": { "text": "The lab! Build molecules out of atoms.", "recorded": true, "placeholder": true },

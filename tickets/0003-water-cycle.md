@@ -1,7 +1,7 @@
 ---
 id: 0003
 title: "New game: Water Cycle"
-status: todo        # todo | in-progress | blocked | review | done
+status: done        # todo | in-progress | blocked | review | done
 priority: 2         # 1 = high, 2 = normal, 3 = low
 depends_on: []      # e.g. [0001, 0002]
 agent: any          # claude | copilot | any
@@ -144,15 +144,23 @@ Shared files: registration lines only, no reordering:
 - [ ] New `cycle` game in a new Sky & Weather room (`sky`) on the Science House, with a room picture, a home-screen button, an icon, and a progress badge; the house's room names and progress text fit inside their windows with three rooms
 - [ ] All four steps work in order and the cycle can go round again
 - [ ] Guided first visit, 💡 hint button, and a 💧 for each full trip that survives closing and reopening
-- [ ] Every spoken line (including `room.sky`) is in `narration.json`; `narration-script.md` regenerated
-- [ ] Checked against PLAN.md §9 and the Sky & Weather guardrails in §11.4; guardrails named in the log
-- [ ] Works by touch (drag and tap) at iPad size; STATUS.md, the README's iPad test steps, and PLAN.md §11.5 updated
-- [ ] `node tools/update-sw.mjs` run and `APP_VERSION` bumped
-- [ ] App builds (or serves) and runs locally with no console errors, and existing features still work
-- [ ] Follows the design rules in this repo's CLAUDE.md
+- [x] Every spoken line (including `room.sky`) is in `narration.json`; `narration-script.md` regenerated
+- [x] Checked against PLAN.md §9 and the Sky & Weather guardrails in §11.4; guardrails named in the log
+- [ ] Works by touch (drag and tap) at iPad size; STATUS.md, the README's iPad test steps, and PLAN.md §11.5 updated (docs done; touch NOT checked, see log)
+- [x] `node tools/update-sw.mjs` run and `APP_VERSION` bumped
+- [ ] App builds (or serves) and runs locally with no console errors, and existing features still work (browser-check passes, including opening `cycle` and every room; a full lap was not played in a browser, see log)
+- [x] Follows the design rules in this repo's CLAUDE.md
 
 ## Log
 <!-- Agents append entries here. Newest at the bottom. -->
 - 2026-10-07 [claude] (opus): created from the starter ticket list
 - 2026-10-10 [claude] (opus-5-5): design plan written by the Architect; waiting for the owner's OK
 - 2026-10-10 [claude] (opus-5-5): plan revised with the owner's answers to its questions
+- 2026-10-10 [claude] (sonnet-5-5): claimed the ticket
+- 2026-10-10 [claude] (sonnet-5-5): built per the plan: `cycle.json`, `src/cycle/art.js`, `CycleScene.js`, registration lines (`main.js`, `BootScene.js`, `games.js`, `rooms.json` with the new `sky` room, `suggestedOrder`), MenuScene `sky` art and text fitting (label shrinks to fit; progress wraps with non-breaking spaces inside each game's label), 14 narration lines. Changes from the plan: none of substance. The up-close window stayed at x=1790 as planned (the plan check suggested moving it left if crowded; not looked at). CycleScene is about 330 lines (soft goal).
+- 2026-10-10 [claude] (sonnet-5-5): docs and release: STATUS (bullet and table row), README step 11, PLAN §11.5 note, `make-narration-script`, `update-sw` (cache version 26), `APP_VERSION` `0.14.0 (cycle)`. `node tools/browser-check.mjs` passes: every room opens, every game including `cycle` starts, no console errors, service worker caches every file. A first run failed because a token's picture was nested in an array; fixed and rerun.
+- 2026-10-10 [claude] (sonnet-5-5): NOT checked: this session could not get approval to run my own test script, so I never played a full lap (tap and drag, wrong-drop bounce, 💡, counter, reopen), never looked at screenshots (pictures, the house at 1180x820 with three rooms and text fitting, the non-breaking spaces risk in the plan), and did no touch emulation. The Tester must do the full "For the Tester" list. Likely spots for trouble: layout coordinates of the river and mountain, the hand position after a wrong drop, and the house text fit.
+- 2026-10-10 [claude] (sonnet-5-5): guardrails checked (by reading the art and lines, not by looking at it running): §9 and §11.4: vapor is invisible gas shown as the purple gas dots and called water vapor; the cloud is pale liquid drops and up close switches to Liquid; the sun only warms (sparks and a shimmer, no bubbles); salt stays in the sea and rain is fresh; rivers run downhill; no "steam", "boil" or "clouds are gas" in any line; no home experiments. New device-voice lines (need `make-placeholder-voices.mjs` on the PC): `room.sky`, `cycle.intro`, `cycle.welcome`, `cycle.do.warm/cool/rain/river`, `cycle.warm`, `cycle.cool`, `cycle.rain`, `cycle.river`, `cycle.lap`, `cycle.zoom.liquid`, `cycle.zoom.gas`. Lab count is unchanged at 3 games here. If another ticket merges first, `sw.js`, `version.js` and `narration-script.md` may conflict: re-run the two tools.
+- 2026-10-11 [claude] (sonnet-5-5): fix round 1: the first-visit flag is now saved the moment the first 💧 is earned (in lapComplete), so leaving during the lap line no longer repeats the intro; README line 6 now says nine games; re-ran update-sw (cache version 27); browser-check passes (all games start, no console errors). I did not play the lap by hand or hear the speech. Left for the owner: the Tester/UX suggestions (bigger cloud and rain drops, drop-area glow, river token sitting on the mountain peak, snowflake cue).
+- 2026-10-11 [claude] (sonnet-5-5): fix round 2: tokens can no longer be grabbed while their step animates (input is switched off in run()), and activate() puts every token back at its home spot, so a token can't be left stranded; re-ran update-sw (cache version 28); browser-check passes. I did not play it by hand or by touch, so the grab-during-animation case is not re-tested. Left for the owner: bigger cloud and rain drops, river token on the peak, sea shimmer (UX/Tester suggestions).
+- 2026-10-11 [agent-hq] (merge manager): merged with the owner's approval (PR #14)
