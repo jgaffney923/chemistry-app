@@ -3,8 +3,10 @@ import { addEmoji } from '../ui/emoji.js';
 
 export const SEA = { x: 0, y: 1180, w: 1000, h: 356 };
 export const PEAK = { x: 1300, y: 820 };
-export const DROP_COLOR = 0xeaf6ff;
-export const RAIN_COLOR = 0x7cc8f0;
+export const DROP_COLOR = 0xf4faff;
+export const DROP_OUTLINE = 0x1f5ea8;
+export const RAIN_COLOR = 0x2a78d0;
+export const RIVER_IDLE_ALPHA = 0.7;
 
 // Where the mountain surface is at a given x (rain lands on it).
 export function mountainY(x) {
@@ -30,8 +32,8 @@ export function drawLandscape(scene) {
     { x: 1290, y: 880 }, { x: 1260, y: 970 }, { x: 1200, y: 1040 }, { x: 1120, y: 1110 }, { x: 1040, y: 1170 }, { x: 990, y: 1210 },
   ];
   const river = scene.add.graphics();
-  river.lineStyle(36, 0x4fa6e8, 1).strokePoints(riverPoints, false, false);
-  river.setAlpha(0.35);
+  river.lineStyle(56, 0x1f6fc8, 1).strokePoints(riverPoints, false, false);
+  river.setAlpha(RIVER_IDLE_ALPHA);
   return { sea, river, riverPoints };
 }
 
@@ -40,15 +42,15 @@ export function sunArt(scene) {
   return [scene.add.circle(0, 0, 110, 0xffe066, 0.6), addEmoji(scene, 0, 0, '☀️', 170)];
 }
 
-// A cloud made of many tiny pale drops. `container.drops` lists them.
+// A cloud made of many solid drops. `container.drops` lists them.
 export function cloudOfDrops(scene, x, y, count) {
   const cloud = scene.add.container(x, y);
   cloud.drops = [];
   for (let i = 0; i < count; i++) {
     const angle = i * 2.4;
     const dist = Math.sqrt((i + 0.5) / count);
-    const drop = scene.add.circle(Math.cos(angle) * dist * 150, Math.sin(angle) * dist * 85, 14, DROP_COLOR)
-      .setStrokeStyle(2, 0xffffff, 0.8);
+    const drop = scene.add.circle(Math.cos(angle) * dist * 150, Math.sin(angle) * dist * 85, 20, DROP_COLOR)
+      .setStrokeStyle(4, DROP_OUTLINE, 1);
     cloud.add(drop);
     cloud.drops.push(drop);
   }
@@ -57,5 +59,5 @@ export function cloudOfDrops(scene, x, y, count) {
 }
 
 export function raindrop(scene, x, y) {
-  return scene.add.circle(x, y, 10, RAIN_COLOR).setStrokeStyle(2, 0xffffff, 0.8);
+  return scene.add.circle(x, y, 16, RAIN_COLOR).setStrokeStyle(3, 0xffffff, 1);
 }
