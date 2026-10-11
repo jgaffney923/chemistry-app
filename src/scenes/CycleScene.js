@@ -1,6 +1,6 @@
 import { W } from '../layout.js';
 import { ParticleView } from '../heat/ParticleView.js';
-import { drawLandscape, sunArt, cloudOfDrops, raindrop, mountainY, DROP_COLOR } from '../cycle/art.js';
+import { drawLandscape, sunArt, cloudOfDrops, raindrop, mountainY, DROP_COLOR, DROP_OUTLINE, RIVER_IDLE_ALPHA } from '../cycle/art.js';
 import { makeRoundButton } from '../ui/button.js';
 import { addEmoji, addLabel } from '../ui/emoji.js';
 import { makeDraggable, returnTo } from '../systems/drag.js';
@@ -11,6 +11,8 @@ import { addStars, getStars, tipShown, markTipShown } from '../systems/save.js';
 const UP = { x: 1790, y: 520, r: 240 };
 const CLOUD = { x: 1150, y: 430 };
 const VAPOR = 0xc3a2ff;
+const VAPOR_OUTLINE = 0x7a55d6;
+const VAPOR_ALPHA = 0.55;
 const STATE_STYLE = { liquid: { label: 'Liquid', color: '#3fd0e3' }, gas: { label: 'Gas', color: '#c3a2ff' } };
 // Where each token is dropped to count: [minX, maxX, minY, maxY].
 const TARGET = {
@@ -96,6 +98,7 @@ export default class CycleScene extends Phaser.Scene {
     const token = this.add.container(x, y);
     token.add([this.add.circle(0, 0, r, 0xffffff, 0.9).setStrokeStyle(8, 0x2b2350, 0.5), ...[content].flat()]);
     token.setInteractive(new Phaser.Geom.Circle(0, 0, r), Phaser.Geom.Circle.Contains);
+    token.input.enabled = false;
     this.enableDrag(token, id, x, y);
     return token;
   }
@@ -160,10 +163,10 @@ export default class CycleScene extends Phaser.Scene {
     changeEffect(this, 500, 1350, 160, 'heat');
     this.tweens.add({ targets: this.sea, alpha: 0.75, duration: 450, yoyo: true, repeat: 5 });
     for (let i = 0; i < this.cfg.counts.vaporDots; i++) {
-      const dot = this.add.circle(100 + Math.random() * 800, 1230, 12, VAPOR).setAlpha(0);
+      const dot = this.add.circle(100 + Math.random() * 800, 1230, 20, VAPOR).setStrokeStyle(3, VAPOR_OUTLINE, 1).setAlpha(0);
       this.vapor.push(dot);
       this.tweens.add({
-        targets: dot, x: 950 + Math.random() * 400, y: 330 + Math.random() * 230, alpha: 0.9,
+        targets: dot, x: 950 + Math.random() * 400, y: 330 + Math.random() * 230, alpha: VAPOR_ALPHA,
         duration: 2200, delay: i * 80, ease: 'Sine.easeOut',
         onComplete: () => this.tweens.add({ targets: dot, x: dot.x + 30, y: dot.y - 20, duration: 700, yoyo: true, repeat: -1 }),
       });
@@ -181,13 +184,14 @@ export default class CycleScene extends Phaser.Scene {
       this.tweens.add({
         targets: dot, x: CLOUD.x + (Math.random() - 0.5) * 200, y: CLOUD.y + (Math.random() - 0.5) * 120,
         duration: 1400, delay: i * 30, ease: 'Sine.easeInOut',
-        onComplete: () => dot.setFillStyle(DROP_COLOR).setRadius(14),
+        onComplete: () => dot.setFillStyle(DROP_COLOR).setStrokeStyle(4, DROP_OUTLINE, 1).setRadius(20).setAlpha(1),
       });
     });
     this.time.delayedCall(2400, () => {
       this.vapor.forEach((dot) => dot.destroy());
       this.vapor = [];
       this.cloud = cloudOfDrops(this, CLOUD.x, CLOUD.y, this.cfg.counts.cloudDrops).setAlpha(0);
+      this.cloud.input.enabled = false;
       this.tweens.add({ targets: this.cloud, alpha: 1, duration: 300 });
       this.tokens.rain = this.cloud;
       this.enableDrag(this.cloud, 'rain', CLOUD.x, CLOUD.y);
@@ -200,7 +204,7 @@ export default class CycleScene extends Phaser.Scene {
     const grey = 0xaab4c2;
     cloud.drops.forEach((drop, i) => {
       if (i % 4 === 0) this.tweens.add({ targets: drop, scale: 1.8, duration: 700 });
-      else this.tweens.add({ targets: drop, alpha: 0.4, duration: 700 });
+      else this.tweens.add({ targets: drop, alpha: 0.55, duration: 700 });
       drop.setFillStyle(i % 4 === 0 ? 0xdde6f0 : grey);
     });
     const total = this.cfg.counts.raindrops;
@@ -215,7 +219,7 @@ export default class CycleScene extends Phaser.Scene {
     }
     this.time.delayedCall(2900, () => {
       this.tweens.add({ targets: cloud, alpha: 0.15, duration: 800 });
-      this.tokens.river = this.makeToken('river', 1290, 850, 100, addEmoji(this, 0, 0, '💧', 120));
+      this.tokens.river = this.makeToken('river', 1480, 740, 100, addEmoji(this, 0, 0, '💧', 120));
     });
     return 3800;
   }
@@ -280,7 +284,7 @@ export default class CycleScene extends Phaser.Scene {
     this.cloud?.destroy();
     this.cloud = null;
     delete this.tokens.rain;
-    this.tweens.add({ targets: this.river, alpha: 0.35, duration: 600 });
+    this.tweens.add({ targets: this.river, alpha: RIVER_IDLE_ALPHA, duration: 600 });
     this.zoom.setState('liquid');
     this.showState('liquid');
     this.zoom.temp = this.cfg.upClose.startTemp;
