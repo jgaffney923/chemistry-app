@@ -1,4 +1,4 @@
-# Status (last updated 2026-10-06)
+# Status (last updated 2026-10-11)
 
 ## Where things stand
 - **M0 (app shell)** built. Pushed to https://github.com/jgaffney923/chemistry-app (public; commits use the GitHub noreply email `282106827+jgaffney923@users.noreply.github.com`, set in this repo's git config). GitHub Pages is enabled and publishes the repository root from `main` at https://jgaffney923.github.io/chemistry-app/
@@ -25,6 +25,7 @@
 - **Air Builder room fix (2026-10-07, ticket 0001):** Air Builder is listed only in the Lab (M11 had also put it in the Kitchen), and the home screen can now suggest it (`suggestedOrder`, after Sink or Float). Release `0.13.2 (air)`, cache version 24.
 - **Sky & Weather room and Water Cycle (2026-10-10, ticket 0003):** a third room on the Science House with Water Cycle: warm the sea (invisible vapor rises as purple dots), cool the air (the dots become pale liquid drops that make a cloud), rain onto the mountain, and a river back to the sea, with a round "up close" window that shows liquid and gas. Each full trip earns a 💧 (`stars.cycle`). The house now fits three rooms: long room names shrink and progress lines wrap inside their windows. Scene `src/scenes/CycleScene.js`, art `src/cycle/art.js`, data `src/data/cycle.json`. 14 new lines (`room.sky`, `cycle.*`) use device speech. Release `0.14.0 (cycle)`.
 - **M12 Color-Change Potions** built (2026-10-11, ticket 0002) in the Lab room: pour lemon juice, vinegar, water, or baking soda water into four cups of purple cabbage juice (drag or tap). Acids turn it pink or red, water leaves it purple, a base turns it blue-green; pouring a pink cup into a blue-green one fizzes (carbon dioxide) and heads back toward purple. An Acid / Neutral / Base chart fills in as kids find them, five stickers are saved (`potionsFound`), and the first visit is guided with a hand. Scene `src/scenes/PotionsScene.js`, code `src/potions/`, data `src/data/potions.json`. 35 new lines use device speech. Release `0.15.0 (potions)`.
+- **Water Cycle polish (2026-10-11, ticket 0009):** only the token for the current step reacts to touch; vapor dots, cloud drops, and raindrops are bigger and higher contrast (vapor stays faint, cloud drops stay solid); the river token moved clear of the mountain's snow cap; the river line is thicker, darker, and more opaque. Release `0.15.1 (water cycle polish)`. The owner still judges the look by eye on the iPad.
 - **Roadmap (2026-09-28):** PLAN.md section 10 now lists 15 more modules in three tiers, a scalable "Science House" home screen, and milestones M6-M16. Owner asked for the expansion before M5; the order is to be revisited after kid testing. Section 11 adds rooms for other sciences (Workshop/physics, Garden/life science, Sky & Weather/earth and space) with their own accuracy guardrails, to come after chemistry Tier 1.
 
 ## Tested
@@ -36,7 +37,7 @@ On the real iPad: installs from GitHub Pages and plays; the owner's recorded voi
 
 ## Next steps
 1. Kid-test Heat Slider in the installed iPad app: heating and cooling, material switching, hints, offline launch, background/resume audio, and simultaneous touches.
-2. Kid-test M9 Unmix!, M10 Sink or Float, and M11 Air Builder on the installed iPad, all in one session, before starting M12 Color-Change Potions. For Air Builder, watch whether kids find the + sign a second time for the triple bond, and whether four nitrogens is too many to build. For Sink or Float, watch whether kids understand the Float and Sink button pictures, and whether they try different pour orders in the Liquid Tower.
+2. Kid-test M9 Unmix!, M10 Sink or Float, and M11 Air Builder on the installed iPad, all in one session, before starting more new games (M12 Color-Change Potions and M13 Water Cycle are already built). For Air Builder, watch whether kids find the + sign a second time for the triple bond, and whether four nitrogens is too many to build. For Sink or Float, watch whether kids understand the Float and Sink button pictures, and whether they try different pour orders in the Liquid Tower.
    For M9 Unmix!: Check tool recognition, dragging, all five stickers, offline narration, and replay. Then run `node tools/make-placeholder-voices.mjs` on the Windows PC to give the 97 new lines the stand-in voice.
 3. Schedule playable portrait layouts; the current rotation prompt remains a temporary fallback, not the final portrait experience.
 4. Record introductions, hints, and discovery explanations first; stand-in voice remains available for the rest.
